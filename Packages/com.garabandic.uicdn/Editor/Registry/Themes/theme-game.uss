@@ -1,0 +1,42 @@
+/* Composable game UI utilities. No sprites or font packages required. */
+.ui-game { padding: 16px; }
+.ui-game .ui-card-header { padding: 12px 16px; }
+.ui-game .ui-card-content { padding: 0 16px 12px 16px; }
+.ui-game-title { font-size: var(--ui-font-lg); -unity-font-style: bold; margin-bottom: 12px; }
+.ui-game-topbar { flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.ui-game-currency { background-color: var(--ui-surface); padding: 8px 16px; border-radius: var(--ui-radius-md); -unity-font-style: bold; }
+.ui-game-grid { flex-direction: row; margin-top: 12px; margin-bottom: 16px; }
+.ui-game-slot { flex-grow: 1; flex-basis: 0; align-items: center; padding: 16px 8px; margin-right: 8px; border-width: 3px; border-radius: var(--ui-radius-md); border-color: var(--ui-border); }
+.ui-game-slot--last { margin-right: 0; }
+.ui-game-slot-icon { width: 44px; height: 44px; border-radius: var(--ui-radius-sm); border-width: 3px; border-color: #183749; margin-bottom: 8px; }
+.ui-game-slot-name { color: #153049; -unity-font-style: bold; font-size: 13px; }
+.ui-game-slot-level { color: #153049; font-size: 11px; margin-top: 4px; }
+.ui-rarity-common { background-color: #dff8c4; border-color: #6bc921; }
+.ui-rarity-rare { background-color: #d3f3ff; border-color: #25b6ed; }
+.ui-rarity-epic { background-color: #eddbff; border-color: #ba56e7; }
+.ui-rarity-legendary { background-color: #fff0b5; border-color: #eeaf21; }
+.ui-game-action { margin-top: 12px; }
+.ui-game-caption { color: var(--ui-muted); margin-bottom: 8px; white-space: normal; }
+.ui-game-nav { flex-direction: row; margin-top: 16px; }
+.ui-game-nav > .ui-button { flex-grow: 1; flex-basis: 0; margin-right: 6px; padding-left: 8px; padding-right: 8px; }
+.ui-shop { max-width: 520px; width: 100%; align-self: center; padding: 12px 16px; }
+.ui-shop .ui-game-title { font-size: 28px; margin-bottom: 0; -unity-font-style: bold; }
+.ui-shop-counter { flex-direction: row; align-items: center; padding: 6px 12px; border-radius: 10px; background-color: var(--ui-surface); -unity-font-style: bold; }
+.ui-shop-counter .ui-shop-coin { width: 24px; height: 24px; margin-right: 6px; }
+.ui-shop-feature { margin-top: 2px; }
+.ui-shop .ui-card-header { padding: 12px 20px 10px 20px; }
+.ui-shop .ui-card-title { font-size: 22px; margin-top: 8px; white-space: normal; }
+.ui-shop .ui-card-description { font-size: 13px; }
+.ui-shop .ui-card-content { padding: 0 20px 20px 20px; }
+.ui-shop-supplies { flex-direction: row; padding-top: 6px; }
+.ui-shop-supply { flex-grow: 1; flex-basis: 0; align-items: center; border-left-width: 1px; border-left-color: var(--ui-border); padding: 0 6px; }
+.ui-shop-supply-count { font-size: 24px; -unity-font-style: bold; color: var(--ui-foreground); }
+.ui-shop-supply-label { font-size: 11px; color: var(--ui-muted); margin-top: 4px; }
+.ui-shop-section { font-size: 11px; -unity-font-style: bold; color: var(--ui-muted); letter-spacing: 1px; margin: 20px 0 10px 0; }
+.ui-shop-offer { flex-direction: row; align-items: center; min-height: 64px; padding: 8px 12px; margin-bottom: 8px; border-radius: var(--ui-radius-md); background-color: var(--ui-surface); }
+.ui-shop-coin { width: 40px; height: 40px; margin-right: 10px; background-color: #ecc34f; border-radius: 20px; }
+.ui-shop-amount { flex-grow: 1; font-size: 22px; -unity-font-style: bold; }
+.ui-shop-pile { width: 60px; height: 36px; margin-right: 8px; flex-shrink: 0; }
+.ui-shop-pile .ui-shop-stacked-coin { position: absolute; width: 30px; height: 20px; margin-right: 0; }
+.ui-shop .ui-game-action { min-width: 120px; margin-top: 0; }
+.ui-shop .ui-game-nav { border-top-width: 1px; border-top-color: var(--ui-border); padding-top: 16px; margin-top: 10px; }

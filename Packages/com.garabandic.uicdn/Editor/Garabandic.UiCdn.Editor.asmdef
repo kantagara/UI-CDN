@@ -1,0 +1,6 @@
+{
+  "name": "Garabandic.UiCdn.Editor",
+  "rootNamespace": "Garabandic.UiCdn.Editor",
+  "includePlatforms": ["Editor"],
+  "autoReferenced": true
+}

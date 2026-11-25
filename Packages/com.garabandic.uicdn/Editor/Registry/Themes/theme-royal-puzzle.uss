@@ -1,0 +1,66 @@
+/* Royal Puzzle | royal | SPDX-License-Identifier: MIT */
+.ui-theme-royal-puzzle {
+    --ui-background: #1d2451;
+    --ui-surface: #343b75;
+    --ui-surface-hover: #454d88;
+    --ui-foreground: #fff5d9;
+    --ui-muted: #d0cce7;
+    --ui-border: #bea056;
+    --ui-primary: #83c92b;
+    --ui-primary-hover: #a8df42;
+    --ui-primary-foreground: #ffffff;
+    --ui-danger: #e76d64;
+    --ui-success: #83c92b;
+    --ui-radius-sm: 3px;
+    --ui-radius-md: 6px;
+    --ui-radius-lg: 10px;
+    --ui-font-sm: 12px;
+    --ui-font-md: 14px;
+    --ui-font-lg: 20px;
+    --ui-control-height: 36px;
+    color: var(--ui-foreground);
+    background-color: var(--ui-background);
+    font-size: var(--ui-font-md);
+}
+.ui-theme-royal-puzzle .ui-button { background-image: url("Assets/royal-action.png"); background-color: transparent; -unity-background-image-tint-color: white; -unity-slice-left: 20; -unity-slice-right: 20; -unity-slice-top: 20; -unity-slice-bottom: 20; border-width: 0; min-height: 52px; padding: 12px 22px; color: #ffffff; font-size: 18px; -unity-font-style: bold; -unity-text-outline-width: 0.7px; -unity-text-outline-color: #31571b; }
+.ui-theme-royal-puzzle .ui-button:hover { background-color: transparent; -unity-background-image-tint-color: #fff6db; }
+.ui-theme-royal-puzzle .ui-button:focus { border-width: 2px; border-color: #fff0aa; border-radius: 12px; }
+.ui-theme-royal-puzzle .ui-button--secondary, .ui-theme-royal-puzzle .ui-tabs-trigger { background-image: url("Assets/royal-secondary.png"); background-color: transparent; -unity-background-image-tint-color: white; -unity-slice-left: 20; -unity-slice-right: 20; -unity-slice-top: 20; -unity-slice-bottom: 20; border-width: 0; -unity-text-outline-color: #244469; }
+.ui-theme-royal-puzzle .ui-button--ghost { background-image: none; background-color: transparent; font-size: 15px; -unity-text-outline-width: 0; }
+.ui-theme-royal-puzzle .ui-button--danger { background-image: url("Assets/royal-secondary.png"); background-color: transparent; -unity-background-image-tint-color: white; -unity-slice-left: 20; -unity-slice-right: 20; -unity-slice-top: 20; -unity-slice-bottom: 20; border-width: 0; -unity-background-image-tint-color: #ff9fa2; }
+.ui-theme-royal-puzzle .ui-card, .ui-theme-royal-puzzle .ui-dialog-content, .ui-theme-royal-puzzle .ui-toast { background-image: url("Assets/royal-panel.png"); background-color: transparent; -unity-background-image-tint-color: white; -unity-slice-left: 20; -unity-slice-right: 20; -unity-slice-top: 20; -unity-slice-bottom: 20; border-width: 0; border-radius: 16px; }
+.ui-theme-royal-puzzle .ui-tabs-trigger--active { background-image: url("Assets/royal-action.png"); background-color: transparent; -unity-background-image-tint-color: white; -unity-slice-left: 20; -unity-slice-right: 20; -unity-slice-top: 20; -unity-slice-bottom: 20; border-width: 0; }
+.ui-theme-royal-puzzle .ui-badge { color: #fff0ad; background-color: #252b59; border-width: 1px; border-color: #bea056; }
+.ui-theme-royal-puzzle .ui-shop-offer { background-image: url("Assets/royal-parchment.png"); background-color: transparent; -unity-background-image-tint-color: white; -unity-slice-left: 20; -unity-slice-right: 20; -unity-slice-top: 20; -unity-slice-bottom: 20; border-width: 0; color: #393452; }
+.ui-theme-royal-puzzle .ui-shop-coin { background-image: url("Assets/royal-coin.png"); }
+.ui-theme-royal-puzzle .ui-shop-counter { background-image: url("Assets/royal-parchment.png"); background-color: transparent; -unity-background-image-tint-color: white; -unity-slice-left: 20; -unity-slice-right: 20; -unity-slice-top: 20; -unity-slice-bottom: 20; border-width: 0; color: #393452; }
+.ui-theme-royal-puzzle .ui-shop-amount { color: #393452; }
+.ui-theme-royal-puzzle .ui-game-title { color: #ffdf89; -unity-text-outline-width: 0.6px; -unity-text-outline-color: #151d40; }
+.ui-theme-royal-puzzle .ui-shop .ui-game-action, .ui-theme-royal-puzzle .ui-shop .ui-game-nav > .ui-button { min-height: 44px; padding: 8px 14px; font-size: 16px; }
+.ui-theme-royal-puzzle .ui-shop Label, .ui-theme-royal-puzzle .ui-shop .ui-button { -unity-font-definition: var(--ui-display-font, url("Assets/Coiny-Regular.ttf")); -unity-font: var(--ui-display-font, url("Assets/Coiny-Regular.ttf")); -unity-font-style: normal; }
+.ui-theme-royal-puzzle .ui-button, .ui-theme-royal-puzzle .ui-card-title, .ui-theme-royal-puzzle .ui-game-title, .ui-theme-royal-puzzle .ui-shop-amount, .ui-theme-royal-puzzle .ui-shop-supply-count, .ui-theme-royal-puzzle .ui-shop-counter { -unity-font-definition: var(--ui-display-font, url("Assets/Coiny-Regular.ttf")); -unity-font: var(--ui-display-font, url("Assets/Coiny-Regular.ttf")); -unity-font-style: normal; }
+.ui-theme-royal-puzzle .ui-button, .ui-theme-royal-puzzle .ui-shop .ui-game-action { font-size: 22px; -unity-text-outline-width: 0.45px; -unity-text-outline-color: #32580c; text-shadow: 0 1px 1px #3c6612; padding-bottom: 10px; }
+.ui-theme-royal-puzzle .ui-button:active, .ui-theme-royal-puzzle .ui-button:active:focus { translate: 0 2px; scale: 0.98 0.94; -unity-background-image-tint-color: #d8edaa; }
+.ui-theme-royal-puzzle .ui-shop .ui-game-title { font-size: 32px; -unity-text-outline-width: 0.5px; text-shadow: 0 1px 1px #101a38; }
+.ui-theme-royal-puzzle .ui-shop .ui-shop-amount { font-size: 27px; color: #304461; }
+.ui-theme-royal-puzzle .ui-shop .ui-badge { background-color: #ffda80; color: #402e19; border-width: 0; border-radius: 4px; font-size: 12px; letter-spacing: 0.5px; padding: 3px 8px; }
+.ui-theme-royal-puzzle .ui-shop .ui-shop-counter { background-image: none; background-color: #303e68; border-width: 0; border-radius: 9px; color: #ffdf89; font-size: 16px; }
+.ui-theme-royal-puzzle .ui-shop .ui-game-nav { background-color: #28345c; border-radius: 10px; border-width: 0; padding: 4px; }
+.ui-theme-royal-puzzle .ui-shop .ui-game-nav > .ui-button { background-image: none; background-color: transparent; border-width: 0; border-radius: 7px; color: #cad5ea; font-size: 16px; -unity-text-outline-width: 0; text-shadow: 0 0 0 transparent; }
+.ui-theme-royal-puzzle .ui-shop .ui-game-nav > .ui-button--primary { background-color: #476797; color: #ffffff; }
+.ui-theme-royal-puzzle .ui-shop .ui-game-nav > .ui-button:focus { border-width: 1px; border-color: #e6f1ff; }
+.ui-theme-royal-puzzle .ui-shop .ui-shop-section { color: #d9e3f2; font-size: 14px; letter-spacing: 0.5px; }
+.ui-theme-royal-puzzle .ui-shop .ui-shop-supply-label { color: #dee6f2; font-size: 13px; }
+.ui-theme-royal-puzzle .treasury { background-color: #15325a; border-width: 2px; border-color: #305383; }
+.ui-theme-royal-puzzle .treasury Label, .ui-theme-royal-puzzle .treasury .treasury-price { -unity-font-definition: var(--ui-display-font, url("Assets/Coiny-Regular.ttf")); -unity-font: var(--ui-display-font, url("Assets/Coiny-Regular.ttf")); -unity-font-style: normal; }
+.ui-theme-royal-puzzle .treasury .treasury-title, .ui-theme-royal-puzzle .treasury .treasury-feature-title, .ui-theme-royal-puzzle .treasury .treasury-prize { color: #ffe480; -unity-text-outline-width: 1.4px; -unity-text-outline-color: #66411f; text-shadow: 0 2px 1px #462c27; }
+.ui-theme-royal-puzzle .treasury-bar { border-bottom-width: 2px; border-bottom-color: #4587bc; }
+.ui-theme-royal-puzzle .treasury-wallet { background-color: #082341; color: #fff0bb; }
+.ui-theme-royal-puzzle .treasury-feature { background-image: url("Assets/treasury-enamel.png"); border-color: #ffcd62; border-bottom-color: #c78124; }
+.ui-theme-royal-puzzle .treasury-deal { background-color: #801938; color: #fff0ab; border-top-width: 2px; border-top-color: #ffad4b; }
+.ui-theme-royal-puzzle .treasury-quantity { color: #fff5ce; -unity-text-outline-width: 1px; -unity-text-outline-color: #602340; }
+.ui-theme-royal-puzzle .treasury-section { color: #ffe7a2; text-shadow: 0 1px 1px #082442; }
+.ui-theme-royal-puzzle .treasury-pack { background-image: url("Assets/royal-parchment.png"); background-color: transparent; -unity-background-image-tint-color: white; -unity-slice-left: 20; -unity-slice-right: 20; -unity-slice-top: 20; -unity-slice-bottom: 20; border-width: 0; color: #274260; }
+.ui-theme-royal-puzzle .treasury .treasury-price { width: 103px; min-height: 43px; font-size: 19px; padding: 2px 4px 7px 4px; -unity-text-outline-width: 0.85px; -unity-text-outline-color: #365515; text-shadow: 0 1px 1px #365515; }
+.ui-theme-royal-puzzle .ui-button:focus { border-color: var(--ui-foreground); }
+.ui-theme-royal-puzzle .ui-button--ghost:focus { border-width: 2px; }

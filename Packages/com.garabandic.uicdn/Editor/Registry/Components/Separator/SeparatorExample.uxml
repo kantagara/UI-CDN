@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:c="Garabandic.UiCdn.Editor.Preview">
+  <ui:Style src="../../Themes/theme-tokens.uss" />
+  <ui:Style src="../../Themes/theme-dark.uss" />
+  <ui:Style src="../Core/UiCore.uss" />
+  <ui:Style src="../Separator/UiSeparator.uss" />
+  <ui:VisualElement class="ui-root ui-stack ui-example">
+    <ui:Label text="Inventory" /><c:UiSeparator /><ui:Label text="Equipment" />
+  </ui:VisualElement>
+</ui:UXML>

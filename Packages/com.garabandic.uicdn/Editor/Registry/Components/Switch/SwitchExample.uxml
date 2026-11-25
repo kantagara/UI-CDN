@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:c="Garabandic.UiCdn.Editor.Preview">
+  <ui:Style src="../../Themes/theme-tokens.uss" />
+  <ui:Style src="../../Themes/theme-dark.uss" />
+  <ui:Style src="../Core/UiCore.uss" />
+  <ui:Style src="../Switch/UiSwitch.uss" />
+  <ui:VisualElement class="ui-root ui-stack ui-example">
+    <c:UiSwitch text="Music" value="true" /><c:UiSwitch text="Vibration" />
+  </ui:VisualElement>
+</ui:UXML>

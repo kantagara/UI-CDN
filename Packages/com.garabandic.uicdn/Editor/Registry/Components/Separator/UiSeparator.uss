@@ -1,0 +1,2 @@
+.ui-separator { height: 1px; min-height: 1px; background-color: var(--ui-border); margin: var(--ui-space-4) 0; }
+.ui-separator--vertical { width: 1px; min-width: 1px; height: auto; align-self: stretch; margin: 0 var(--ui-space-4); }

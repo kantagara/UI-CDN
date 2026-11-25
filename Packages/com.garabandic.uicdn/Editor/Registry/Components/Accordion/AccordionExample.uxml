@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:c="Garabandic.UiCdn.Editor.Preview">
+  <ui:Style src="../../Themes/theme-tokens.uss" />
+  <ui:Style src="../../Themes/theme-dark.uss" />
+  <ui:Style src="../Core/UiCore.uss" />
+  <ui:Style src="../Button/UiButton.uss" />
+  <ui:Style src="../Accordion/UiAccordion.uss" />
+  <ui:VisualElement class="ui-root ui-stack ui-example">
+    <c:UiAccordion><c:UiAccordionItem open="true"><c:UiAccordionTrigger text="Do I own the code?" /><c:UiAccordionContent><ui:Label text="Yes. Every installed file lives in your Assets directory." /></c:UiAccordionContent></c:UiAccordionItem><c:UiAccordionItem><c:UiAccordionTrigger text="Can I change the animation?" /><c:UiAccordionContent><ui:Label text="Override PlayEnterAnimation and PlayExitAnimation." /></c:UiAccordionContent></c:UiAccordionItem></c:UiAccordion>
+  </ui:VisualElement>
+</ui:UXML>

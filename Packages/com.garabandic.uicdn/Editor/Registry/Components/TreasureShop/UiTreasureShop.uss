@@ -1,0 +1,30 @@
+.treasury { width: 100%; max-width: 396px; align-self: center; padding: 0 10px 12px 10px; background-color: var(--ui-background); border-radius: 16px; overflow: hidden; }
+.treasury Label { padding: 0; margin: 0; }
+.treasury-bar { height: 62px; justify-content: center; align-items: center; margin-bottom: 8px; }
+.treasury-bar .treasury-title { font-size: 34px; color: var(--ui-foreground); }
+.treasury-wallet { position: absolute; left: 0; flex-direction: row; align-items: center; background-color: var(--ui-surface); border-radius: 14px; padding: 2px 7px 2px 1px; font-size: 14px; }
+.treasury-wallet-coin { width: 24px; height: 24px; background-image: url("../../Themes/Assets/royal-coin.png"); }
+.treasury-feature { border-width: 3px; border-color: var(--ui-border); border-radius: 18px; overflow: hidden; background-color: var(--ui-surface); }
+.treasury-feature .treasury-feature-title { -unity-text-align: middle-center; font-size: 28px; padding-top: 6px; }
+.treasury-loot { flex-direction: row; align-items: center; padding: 0 6px 5px 4px; }
+.treasury-jackpot { flex-grow: 1; flex-basis: 0; align-items: center; justify-content: center; }
+.treasury-chest { width: 100%; height: 97px; -unity-background-scale-mode: scale-to-fit; }
+.treasury-prize { font-size: 22px; }
+.treasury-rewards { flex-direction: row; width: 55%; padding: 4px; border-radius: 12px; background-color: rgba(0,0,0,0.25); }
+.treasury-reward { flex-grow: 1; flex-basis: 0; align-items: center; }
+.treasury-reward-art { width: 100%; height: 48px; -unity-background-scale-mode: scale-to-fit; }
+.treasury-quantity { font-size: 17px; }
+.treasury-deal { flex-direction: row; align-items: center; justify-content: space-between; background-color: var(--ui-surface-hover); padding: 3px 7px; }
+.treasury-deal Label { font-size: 16px; padding-left: 5px; }
+.treasury .treasury-section { margin: 8px 0 4px 4px; font-size: 20px; }
+.treasury-pack { min-height: 57px; flex-direction: row; align-items: center; padding: 3px 7px; margin-bottom: 4px; background-color: var(--ui-surface); border-radius: 10px; }
+.treasury-money { width: 55px; height: 46px; -unity-background-scale-mode: scale-to-fit; }
+.treasury-count { flex-grow: 1; font-size: 23px; }
+.treasury .treasury-price { width: 103px; margin: 0; padding: 2px 4px 7px 4px; }
+.art-chest { background-image: url("../../Themes/Assets/loot-chest.png"); }
+.art-rocket { background-image: url("../../Themes/Assets/loot-rocket.png"); }
+.art-hammer { background-image: url("../../Themes/Assets/loot-hammer.png"); }
+.art-heart { background-image: url("../../Themes/Assets/loot-heart.png"); }
+.art-coins { background-image: url("../../Themes/Assets/loot-coins.png"); }
+.art-pouch { background-image: url("../../Themes/Assets/loot-pouch.png"); }
+.treasury .treasury-price--selected { border-width: 2px; border-color: var(--ui-foreground); }

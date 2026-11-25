@@ -1,0 +1,5 @@
+.ui-slider { color: var(--ui-foreground); min-height: var(--ui-control-height); margin: var(--ui-space-2) 0; }
+.ui-slider .unity-base-slider__tracker { background-color: var(--ui-border); height: 4px; border-radius: 2px; }
+.ui-slider .unity-base-slider__dragger { background-color: var(--ui-primary); border-width: 1px; border-color: var(--ui-primary); border-radius: 10px; width: 16px; height: 16px; }
+.ui-slider:focus .unity-base-slider__dragger, .ui-slider .unity-base-slider__drag-container:focus .unity-base-slider__dragger { border-color: var(--ui-foreground); border-width: 2px; }
+.ui-slider:disabled { opacity: 0.4; }

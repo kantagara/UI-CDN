@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:c="Garabandic.UiCdn.Editor.Preview">
+  <ui:Style src="../../Themes/theme-tokens.uss" />
+  <ui:Style src="../../Themes/theme-dark.uss" />
+  <ui:Style src="../Core/UiCore.uss" />
+  <ui:Style src="../Slider/UiSlider.uss" />
+  <ui:VisualElement class="ui-root ui-stack ui-example">
+    <c:UiSlider label="Music volume" low-value="0" high-value="100" value="65" />
+  </ui:VisualElement>
+</ui:UXML>

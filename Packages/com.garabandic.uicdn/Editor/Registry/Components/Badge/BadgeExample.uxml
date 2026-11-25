@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:c="Garabandic.UiCdn.Editor.Preview">
+  <ui:Style src="../../Themes/theme-tokens.uss" />
+  <ui:Style src="../../Themes/theme-dark.uss" />
+  <ui:Style src="../Core/UiCore.uss" />
+  <ui:Style src="../Badge/UiBadge.uss" />
+  <ui:VisualElement class="ui-root ui-stack ui-example">
+    <c:UiBadge text="Early access" /><c:UiBadge text="Online" variant="success" /><c:UiBadge text="Disconnected" variant="danger" />
+  </ui:VisualElement>
+</ui:UXML>

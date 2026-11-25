@@ -1,0 +1,5 @@
+.ui-alert { padding: var(--ui-space-4); border-width: 1px; border-color: var(--ui-border); border-left-width: 3px; border-left-color: var(--ui-primary); border-radius: var(--ui-radius-md); background-color: var(--ui-surface); }
+.ui-alert--danger { border-left-color: var(--ui-danger); }
+.ui-alert--success { border-left-color: var(--ui-success); }
+.ui-alert-title { color: var(--ui-foreground); -unity-font-style: bold; margin-bottom: var(--ui-space-1); }
+.ui-alert-description { color: var(--ui-muted); white-space: normal; }

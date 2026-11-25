@@ -1,0 +1,19 @@
+.registry { padding: 20px; background-color: #16191f; color: #edf0f6; }
+#heading { font-size: 24px; -unity-font-style: bold; margin-bottom: 4px; }
+#subtitle { color: #99a3b6; margin-bottom: 20px; }
+.registry > .unity-base-field { margin-bottom: 12px; }
+#appearance { flex-direction: row; margin-bottom: 12px; }
+#appearance > .unity-base-field { flex-grow: 1; flex-basis: 0; }
+#font-picker { margin-left: 16px; }
+.registry > ToolbarSearchField { width: 100%; }
+#body { flex-direction: row; flex-grow: 1; margin-top: 12px; }
+#catalog { width: 220px; min-width: 200px; border-right-width: 1px; border-right-color: #333b49; padding-right: 12px; }
+#detail { flex-grow: 1; padding-left: 20px; }
+.catalog-item { -unity-text-align: middle-left; min-height: 36px; margin-bottom: 4px; background-color: #232832; color: #edf0f6; border-width: 1px; border-color: #333b49; }
+.catalog-item--selected { border-color: #8bb3ff; background-color: #2e3a50; }
+#component-title { font-size: 22px; -unity-font-style: bold; margin-bottom: 8px; }
+#preview { min-height: 280px; padding: 24px; margin-top: 16px; margin-bottom: 8px; border-radius: 8px; overflow: hidden; }
+.wrap { white-space: normal; margin-bottom: 12px; }
+.actions { flex-direction: row; flex-wrap: wrap; margin-top: 20px; }
+.actions > Button { min-height: 36px; padding-left: 16px; padding-right: 16px; margin-right: 8px; }
+#status { white-space: normal; color: #99a3b6; padding-top: 12px; }

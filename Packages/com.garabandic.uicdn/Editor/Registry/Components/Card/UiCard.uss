@@ -1,0 +1,5 @@
+.ui-card { background-color: var(--ui-surface); border-width: 1px; border-color: var(--ui-border); border-radius: var(--ui-radius-lg); overflow: hidden; }
+.ui-card-header, .ui-card-content { padding: var(--ui-space-6); }
+.ui-card-title { font-size: var(--ui-font-lg); color: var(--ui-foreground); -unity-font-style: bold; margin-bottom: var(--ui-space-2); }
+.ui-card-description { color: var(--ui-muted); white-space: normal; }
+.ui-card-footer { flex-direction: row; padding: var(--ui-space-4) var(--ui-space-6); border-top-width: 1px; border-top-color: var(--ui-border); }

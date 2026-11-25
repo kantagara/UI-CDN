@@ -1,0 +1,2 @@
+/* Display type override. SPDX-License-Identifier: MIT */
+.ui-root { --ui-display-font: url("Assets/Coiny-Regular.ttf"); }

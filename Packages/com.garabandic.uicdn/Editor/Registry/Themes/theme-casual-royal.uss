@@ -1,0 +1,261 @@
+/* Casual Royal | chunky | SPDX-License-Identifier: MIT */
+.ui-theme-casual-royal {
+    --ui-background: #29a7f2;
+    --ui-surface: #0868c9;
+    --ui-surface-hover: #167cde;
+    --ui-foreground: #ffffff;
+    --ui-muted: #d5edff;
+    --ui-border: #10223b;
+    --ui-primary: #87df32;
+    --ui-primary-hover: #9be64b;
+    --ui-primary-foreground: #193b23;
+    --ui-danger: #ff626e;
+    --ui-success: #80ed08;
+    --ui-radius-sm: 10px;
+    --ui-radius-md: 16px;
+    --ui-radius-lg: 22px;
+    --ui-font-sm: 14px;
+    --ui-font-md: 16px;
+    --ui-font-lg: 26px;
+    --ui-control-height: 52px;
+    color: var(--ui-foreground);
+    background-color: var(--ui-background);
+    font-size: var(--ui-font-md);
+}
+.ui-theme-casual-royal {
+    --ui-shop-board: #146bbb;
+    --ui-shop-title: #fff4c5;
+    --ui-shop-cover: #1467b4;
+    --ui-shop-rim: #75c7ff;
+    --ui-shop-ribbon: #0e497f;
+    --ui-shop-stock: #ddf4ff;
+    --ui-shop-ink: #17436b;
+}
+
+.ui-theme-casual-royal .ui-root,
+.ui-theme-casual-royal .ui-card-description,
+.ui-theme-casual-royal .ui-dialog-description,
+.ui-theme-casual-royal .ui-alert-description,
+.ui-theme-casual-royal .ui-toast-description,
+.ui-theme-casual-royal .ui-input,
+.ui-theme-casual-royal .ui-switch,
+.ui-theme-casual-royal .ui-checkbox,
+.ui-theme-casual-royal .ui-slider,
+.ui-theme-casual-royal .ui-game-caption,
+.ui-theme-casual-royal .ui-shop Label,
+.ui-theme-casual-royal .treasury Label {
+    -unity-font-definition: url("Assets/Nunito-SemiBold.ttf");
+    -unity-font: url("Assets/Nunito-SemiBold.ttf");
+    -unity-font-style: normal;
+}
+
+.ui-theme-casual-royal .ui-button,
+.ui-theme-casual-royal .ui-heading,
+.ui-theme-casual-royal .ui-game-title,
+.ui-theme-casual-royal .ui-card-title,
+.ui-theme-casual-royal .ui-dialog-title,
+.ui-theme-casual-royal .ui-alert-title,
+.ui-theme-casual-royal .ui-toast-title,
+.ui-theme-casual-royal .ui-badge,
+.ui-theme-casual-royal .ui-game-currency,
+.ui-theme-casual-royal .ui-game-slot-name,
+.ui-theme-casual-royal .ui-shop .ui-shop-amount,
+.ui-theme-casual-royal .ui-shop .ui-card-title,
+.ui-theme-casual-royal .treasury .treasury-title,
+.ui-theme-casual-royal .treasury .treasury-feature-title,
+.ui-theme-casual-royal .treasury .treasury-prize,
+.ui-theme-casual-royal .treasury .treasury-section,
+.ui-theme-casual-royal .treasury .treasury-count {
+    -unity-font-definition: var(--ui-display-font, url("Assets/Coiny-Regular.ttf"));
+    -unity-font: var(--ui-display-font, url("Assets/Coiny-Regular.ttf"));
+    -unity-font-style: normal;
+}
+
+.ui-theme-casual-royal .ui-button {
+    background-image: url("Assets/cap-chunky.png");
+    -unity-slice-left: 20;
+    -unity-slice-right: 20;
+    -unity-slice-top: 20;
+    -unity-slice-bottom: 20;
+    border-radius: 14px;
+    border-width: 2px;
+    border-color: transparent;
+    min-height: 52px;
+    padding: 5px 16px 11px 16px;
+    font-size: 18px;
+    -unity-text-align: middle-center;
+    transition-property: background-color, border-color, scale, translate;
+}
+
+.ui-theme-casual-royal .ui-button--secondary {
+    background-color: var(--ui-surface-hover);
+    color: var(--ui-foreground);
+}
+
+.ui-theme-casual-royal .ui-button--danger {
+    background-color: var(--ui-danger);
+    color: #241e2f;
+}
+
+.ui-theme-casual-royal .ui-button--ghost {
+    background-image: none;
+    background-color: transparent;
+    color: var(--ui-foreground);
+}
+
+.ui-theme-casual-royal .ui-button--secondary:hover {
+    background-color: var(--ui-surface);
+}
+
+.ui-theme-casual-royal .ui-button--danger:hover {
+    background-color: var(--ui-danger);
+    -unity-background-image-tint-color: #ffe4e4;
+}
+
+.ui-theme-casual-royal .ui-button--ghost:hover {
+    background-color: var(--ui-surface-hover);
+}
+
+.ui-theme-casual-royal .ui-tabs-trigger--active,
+.ui-theme-casual-royal .ui-tabs-trigger--active:hover {
+    background-image: url("Assets/cap-chunky.png");
+    background-color: var(--ui-primary);
+    color: var(--ui-primary-foreground);
+}
+
+.ui-theme-casual-royal .ui-button:focus,
+.ui-theme-casual-royal .treasury .treasury-price--selected {
+    border-width: 2px;
+    border-color: var(--ui-primary-foreground);
+}
+
+.ui-theme-casual-royal .ui-button--ghost:focus,
+.ui-theme-casual-royal .ui-button--secondary:focus {
+    border-color: var(--ui-foreground);
+}
+
+.ui-theme-casual-royal .ui-button--primary:active,
+.ui-theme-casual-royal .ui-button--secondary:active,
+.ui-theme-casual-royal .ui-button--danger:active,
+.ui-theme-casual-royal .ui-tabs-trigger--active:active {
+    background-image: url("Assets/cap-chunky-pressed.png");
+}
+
+.ui-theme-casual-royal .ui-button:active {
+    translate: 0 2px;
+    scale: 0.99 0.96;
+}
+
+.ui-theme-casual-royal .ui-accordion-trigger {
+    -unity-text-align: middle-left;
+}
+
+.ui-theme-casual-royal .ui-card,
+.ui-theme-casual-royal .ui-toast,
+.ui-theme-casual-royal .ui-dialog-content,
+.ui-theme-casual-royal .ui-game-currency,
+.ui-theme-casual-royal .ui-shop-offer,
+.ui-theme-casual-royal .treasury-pack {
+    background-image: url("Assets/frame-chunky.png");
+    -unity-slice-left: 20;
+    -unity-slice-right: 20;
+    -unity-slice-top: 20;
+    -unity-slice-bottom: 20;
+    border-radius: 14px;
+    border-width: 1px;
+    border-color: var(--ui-border);
+}
+
+.ui-theme-casual-royal .ui-toast:focus {
+    border-color: var(--ui-primary);
+}
+
+.ui-theme-casual-royal .ui-game > .ui-game-title,
+.ui-theme-casual-royal .ui-game > .ui-game-caption {
+    color: #123453;
+}
+
+.ui-theme-casual-royal .ui-tabs-list {
+    padding: 4px;
+    border-radius: 14px;
+}
+
+.ui-theme-casual-royal .ui-input .unity-base-text-field__input {
+    background-color: var(--ui-surface);
+}
+
+.ui-theme-casual-royal .ui-heading,
+.ui-theme-casual-royal .ui-game-caption {
+    white-space: normal;
+}
+
+.ui-theme-casual-royal .ui-shop-coin {
+    background-image: url("Assets/royal-coin.png");
+    background-color: transparent;
+}
+
+.ui-theme-casual-royal .treasury {
+    background-color: var(--ui-shop-board);
+    border-width: 2px;
+    border-color: var(--ui-shop-rim);
+    border-radius: 14px;
+}
+
+.ui-theme-casual-royal .treasury-bar {
+    border-bottom-width: 2px;
+    border-bottom-color: var(--ui-shop-rim);
+}
+
+.ui-theme-casual-royal .treasury .treasury-title,
+.ui-theme-casual-royal .treasury .treasury-section {
+    color: var(--ui-shop-title);
+}
+
+.ui-theme-casual-royal .treasury-wallet {
+    background-color: var(--ui-shop-ribbon);
+    color: #fff5df;
+}
+
+.ui-theme-casual-royal .treasury-feature {
+    background-image: url("Assets/cover-casual-royal.png");
+    background-color: var(--ui-shop-cover);
+    border-color: var(--ui-shop-rim);
+    border-radius: 14px;
+}
+
+.ui-theme-casual-royal .treasury .treasury-feature-title,
+.ui-theme-casual-royal .treasury .treasury-prize {
+    color: #fff2cc;
+    -unity-text-outline-width: 0.65px;
+    -unity-text-outline-color: var(--ui-shop-ribbon);
+    text-shadow: 0 1px 1px var(--ui-shop-ribbon);
+}
+
+.ui-theme-casual-royal .treasury-rewards {
+    background-color: rgba(15, 17, 29, 0.32);
+}
+
+.ui-theme-casual-royal .treasury-quantity {
+    color: #fff9e8;
+}
+
+.ui-theme-casual-royal .treasury-deal {
+    background-color: var(--ui-shop-ribbon);
+    color: #fff5df;
+    border-top-width: 1px;
+    border-top-color: var(--ui-shop-rim);
+}
+
+.ui-theme-casual-royal .treasury-pack,
+.ui-theme-casual-royal .ui-shop-offer {
+    background-color: var(--ui-shop-stock);
+    border-color: var(--ui-shop-rim);
+    color: var(--ui-shop-ink);
+}
+
+.ui-theme-casual-royal .treasury .treasury-price {
+    width: 103px;
+    min-height: 44px;
+    padding: 2px 4px 8px 4px;
+    font-size: 19px;
+}

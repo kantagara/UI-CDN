@@ -1,0 +1,15 @@
+.ui-button {
+    min-height: var(--ui-control-height); padding: var(--ui-space-2) var(--ui-space-4);
+    margin: 0; border-width: 1px; border-color: var(--ui-border); border-radius: var(--ui-radius-md);
+    background-color: var(--ui-primary); color: var(--ui-primary-foreground); -unity-font-style: bold;
+    transition-property: background-color, border-color, scale;
+    transition-duration: var(--ui-duration-fast); transition-timing-function: var(--ui-ease);
+}
+.ui-button:hover { background-color: var(--ui-primary-hover); }
+.ui-button:active { scale: 0.98 0.98; }
+.ui-button:focus { border-color: var(--ui-foreground); border-width: 2px; }
+.ui-button--secondary { background-color: var(--ui-surface); color: var(--ui-foreground); }
+.ui-button--ghost { background-color: transparent; color: var(--ui-foreground); border-color: transparent; }
+.ui-button--secondary:hover, .ui-button--ghost:hover { background-color: var(--ui-surface-hover); }
+.ui-button--danger { background-color: var(--ui-danger); color: var(--ui-primary-foreground); }
+.ui-button:disabled { opacity: 0.4; }

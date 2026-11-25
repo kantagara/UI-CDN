@@ -1,0 +1,5 @@
+.ui-accordion-item { border-bottom-width: 1px; border-bottom-color: var(--ui-border); }
+.ui-accordion-trigger { -unity-text-align: middle-left; border-radius: 0; padding: var(--ui-space-4); }
+.ui-accordion-item--open > .ui-accordion-trigger { color: var(--ui-primary); }
+.ui-accordion-content { padding: var(--ui-space-4); opacity: 0; translate: 0 -4px; transition-property: opacity, translate; transition-duration: var(--ui-duration-panel); transition-timing-function: var(--ui-ease); }
+.ui-accordion-content--open { opacity: 1; translate: 0 0; }

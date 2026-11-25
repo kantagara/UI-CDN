@@ -1,0 +1,769 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "foundations": [
+    {
+      "source": "Editor/Registry/Themes/theme-tokens.uss",
+      "target": "Themes/theme-tokens.uss"
+    },
+    {
+      "source": "Editor/Registry/Themes/theme-game.uss",
+      "target": "Themes/theme-game.uss"
+    },
+    {
+      "source": "Editor/Registry/Themes/theme-royal-puzzle.uss",
+      "target": "Themes/theme-royal-puzzle.uss"
+    },
+    {
+      "source": "Editor/Registry/Themes/theme-dark.uss",
+      "target": "Themes/theme-dark.uss"
+    },
+    {
+      "source": "Editor/Registry/Themes/theme-casual-royal.uss",
+      "target": "Themes/theme-casual-royal.uss"
+    },
+    {
+      "source": "Editor/Registry/Themes/theme-candy-pop.uss",
+      "target": "Themes/theme-candy-pop.uss"
+    },
+    {
+      "source": "Editor/Registry/Themes/theme-toy-box.uss",
+      "target": "Themes/theme-toy-box.uss"
+    },
+    {
+      "source": "Editor/Registry/Themes/theme-jungle-quest.uss",
+      "target": "Themes/theme-jungle-quest.uss"
+    },
+    {
+      "source": "Editor/Registry/Themes/theme-sunny-puzzle.uss",
+      "target": "Themes/theme-sunny-puzzle.uss"
+    },
+    {
+      "source": "Editor/Registry/Themes/theme-mint-cloud.uss",
+      "target": "Themes/theme-mint-cloud.uss"
+    },
+    {
+      "source": "Editor/Registry/Themes/theme-neon-arcade.uss",
+      "target": "Themes/theme-neon-arcade.uss"
+    },
+    {
+      "source": "Editor/Registry/Themes/theme-paper-play.uss",
+      "target": "Themes/theme-paper-play.uss"
+    },
+    {
+      "source": "Editor/Registry/Themes/theme-studio-light.uss",
+      "target": "Themes/theme-studio-light.uss"
+    },
+    {
+      "source": "Editor/Registry/Themes/font-coiny.uss",
+      "target": "Themes/font-coiny.uss"
+    },
+    {
+      "source": "Editor/Registry/Themes/font-nunito.uss",
+      "target": "Themes/font-nunito.uss"
+    },
+    {
+      "source": "Editor/Registry/Themes/font-fredoka.uss",
+      "target": "Themes/font-fredoka.uss"
+    },
+    {
+      "source": "Editor/Registry/Docs/AGENTS.md",
+      "target": "AGENTS.md"
+    },
+    {
+      "source": "LICENSE.md",
+      "target": "LICENSE.md"
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Coiny-License.txt",
+      "target": "Themes/Assets/Coiny-License.txt"
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Nunito-License.txt",
+      "target": "Themes/Assets/Nunito-License.txt"
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Fredoka-License.txt",
+      "target": "Themes/Assets/Fredoka-License.txt"
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/royal-action.png",
+      "target": "Themes/Assets/royal-action.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/royal-secondary.png",
+      "target": "Themes/Assets/royal-secondary.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/royal-panel.png",
+      "target": "Themes/Assets/royal-panel.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/royal-parchment.png",
+      "target": "Themes/Assets/royal-parchment.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/royal-coin.png",
+      "target": "Themes/Assets/royal-coin.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Coiny-Regular.ttf",
+      "target": "Themes/Assets/Coiny-Regular.ttf",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Nunito-SemiBold.ttf",
+      "target": "Themes/Assets/Nunito-SemiBold.ttf",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Fredoka-SemiBold.ttf",
+      "target": "Themes/Assets/Fredoka-SemiBold.ttf",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/loot-chest.png",
+      "target": "Themes/Assets/loot-chest.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/loot-rocket.png",
+      "target": "Themes/Assets/loot-rocket.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/loot-hammer.png",
+      "target": "Themes/Assets/loot-hammer.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/loot-heart.png",
+      "target": "Themes/Assets/loot-heart.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/loot-coins.png",
+      "target": "Themes/Assets/loot-coins.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/loot-pouch.png",
+      "target": "Themes/Assets/loot-pouch.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/treasury-enamel.png",
+      "target": "Themes/Assets/treasury-enamel.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cap-chunky.png",
+      "target": "Themes/Assets/cap-chunky.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cap-chunky-pressed.png",
+      "target": "Themes/Assets/cap-chunky-pressed.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/frame-chunky.png",
+      "target": "Themes/Assets/frame-chunky.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cap-soft.png",
+      "target": "Themes/Assets/cap-soft.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cap-soft-pressed.png",
+      "target": "Themes/Assets/cap-soft-pressed.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/frame-soft.png",
+      "target": "Themes/Assets/frame-soft.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cap-neon.png",
+      "target": "Themes/Assets/cap-neon.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cap-neon-pressed.png",
+      "target": "Themes/Assets/cap-neon-pressed.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/frame-neon.png",
+      "target": "Themes/Assets/frame-neon.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cap-paper.png",
+      "target": "Themes/Assets/cap-paper.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cap-paper-pressed.png",
+      "target": "Themes/Assets/cap-paper-pressed.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/frame-paper.png",
+      "target": "Themes/Assets/frame-paper.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cap-minimal.png",
+      "target": "Themes/Assets/cap-minimal.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cap-minimal-pressed.png",
+      "target": "Themes/Assets/cap-minimal-pressed.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/frame-minimal.png",
+      "target": "Themes/Assets/frame-minimal.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cover-casual-royal.png",
+      "target": "Themes/Assets/cover-casual-royal.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cover-candy-pop.png",
+      "target": "Themes/Assets/cover-candy-pop.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cover-toy-box.png",
+      "target": "Themes/Assets/cover-toy-box.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cover-jungle-quest.png",
+      "target": "Themes/Assets/cover-jungle-quest.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cover-sunny-puzzle.png",
+      "target": "Themes/Assets/cover-sunny-puzzle.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cover-mint-cloud.png",
+      "target": "Themes/Assets/cover-mint-cloud.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cover-neon-arcade.png",
+      "target": "Themes/Assets/cover-neon-arcade.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cover-paper-play.png",
+      "target": "Themes/Assets/cover-paper-play.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cover-dark.png",
+      "target": "Themes/Assets/cover-dark.png",
+      "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/cover-studio-light.png",
+      "target": "Themes/Assets/cover-studio-light.png",
+      "binary": true
+    }
+  ],
+  "themes": [
+    {
+      "id": "royal-puzzle",
+      "name": "Royal Puzzle",
+      "family": "royal",
+      "description": "A focused casual/puzzle direction: gold-trimmed controls, parchment offers and a deep royal canvas.",
+      "cssClass": "ui-theme-royal-puzzle",
+      "source": "Editor/Registry/Themes/theme-royal-puzzle.uss"
+    },
+    {
+      "id": "dark",
+      "name": "Studio Dark",
+      "family": "minimal",
+      "description": "Sharp dark surfaces and restrained blue accents.",
+      "cssClass": "ui-theme-dark",
+      "source": "Editor/Registry/Themes/theme-dark.uss"
+    },
+    {
+      "id": "casual-royal",
+      "name": "Casual Royal",
+      "family": "chunky",
+      "description": "Reference-inspired sky blue, lime actions, thick ink outlines and bold game panels.",
+      "cssClass": "ui-theme-casual-royal",
+      "source": "Editor/Registry/Themes/theme-casual-royal.uss"
+    },
+    {
+      "id": "candy-pop",
+      "name": "Candy Pop",
+      "family": "chunky",
+      "description": "Bubblegum pink, violet panels and lemon candy buttons.",
+      "cssClass": "ui-theme-candy-pop",
+      "source": "Editor/Registry/Themes/theme-candy-pop.uss"
+    },
+    {
+      "id": "toy-box",
+      "name": "Toy Box",
+      "family": "chunky",
+      "description": "Primary red, blue and yellow with playful toy-like depth.",
+      "cssClass": "ui-theme-toy-box",
+      "source": "Editor/Registry/Themes/theme-toy-box.uss"
+    },
+    {
+      "id": "jungle-quest",
+      "name": "Jungle Quest",
+      "family": "chunky",
+      "description": "Leaf green panels, warm gold actions and dark forest outlines.",
+      "cssClass": "ui-theme-jungle-quest",
+      "source": "Editor/Registry/Themes/theme-jungle-quest.uss"
+    },
+    {
+      "id": "sunny-puzzle",
+      "name": "Sunny Puzzle",
+      "family": "soft",
+      "description": "Cream canvas, rounded white cards and warm orange actions.",
+      "cssClass": "ui-theme-sunny-puzzle",
+      "source": "Editor/Registry/Themes/theme-sunny-puzzle.uss"
+    },
+    {
+      "id": "mint-cloud",
+      "name": "Mint Cloud",
+      "family": "soft",
+      "description": "Calm aqua panels and generous rounded shapes for cozy casual games.",
+      "cssClass": "ui-theme-mint-cloud",
+      "source": "Editor/Registry/Themes/theme-mint-cloud.uss"
+    },
+    {
+      "id": "neon-arcade",
+      "name": "Neon Arcade",
+      "family": "neon",
+      "description": "Midnight violet, electric cyan and luminous magenta borders.",
+      "cssClass": "ui-theme-neon-arcade",
+      "source": "Editor/Registry/Themes/theme-neon-arcade.uss"
+    },
+    {
+      "id": "paper-play",
+      "name": "Paper Play",
+      "family": "paper",
+      "description": "Warm paper, dark pencil outlines and an editorial flat look.",
+      "cssClass": "ui-theme-paper-play",
+      "source": "Editor/Registry/Themes/theme-paper-play.uss"
+    },
+    {
+      "id": "studio-light",
+      "name": "Studio Light",
+      "family": "minimal",
+      "description": "Clean light surfaces for minimal menus and utility screens.",
+      "cssClass": "ui-theme-studio-light",
+      "source": "Editor/Registry/Themes/theme-studio-light.uss"
+    }
+  ],
+  "components": [
+    {
+      "id": "core",
+      "name": "Core",
+      "category": "Foundation",
+      "description": "Fluent composition helpers and overridable motion lifecycle.",
+      "dependencies": [],
+      "preview": "Editor/Registry/Components/Core/CoreExample.uxml",
+      "files": [
+        {
+          "source": "Editor/Registry/Components/Core/UiCore.cs",
+          "target": "Components/Core/UiCore.cs"
+        },
+        {
+          "source": "Editor/Registry/Components/Core/UiCore.uss",
+          "target": "Components/Core/UiCore.uss"
+        },
+        {
+          "source": "Editor/Registry/Components/Core/CoreExample.uxml",
+          "target": "Components/Core/CoreExample.uxml"
+        }
+      ]
+    },
+    {
+      "id": "button",
+      "name": "Button",
+      "category": "Actions",
+      "description": "Primary, secondary, ghost, and danger actions with native submit navigation.",
+      "dependencies": [
+        "core"
+      ],
+      "preview": "Editor/Registry/Components/Button/ButtonExample.uxml",
+      "files": [
+        {
+          "source": "Editor/Registry/Components/Button/UiButton.cs",
+          "target": "Components/Button/UiButton.cs"
+        },
+        {
+          "source": "Editor/Registry/Components/Button/UiButton.uss",
+          "target": "Components/Button/UiButton.uss"
+        },
+        {
+          "source": "Editor/Registry/Components/Button/ButtonExample.uxml",
+          "target": "Components/Button/ButtonExample.uxml"
+        }
+      ]
+    },
+    {
+      "id": "card",
+      "name": "Card",
+      "category": "Layout",
+      "description": "Composable header, title, description, content, and footer.",
+      "dependencies": [
+        "core"
+      ],
+      "preview": "Editor/Registry/Components/Card/CardExample.uxml",
+      "files": [
+        {
+          "source": "Editor/Registry/Components/Card/UiCard.cs",
+          "target": "Components/Card/UiCard.cs"
+        },
+        {
+          "source": "Editor/Registry/Components/Card/UiCard.uss",
+          "target": "Components/Card/UiCard.uss"
+        },
+        {
+          "source": "Editor/Registry/Components/Card/CardExample.uxml",
+          "target": "Components/Card/CardExample.uxml"
+        }
+      ]
+    },
+    {
+      "id": "dialog",
+      "name": "Dialog",
+      "category": "Overlay",
+      "description": "Modal overlay with focus containment, focus restoration, cancel, and replaceable transitions.",
+      "dependencies": [
+        "core",
+        "button"
+      ],
+      "preview": "Editor/Registry/Components/Dialog/DialogExample.uxml",
+      "files": [
+        {
+          "source": "Editor/Registry/Components/Dialog/UiDialog.cs",
+          "target": "Components/Dialog/UiDialog.cs"
+        },
+        {
+          "source": "Editor/Registry/Components/Dialog/UiDialog.uss",
+          "target": "Components/Dialog/UiDialog.uss"
+        },
+        {
+          "source": "Editor/Registry/Components/Dialog/DialogExample.uxml",
+          "target": "Components/Dialog/DialogExample.uxml"
+        }
+      ]
+    },
+    {
+      "id": "tabs",
+      "name": "Tabs",
+      "category": "Navigation",
+      "description": "Composable tabs with value selection, nested-tab isolation, and left/right navigation.",
+      "dependencies": [
+        "core",
+        "button"
+      ],
+      "preview": "Editor/Registry/Components/Tabs/TabsExample.uxml",
+      "files": [
+        {
+          "source": "Editor/Registry/Components/Tabs/UiTabs.cs",
+          "target": "Components/Tabs/UiTabs.cs"
+        },
+        {
+          "source": "Editor/Registry/Components/Tabs/UiTabs.uss",
+          "target": "Components/Tabs/UiTabs.uss"
+        },
+        {
+          "source": "Editor/Registry/Components/Tabs/TabsExample.uxml",
+          "target": "Components/Tabs/TabsExample.uxml"
+        }
+      ]
+    },
+    {
+      "id": "accordion",
+      "name": "Accordion",
+      "category": "Disclosure",
+      "description": "Single or multiple expandable items with animated content.",
+      "dependencies": [
+        "core",
+        "button"
+      ],
+      "preview": "Editor/Registry/Components/Accordion/AccordionExample.uxml",
+      "files": [
+        {
+          "source": "Editor/Registry/Components/Accordion/UiAccordion.cs",
+          "target": "Components/Accordion/UiAccordion.cs"
+        },
+        {
+          "source": "Editor/Registry/Components/Accordion/UiAccordion.uss",
+          "target": "Components/Accordion/UiAccordion.uss"
+        },
+        {
+          "source": "Editor/Registry/Components/Accordion/AccordionExample.uxml",
+          "target": "Components/Accordion/AccordionExample.uxml"
+        }
+      ]
+    },
+    {
+      "id": "checkbox",
+      "name": "Checkbox",
+      "category": "Forms",
+      "description": "Native boolean field with change events and submit support.",
+      "dependencies": [
+        "core"
+      ],
+      "preview": "Editor/Registry/Components/Checkbox/CheckboxExample.uxml",
+      "files": [
+        {
+          "source": "Editor/Registry/Components/Checkbox/UiCheckbox.cs",
+          "target": "Components/Checkbox/UiCheckbox.cs"
+        },
+        {
+          "source": "Editor/Registry/Components/Checkbox/UiCheckbox.uss",
+          "target": "Components/Checkbox/UiCheckbox.uss"
+        },
+        {
+          "source": "Editor/Registry/Components/Checkbox/CheckboxExample.uxml",
+          "target": "Components/Checkbox/CheckboxExample.uxml"
+        }
+      ]
+    },
+    {
+      "id": "switch",
+      "name": "Switch",
+      "category": "Forms",
+      "description": "Compact toggle for immediate settings.",
+      "dependencies": [
+        "core"
+      ],
+      "preview": "Editor/Registry/Components/Switch/SwitchExample.uxml",
+      "files": [
+        {
+          "source": "Editor/Registry/Components/Switch/UiSwitch.cs",
+          "target": "Components/Switch/UiSwitch.cs"
+        },
+        {
+          "source": "Editor/Registry/Components/Switch/UiSwitch.uss",
+          "target": "Components/Switch/UiSwitch.uss"
+        },
+        {
+          "source": "Editor/Registry/Components/Switch/SwitchExample.uxml",
+          "target": "Components/Switch/SwitchExample.uxml"
+        }
+      ]
+    },
+    {
+      "id": "input",
+      "name": "Input",
+      "category": "Forms",
+      "description": "Native text editing with validation styling and change events.",
+      "dependencies": [
+        "core"
+      ],
+      "preview": "Editor/Registry/Components/Input/InputExample.uxml",
+      "files": [
+        {
+          "source": "Editor/Registry/Components/Input/UiInput.cs",
+          "target": "Components/Input/UiInput.cs"
+        },
+        {
+          "source": "Editor/Registry/Components/Input/UiInput.uss",
+          "target": "Components/Input/UiInput.uss"
+        },
+        {
+          "source": "Editor/Registry/Components/Input/InputExample.uxml",
+          "target": "Components/Input/InputExample.uxml"
+        }
+      ]
+    },
+    {
+      "id": "slider",
+      "name": "Slider",
+      "category": "Forms",
+      "description": "Native range selection with gamepad navigation and change events.",
+      "dependencies": [
+        "core"
+      ],
+      "preview": "Editor/Registry/Components/Slider/SliderExample.uxml",
+      "files": [
+        {
+          "source": "Editor/Registry/Components/Slider/UiSlider.cs",
+          "target": "Components/Slider/UiSlider.cs"
+        },
+        {
+          "source": "Editor/Registry/Components/Slider/UiSlider.uss",
+          "target": "Components/Slider/UiSlider.uss"
+        },
+        {
+          "source": "Editor/Registry/Components/Slider/SliderExample.uxml",
+          "target": "Components/Slider/SliderExample.uxml"
+        }
+      ]
+    },
+    {
+      "id": "badge",
+      "name": "Badge",
+      "category": "Status",
+      "description": "Compact default, success, and danger status labels.",
+      "dependencies": [
+        "core"
+      ],
+      "preview": "Editor/Registry/Components/Badge/BadgeExample.uxml",
+      "files": [
+        {
+          "source": "Editor/Registry/Components/Badge/UiBadge.cs",
+          "target": "Components/Badge/UiBadge.cs"
+        },
+        {
+          "source": "Editor/Registry/Components/Badge/UiBadge.uss",
+          "target": "Components/Badge/UiBadge.uss"
+        },
+        {
+          "source": "Editor/Registry/Components/Badge/BadgeExample.uxml",
+          "target": "Components/Badge/BadgeExample.uxml"
+        }
+      ]
+    },
+    {
+      "id": "alert",
+      "name": "Alert",
+      "category": "Feedback",
+      "description": "Composable inline informational, success, and danger messages.",
+      "dependencies": [
+        "core"
+      ],
+      "preview": "Editor/Registry/Components/Alert/AlertExample.uxml",
+      "files": [
+        {
+          "source": "Editor/Registry/Components/Alert/UiAlert.cs",
+          "target": "Components/Alert/UiAlert.cs"
+        },
+        {
+          "source": "Editor/Registry/Components/Alert/UiAlert.uss",
+          "target": "Components/Alert/UiAlert.uss"
+        },
+        {
+          "source": "Editor/Registry/Components/Alert/AlertExample.uxml",
+          "target": "Components/Alert/AlertExample.uxml"
+        }
+      ]
+    },
+    {
+      "id": "progress",
+      "name": "Progress",
+      "category": "Status",
+      "description": "Animated determinate progress with native range clamping.",
+      "dependencies": [
+        "core"
+      ],
+      "preview": "Editor/Registry/Components/Progress/ProgressExample.uxml",
+      "files": [
+        {
+          "source": "Editor/Registry/Components/Progress/UiProgress.cs",
+          "target": "Components/Progress/UiProgress.cs"
+        },
+        {
+          "source": "Editor/Registry/Components/Progress/UiProgress.uss",
+          "target": "Components/Progress/UiProgress.uss"
+        },
+        {
+          "source": "Editor/Registry/Components/Progress/ProgressExample.uxml",
+          "target": "Components/Progress/ProgressExample.uxml"
+        }
+      ]
+    },
+    {
+      "id": "separator",
+      "name": "Separator",
+      "category": "Layout",
+      "description": "Horizontal and vertical layout dividers.",
+      "dependencies": [
+        "core"
+      ],
+      "preview": "Editor/Registry/Components/Separator/SeparatorExample.uxml",
+      "files": [
+        {
+          "source": "Editor/Registry/Components/Separator/UiSeparator.cs",
+          "target": "Components/Separator/UiSeparator.cs"
+        },
+        {
+          "source": "Editor/Registry/Components/Separator/UiSeparator.uss",
+          "target": "Components/Separator/UiSeparator.uss"
+        },
+        {
+          "source": "Editor/Registry/Components/Separator/SeparatorExample.uxml",
+          "target": "Components/Separator/SeparatorExample.uxml"
+        }
+      ]
+    },
+    {
+      "id": "toast",
+      "name": "Toast",
+      "category": "Feedback",
+      "description": "Dismissible notifications with hover/focus pause and motion lifecycle.",
+      "dependencies": [
+        "core",
+        "button"
+      ],
+      "preview": "Editor/Registry/Components/Toast/ToastExample.uxml",
+      "files": [
+        {
+          "source": "Editor/Registry/Components/Toast/UiToast.cs",
+          "target": "Components/Toast/UiToast.cs"
+        },
+        {
+          "source": "Editor/Registry/Components/Toast/UiToast.uss",
+          "target": "Components/Toast/UiToast.uss"
+        },
+        {
+          "source": "Editor/Registry/Components/Toast/ToastExample.uxml",
+          "target": "Components/Toast/ToastExample.uxml"
+        }
+      ]
+    },
+    {
+      "id": "treasureshop",
+      "name": "TreasureShop",
+      "category": "Screens",
+      "description": "Illustrated portrait shop with a treasure bundle and three coin packs.",
+      "dependencies": [
+        "core",
+        "button"
+      ],
+      "preview": "Editor/Registry/Components/TreasureShop/TreasureShopExample.uxml",
+      "files": [
+        {
+          "source": "Editor/Registry/Components/TreasureShop/UiTreasureShop.cs",
+          "target": "Components/TreasureShop/UiTreasureShop.cs"
+        },
+        {
+          "source": "Editor/Registry/Components/TreasureShop/UiTreasureShop.uss",
+          "target": "Components/TreasureShop/UiTreasureShop.uss"
+        },
+        {
+          "source": "Editor/Registry/Components/TreasureShop/TreasureShopExample.uxml",
+          "target": "Components/TreasureShop/TreasureShopExample.uxml"
+        }
+      ]
+    }
+  ]
+}

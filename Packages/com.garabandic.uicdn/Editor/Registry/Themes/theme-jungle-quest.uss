@@ -1,0 +1,261 @@
+/* Jungle Quest | chunky | SPDX-License-Identifier: MIT */
+.ui-theme-jungle-quest {
+    --ui-background: #bce781;
+    --ui-surface: #287647;
+    --ui-surface-hover: #368951;
+    --ui-foreground: #ffffff;
+    --ui-muted: #d9f5c5;
+    --ui-border: #173a29;
+    --ui-primary: #ffce35;
+    --ui-primary-hover: #ffe36b;
+    --ui-primary-foreground: #24402b;
+    --ui-danger: #ff8070;
+    --ui-success: #b4f249;
+    --ui-radius-sm: 10px;
+    --ui-radius-md: 16px;
+    --ui-radius-lg: 22px;
+    --ui-font-sm: 14px;
+    --ui-font-md: 16px;
+    --ui-font-lg: 26px;
+    --ui-control-height: 52px;
+    color: var(--ui-foreground);
+    background-color: var(--ui-background);
+    font-size: var(--ui-font-md);
+}
+.ui-theme-jungle-quest {
+    --ui-shop-board: #255a40;
+    --ui-shop-title: #ffe391;
+    --ui-shop-cover: #327359;
+    --ui-shop-rim: #a8cd76;
+    --ui-shop-ribbon: #194e43;
+    --ui-shop-stock: #edf1cc;
+    --ui-shop-ink: #284a37;
+}
+
+.ui-theme-jungle-quest .ui-root,
+.ui-theme-jungle-quest .ui-card-description,
+.ui-theme-jungle-quest .ui-dialog-description,
+.ui-theme-jungle-quest .ui-alert-description,
+.ui-theme-jungle-quest .ui-toast-description,
+.ui-theme-jungle-quest .ui-input,
+.ui-theme-jungle-quest .ui-switch,
+.ui-theme-jungle-quest .ui-checkbox,
+.ui-theme-jungle-quest .ui-slider,
+.ui-theme-jungle-quest .ui-game-caption,
+.ui-theme-jungle-quest .ui-shop Label,
+.ui-theme-jungle-quest .treasury Label {
+    -unity-font-definition: url("Assets/Nunito-SemiBold.ttf");
+    -unity-font: url("Assets/Nunito-SemiBold.ttf");
+    -unity-font-style: normal;
+}
+
+.ui-theme-jungle-quest .ui-button,
+.ui-theme-jungle-quest .ui-heading,
+.ui-theme-jungle-quest .ui-game-title,
+.ui-theme-jungle-quest .ui-card-title,
+.ui-theme-jungle-quest .ui-dialog-title,
+.ui-theme-jungle-quest .ui-alert-title,
+.ui-theme-jungle-quest .ui-toast-title,
+.ui-theme-jungle-quest .ui-badge,
+.ui-theme-jungle-quest .ui-game-currency,
+.ui-theme-jungle-quest .ui-game-slot-name,
+.ui-theme-jungle-quest .ui-shop .ui-shop-amount,
+.ui-theme-jungle-quest .ui-shop .ui-card-title,
+.ui-theme-jungle-quest .treasury .treasury-title,
+.ui-theme-jungle-quest .treasury .treasury-feature-title,
+.ui-theme-jungle-quest .treasury .treasury-prize,
+.ui-theme-jungle-quest .treasury .treasury-section,
+.ui-theme-jungle-quest .treasury .treasury-count {
+    -unity-font-definition: var(--ui-display-font, url("Assets/Coiny-Regular.ttf"));
+    -unity-font: var(--ui-display-font, url("Assets/Coiny-Regular.ttf"));
+    -unity-font-style: normal;
+}
+
+.ui-theme-jungle-quest .ui-button {
+    background-image: url("Assets/cap-chunky.png");
+    -unity-slice-left: 20;
+    -unity-slice-right: 20;
+    -unity-slice-top: 20;
+    -unity-slice-bottom: 20;
+    border-radius: 14px;
+    border-width: 2px;
+    border-color: transparent;
+    min-height: 52px;
+    padding: 5px 16px 11px 16px;
+    font-size: 18px;
+    -unity-text-align: middle-center;
+    transition-property: background-color, border-color, scale, translate;
+}
+
+.ui-theme-jungle-quest .ui-button--secondary {
+    background-color: var(--ui-surface-hover);
+    color: var(--ui-foreground);
+}
+
+.ui-theme-jungle-quest .ui-button--danger {
+    background-color: var(--ui-danger);
+    color: #241e2f;
+}
+
+.ui-theme-jungle-quest .ui-button--ghost {
+    background-image: none;
+    background-color: transparent;
+    color: var(--ui-foreground);
+}
+
+.ui-theme-jungle-quest .ui-button--secondary:hover {
+    background-color: var(--ui-surface);
+}
+
+.ui-theme-jungle-quest .ui-button--danger:hover {
+    background-color: var(--ui-danger);
+    -unity-background-image-tint-color: #ffe4e4;
+}
+
+.ui-theme-jungle-quest .ui-button--ghost:hover {
+    background-color: var(--ui-surface-hover);
+}
+
+.ui-theme-jungle-quest .ui-tabs-trigger--active,
+.ui-theme-jungle-quest .ui-tabs-trigger--active:hover {
+    background-image: url("Assets/cap-chunky.png");
+    background-color: var(--ui-primary);
+    color: var(--ui-primary-foreground);
+}
+
+.ui-theme-jungle-quest .ui-button:focus,
+.ui-theme-jungle-quest .treasury .treasury-price--selected {
+    border-width: 2px;
+    border-color: var(--ui-primary-foreground);
+}
+
+.ui-theme-jungle-quest .ui-button--ghost:focus,
+.ui-theme-jungle-quest .ui-button--secondary:focus {
+    border-color: var(--ui-foreground);
+}
+
+.ui-theme-jungle-quest .ui-button--primary:active,
+.ui-theme-jungle-quest .ui-button--secondary:active,
+.ui-theme-jungle-quest .ui-button--danger:active,
+.ui-theme-jungle-quest .ui-tabs-trigger--active:active {
+    background-image: url("Assets/cap-chunky-pressed.png");
+}
+
+.ui-theme-jungle-quest .ui-button:active {
+    translate: 0 2px;
+    scale: 0.99 0.96;
+}
+
+.ui-theme-jungle-quest .ui-accordion-trigger {
+    -unity-text-align: middle-left;
+}
+
+.ui-theme-jungle-quest .ui-card,
+.ui-theme-jungle-quest .ui-toast,
+.ui-theme-jungle-quest .ui-dialog-content,
+.ui-theme-jungle-quest .ui-game-currency,
+.ui-theme-jungle-quest .ui-shop-offer,
+.ui-theme-jungle-quest .treasury-pack {
+    background-image: url("Assets/frame-chunky.png");
+    -unity-slice-left: 20;
+    -unity-slice-right: 20;
+    -unity-slice-top: 20;
+    -unity-slice-bottom: 20;
+    border-radius: 14px;
+    border-width: 1px;
+    border-color: var(--ui-border);
+}
+
+.ui-theme-jungle-quest .ui-toast:focus {
+    border-color: var(--ui-primary);
+}
+
+.ui-theme-jungle-quest .ui-game > .ui-game-title,
+.ui-theme-jungle-quest .ui-game > .ui-game-caption {
+    color: #ffe391;
+}
+
+.ui-theme-jungle-quest .ui-tabs-list {
+    padding: 4px;
+    border-radius: 14px;
+}
+
+.ui-theme-jungle-quest .ui-input .unity-base-text-field__input {
+    background-color: var(--ui-surface);
+}
+
+.ui-theme-jungle-quest .ui-heading,
+.ui-theme-jungle-quest .ui-game-caption {
+    white-space: normal;
+}
+
+.ui-theme-jungle-quest .ui-shop-coin {
+    background-image: url("Assets/royal-coin.png");
+    background-color: transparent;
+}
+
+.ui-theme-jungle-quest .treasury {
+    background-color: var(--ui-shop-board);
+    border-width: 2px;
+    border-color: var(--ui-shop-rim);
+    border-radius: 14px;
+}
+
+.ui-theme-jungle-quest .treasury-bar {
+    border-bottom-width: 2px;
+    border-bottom-color: var(--ui-shop-rim);
+}
+
+.ui-theme-jungle-quest .treasury .treasury-title,
+.ui-theme-jungle-quest .treasury .treasury-section {
+    color: var(--ui-shop-title);
+}
+
+.ui-theme-jungle-quest .treasury-wallet {
+    background-color: var(--ui-shop-ribbon);
+    color: #fff5df;
+}
+
+.ui-theme-jungle-quest .treasury-feature {
+    background-image: url("Assets/cover-jungle-quest.png");
+    background-color: var(--ui-shop-cover);
+    border-color: var(--ui-shop-rim);
+    border-radius: 14px;
+}
+
+.ui-theme-jungle-quest .treasury .treasury-feature-title,
+.ui-theme-jungle-quest .treasury .treasury-prize {
+    color: #fff2cc;
+    -unity-text-outline-width: 0.65px;
+    -unity-text-outline-color: var(--ui-shop-ribbon);
+    text-shadow: 0 1px 1px var(--ui-shop-ribbon);
+}
+
+.ui-theme-jungle-quest .treasury-rewards {
+    background-color: rgba(15, 17, 29, 0.32);
+}
+
+.ui-theme-jungle-quest .treasury-quantity {
+    color: #fff9e8;
+}
+
+.ui-theme-jungle-quest .treasury-deal {
+    background-color: var(--ui-shop-ribbon);
+    color: #fff5df;
+    border-top-width: 1px;
+    border-top-color: var(--ui-shop-rim);
+}
+
+.ui-theme-jungle-quest .treasury-pack,
+.ui-theme-jungle-quest .ui-shop-offer {
+    background-color: var(--ui-shop-stock);
+    border-color: var(--ui-shop-rim);
+    color: var(--ui-shop-ink);
+}
+
+.ui-theme-jungle-quest .treasury .treasury-price {
+    width: 103px;
+    min-height: 44px;
+    padding: 2px 4px 8px 4px;
+    font-size: 19px;
+}

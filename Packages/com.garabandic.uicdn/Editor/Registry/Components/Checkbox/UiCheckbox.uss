@@ -1,0 +1,6 @@
+.ui-checkbox { margin: var(--ui-space-2) 0; color: var(--ui-foreground); min-height: 24px; }
+.ui-checkbox .unity-toggle__input { background-color: transparent; }
+.ui-checkbox .unity-toggle__checkmark { width: 20px; height: 20px; border-width: 1px; border-color: var(--ui-border); border-radius: var(--ui-radius-sm); background-color: var(--ui-surface); transition-property: background-color, border-color; transition-duration: var(--ui-duration-fast); }
+.ui-checkbox:checked .unity-toggle__checkmark { background-color: var(--ui-primary); -unity-background-image-tint-color: var(--ui-primary-foreground); }
+.ui-checkbox:focus .unity-toggle__checkmark, .ui-checkbox .unity-toggle__input:focus .unity-toggle__checkmark { border-color: var(--ui-primary); border-width: 2px; }
+.ui-checkbox:disabled { opacity: 0.4; }

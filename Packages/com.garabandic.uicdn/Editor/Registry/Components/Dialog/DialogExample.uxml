@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:c="Garabandic.UiCdn.Editor.Preview">
+  <ui:Style src="../../Themes/theme-tokens.uss" />
+  <ui:Style src="../../Themes/theme-dark.uss" />
+  <ui:Style src="../Core/UiCore.uss" />
+  <ui:Style src="../Button/UiButton.uss" />
+  <ui:Style src="../Dialog/UiDialog.uss" />
+  <ui:VisualElement class="ui-root ui-stack ui-example">
+    <c:UiButton name="open-dialog" text="Open dialog" /><c:UiDialog><c:UiDialogOverlay /><c:UiDialogContent><c:UiDialogHeader><c:UiDialogTitle text="Leave this session?" /><c:UiDialogDescription text="Your progress has been saved. Press Escape or cancel to return." /></c:UiDialogHeader><c:UiDialogFooter><c:UiButton name="close-dialog" text="Stay here" /></c:UiDialogFooter></c:UiDialogContent></c:UiDialog>
+  </ui:VisualElement>
+</ui:UXML>

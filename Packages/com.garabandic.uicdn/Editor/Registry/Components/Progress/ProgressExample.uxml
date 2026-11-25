@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:c="Garabandic.UiCdn.Editor.Preview">
+  <ui:Style src="../../Themes/theme-tokens.uss" />
+  <ui:Style src="../../Themes/theme-dark.uss" />
+  <ui:Style src="../Core/UiCore.uss" />
+  <ui:Style src="../Progress/UiProgress.uss" />
+  <ui:VisualElement class="ui-root ui-stack ui-example">
+    <c:UiProgress value="64" title="Loading world: 64%" />
+  </ui:VisualElement>
+</ui:UXML>

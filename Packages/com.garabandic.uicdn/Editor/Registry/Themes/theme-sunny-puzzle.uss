@@ -1,0 +1,261 @@
+/* Sunny Puzzle | soft | SPDX-License-Identifier: MIT */
+.ui-theme-sunny-puzzle {
+    --ui-background: #fff2d9;
+    --ui-surface: #fffdf5;
+    --ui-surface-hover: #fff0d3;
+    --ui-foreground: #4d3426;
+    --ui-muted: #80604c;
+    --ui-border: #e5c9a7;
+    --ui-primary: #ffba62;
+    --ui-primary-hover: #ffce8e;
+    --ui-primary-foreground: #52311d;
+    --ui-danger: #dc5067;
+    --ui-success: #58ad78;
+    --ui-radius-sm: 12px;
+    --ui-radius-md: 22px;
+    --ui-radius-lg: 28px;
+    --ui-font-sm: 12px;
+    --ui-font-md: 14px;
+    --ui-font-lg: 24px;
+    --ui-control-height: 44px;
+    color: var(--ui-foreground);
+    background-color: var(--ui-background);
+    font-size: var(--ui-font-md);
+}
+.ui-theme-sunny-puzzle {
+    --ui-shop-board: #ffedcc;
+    --ui-shop-title: #783d2e;
+    --ui-shop-cover: #ac5240;
+    --ui-shop-rim: #ffc47b;
+    --ui-shop-ribbon: #804430;
+    --ui-shop-stock: #fff9e8;
+    --ui-shop-ink: #643f2f;
+}
+
+.ui-theme-sunny-puzzle .ui-root,
+.ui-theme-sunny-puzzle .ui-card-description,
+.ui-theme-sunny-puzzle .ui-dialog-description,
+.ui-theme-sunny-puzzle .ui-alert-description,
+.ui-theme-sunny-puzzle .ui-toast-description,
+.ui-theme-sunny-puzzle .ui-input,
+.ui-theme-sunny-puzzle .ui-switch,
+.ui-theme-sunny-puzzle .ui-checkbox,
+.ui-theme-sunny-puzzle .ui-slider,
+.ui-theme-sunny-puzzle .ui-game-caption,
+.ui-theme-sunny-puzzle .ui-shop Label,
+.ui-theme-sunny-puzzle .treasury Label {
+    -unity-font-definition: url("Assets/Nunito-SemiBold.ttf");
+    -unity-font: url("Assets/Nunito-SemiBold.ttf");
+    -unity-font-style: normal;
+}
+
+.ui-theme-sunny-puzzle .ui-button,
+.ui-theme-sunny-puzzle .ui-heading,
+.ui-theme-sunny-puzzle .ui-game-title,
+.ui-theme-sunny-puzzle .ui-card-title,
+.ui-theme-sunny-puzzle .ui-dialog-title,
+.ui-theme-sunny-puzzle .ui-alert-title,
+.ui-theme-sunny-puzzle .ui-toast-title,
+.ui-theme-sunny-puzzle .ui-badge,
+.ui-theme-sunny-puzzle .ui-game-currency,
+.ui-theme-sunny-puzzle .ui-game-slot-name,
+.ui-theme-sunny-puzzle .ui-shop .ui-shop-amount,
+.ui-theme-sunny-puzzle .ui-shop .ui-card-title,
+.ui-theme-sunny-puzzle .treasury .treasury-title,
+.ui-theme-sunny-puzzle .treasury .treasury-feature-title,
+.ui-theme-sunny-puzzle .treasury .treasury-prize,
+.ui-theme-sunny-puzzle .treasury .treasury-section,
+.ui-theme-sunny-puzzle .treasury .treasury-count {
+    -unity-font-definition: var(--ui-display-font, url("Assets/Coiny-Regular.ttf"));
+    -unity-font: var(--ui-display-font, url("Assets/Coiny-Regular.ttf"));
+    -unity-font-style: normal;
+}
+
+.ui-theme-sunny-puzzle .ui-button {
+    background-image: url("Assets/cap-soft.png");
+    -unity-slice-left: 20;
+    -unity-slice-right: 20;
+    -unity-slice-top: 20;
+    -unity-slice-bottom: 20;
+    border-radius: 18px;
+    border-width: 2px;
+    border-color: transparent;
+    min-height: 46px;
+    padding: 5px 16px 9px 16px;
+    font-size: 18px;
+    -unity-text-align: middle-center;
+    transition-property: background-color, border-color, scale, translate;
+}
+
+.ui-theme-sunny-puzzle .ui-button--secondary {
+    background-color: var(--ui-surface-hover);
+    color: var(--ui-foreground);
+}
+
+.ui-theme-sunny-puzzle .ui-button--danger {
+    background-color: var(--ui-danger);
+    color: #ffffff;
+}
+
+.ui-theme-sunny-puzzle .ui-button--ghost {
+    background-image: none;
+    background-color: transparent;
+    color: var(--ui-foreground);
+}
+
+.ui-theme-sunny-puzzle .ui-button--secondary:hover {
+    background-color: var(--ui-surface);
+}
+
+.ui-theme-sunny-puzzle .ui-button--danger:hover {
+    background-color: var(--ui-danger);
+    -unity-background-image-tint-color: #ffe4e4;
+}
+
+.ui-theme-sunny-puzzle .ui-button--ghost:hover {
+    background-color: var(--ui-surface-hover);
+}
+
+.ui-theme-sunny-puzzle .ui-tabs-trigger--active,
+.ui-theme-sunny-puzzle .ui-tabs-trigger--active:hover {
+    background-image: url("Assets/cap-soft.png");
+    background-color: var(--ui-primary);
+    color: var(--ui-primary-foreground);
+}
+
+.ui-theme-sunny-puzzle .ui-button:focus,
+.ui-theme-sunny-puzzle .treasury .treasury-price--selected {
+    border-width: 2px;
+    border-color: var(--ui-primary-foreground);
+}
+
+.ui-theme-sunny-puzzle .ui-button--ghost:focus,
+.ui-theme-sunny-puzzle .ui-button--secondary:focus {
+    border-color: var(--ui-foreground);
+}
+
+.ui-theme-sunny-puzzle .ui-button--primary:active,
+.ui-theme-sunny-puzzle .ui-button--secondary:active,
+.ui-theme-sunny-puzzle .ui-button--danger:active,
+.ui-theme-sunny-puzzle .ui-tabs-trigger--active:active {
+    background-image: url("Assets/cap-soft-pressed.png");
+}
+
+.ui-theme-sunny-puzzle .ui-button:active {
+    translate: 0 2px;
+    scale: 0.99 0.96;
+}
+
+.ui-theme-sunny-puzzle .ui-accordion-trigger {
+    -unity-text-align: middle-left;
+}
+
+.ui-theme-sunny-puzzle .ui-card,
+.ui-theme-sunny-puzzle .ui-toast,
+.ui-theme-sunny-puzzle .ui-dialog-content,
+.ui-theme-sunny-puzzle .ui-game-currency,
+.ui-theme-sunny-puzzle .ui-shop-offer,
+.ui-theme-sunny-puzzle .treasury-pack {
+    background-image: url("Assets/frame-soft.png");
+    -unity-slice-left: 20;
+    -unity-slice-right: 20;
+    -unity-slice-top: 20;
+    -unity-slice-bottom: 20;
+    border-radius: 18px;
+    border-width: 1px;
+    border-color: var(--ui-border);
+}
+
+.ui-theme-sunny-puzzle .ui-toast:focus {
+    border-color: var(--ui-primary);
+}
+
+.ui-theme-sunny-puzzle .ui-game > .ui-game-title,
+.ui-theme-sunny-puzzle .ui-game > .ui-game-caption {
+    color: #783d2e;
+}
+
+.ui-theme-sunny-puzzle .ui-tabs-list {
+    padding: 4px;
+    border-radius: 18px;
+}
+
+.ui-theme-sunny-puzzle .ui-input .unity-base-text-field__input {
+    background-color: var(--ui-surface);
+}
+
+.ui-theme-sunny-puzzle .ui-heading,
+.ui-theme-sunny-puzzle .ui-game-caption {
+    white-space: normal;
+}
+
+.ui-theme-sunny-puzzle .ui-shop-coin {
+    background-image: url("Assets/royal-coin.png");
+    background-color: transparent;
+}
+
+.ui-theme-sunny-puzzle .treasury {
+    background-color: var(--ui-shop-board);
+    border-width: 2px;
+    border-color: var(--ui-shop-rim);
+    border-radius: 18px;
+}
+
+.ui-theme-sunny-puzzle .treasury-bar {
+    border-bottom-width: 2px;
+    border-bottom-color: var(--ui-shop-rim);
+}
+
+.ui-theme-sunny-puzzle .treasury .treasury-title,
+.ui-theme-sunny-puzzle .treasury .treasury-section {
+    color: var(--ui-shop-title);
+}
+
+.ui-theme-sunny-puzzle .treasury-wallet {
+    background-color: var(--ui-shop-ribbon);
+    color: #fff5df;
+}
+
+.ui-theme-sunny-puzzle .treasury-feature {
+    background-image: url("Assets/cover-sunny-puzzle.png");
+    background-color: var(--ui-shop-cover);
+    border-color: var(--ui-shop-rim);
+    border-radius: 18px;
+}
+
+.ui-theme-sunny-puzzle .treasury .treasury-feature-title,
+.ui-theme-sunny-puzzle .treasury .treasury-prize {
+    color: #fff2cc;
+    -unity-text-outline-width: 0.65px;
+    -unity-text-outline-color: var(--ui-shop-ribbon);
+    text-shadow: 0 1px 1px var(--ui-shop-ribbon);
+}
+
+.ui-theme-sunny-puzzle .treasury-rewards {
+    background-color: rgba(15, 17, 29, 0.32);
+}
+
+.ui-theme-sunny-puzzle .treasury-quantity {
+    color: #fff9e8;
+}
+
+.ui-theme-sunny-puzzle .treasury-deal {
+    background-color: var(--ui-shop-ribbon);
+    color: #fff5df;
+    border-top-width: 1px;
+    border-top-color: var(--ui-shop-rim);
+}
+
+.ui-theme-sunny-puzzle .treasury-pack,
+.ui-theme-sunny-puzzle .ui-shop-offer {
+    background-color: var(--ui-shop-stock);
+    border-color: var(--ui-shop-rim);
+    color: var(--ui-shop-ink);
+}
+
+.ui-theme-sunny-puzzle .treasury .treasury-price {
+    width: 103px;
+    min-height: 44px;
+    padding: 2px 4px 6px 4px;
+    font-size: 19px;
+}

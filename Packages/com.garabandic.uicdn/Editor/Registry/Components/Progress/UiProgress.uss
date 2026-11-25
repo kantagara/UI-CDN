@@ -1,0 +1,4 @@
+.ui-progress { height: 24px; }
+.ui-progress .unity-progress-bar__background { background-color: var(--ui-surface-hover); border-radius: var(--ui-radius-sm); }
+.ui-progress .unity-progress-bar__progress { background-color: var(--ui-primary); border-radius: var(--ui-radius-sm); transition-property: width; transition-duration: var(--ui-duration-panel); transition-timing-function: var(--ui-ease); }
+.ui-progress .unity-progress-bar__title { color: var(--ui-foreground); -unity-font-style: bold; }

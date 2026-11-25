@@ -1,0 +1,5 @@
+.ui-tabs-list { flex-direction: row; background-color: var(--ui-surface); border-radius: var(--ui-radius-md); padding: var(--ui-space-1); }
+.ui-tabs-trigger { flex-grow: 1; color: var(--ui-muted); transition-property: background-color, color, border-color; transition-duration: var(--ui-duration-fast); transition-timing-function: var(--ui-ease); }
+.ui-tabs-trigger--active { background-color: var(--ui-surface-hover); color: var(--ui-foreground); }
+.ui-tabs-content { padding: var(--ui-space-4) 0; }
+.ui-tabs-content--active { opacity: 1; }

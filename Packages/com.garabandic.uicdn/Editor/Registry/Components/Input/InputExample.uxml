@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:c="Garabandic.UiCdn.Editor.Preview">
+  <ui:Style src="../../Themes/theme-tokens.uss" />
+  <ui:Style src="../../Themes/theme-dark.uss" />
+  <ui:Style src="../Core/UiCore.uss" />
+  <ui:Style src="../Input/UiInput.uss" />
+  <ui:VisualElement class="ui-root ui-stack ui-example">
+    <c:UiInput label="Player name" value="Wayfarer" /><c:UiInput label="Invalid example" value="Name already taken" invalid="true" />
+  </ui:VisualElement>
+</ui:UXML>

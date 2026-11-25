@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:c="Garabandic.UiCdn.Editor.Preview">
+  <ui:Style src="../../Themes/theme-tokens.uss" />
+  <ui:Style src="../../Themes/theme-dark.uss" />
+  <ui:Style src="../Core/UiCore.uss" />
+  <ui:Style src="../Button/UiButton.uss" />
+  <ui:Style src="../Tabs/UiTabs.uss" />
+  <ui:VisualElement class="ui-root ui-stack ui-example">
+    <c:UiTabs value="profile"><c:UiTabsList><c:UiTabsTrigger value="profile" text="Profile" /><c:UiTabsTrigger value="settings" text="Settings" /></c:UiTabsList><c:UiTabsContent value="profile"><ui:Label text="Your player profile" /></c:UiTabsContent><c:UiTabsContent value="settings"><ui:Label text="Your game settings" /></c:UiTabsContent></c:UiTabs>
+  </ui:VisualElement>
+</ui:UXML>

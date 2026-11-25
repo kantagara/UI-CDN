@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:c="Garabandic.UiCdn.Editor.Preview">
+  <ui:Style src="../../Themes/theme-tokens.uss" />
+  <ui:Style src="../../Themes/theme-dark.uss" />
+  <ui:Style src="../Core/UiCore.uss" />
+  <ui:Style src="../Button/UiButton.uss" />
+  <ui:Style src="../Toast/UiToast.uss" />
+  <ui:VisualElement class="ui-root ui-stack ui-example">
+    <c:UiButton name="show-toast" text="Show notification" /><c:UiToast duration-ms="4000"><c:UiToastTitle text="Quest complete" /><c:UiToastDescription text="The next chapter is ready. Submit or cancel to dismiss." /></c:UiToast>
+  </ui:VisualElement>
+</ui:UXML>

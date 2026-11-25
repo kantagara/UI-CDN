@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:c="Garabandic.UiCdn.Editor.Preview">
+  <ui:Style src="../../Themes/theme-tokens.uss" />
+  <ui:Style src="../../Themes/theme-dark.uss" />
+  <ui:Style src="../Core/UiCore.uss" />
+  <ui:Style src="../Button/UiButton.uss" />
+  <ui:VisualElement class="ui-root ui-stack ui-example">
+    <c:UiButton name="sample-button" text="Start adventure" /><c:UiButton text="Secondary" variant="secondary" /><c:UiButton text="Ghost" variant="ghost" /><c:UiButton text="Disabled" enabled="false" />
+  </ui:VisualElement>
+</ui:UXML>

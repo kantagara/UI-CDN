@@ -1,0 +1,261 @@
+/* Studio Light | minimal | SPDX-License-Identifier: MIT */
+.ui-theme-studio-light {
+    --ui-background: #eef2f8;
+    --ui-surface: #ffffff;
+    --ui-surface-hover: #e4ebf5;
+    --ui-foreground: #202f49;
+    --ui-muted: #586984;
+    --ui-border: #c0ccdd;
+    --ui-primary: #315ed1;
+    --ui-primary-hover: #4474ed;
+    --ui-primary-foreground: #ffffff;
+    --ui-danger: #c83c56;
+    --ui-success: #258361;
+    --ui-radius-sm: 3px;
+    --ui-radius-md: 6px;
+    --ui-radius-lg: 10px;
+    --ui-font-sm: 12px;
+    --ui-font-md: 14px;
+    --ui-font-lg: 20px;
+    --ui-control-height: 36px;
+    color: var(--ui-foreground);
+    background-color: var(--ui-background);
+    font-size: var(--ui-font-md);
+}
+.ui-theme-studio-light {
+    --ui-shop-board: #e6edf6;
+    --ui-shop-title: #293d61;
+    --ui-shop-cover: #49668e;
+    --ui-shop-rim: #a6bdd9;
+    --ui-shop-ribbon: #344f73;
+    --ui-shop-stock: #f9fbff;
+    --ui-shop-ink: #2d4263;
+}
+
+.ui-theme-studio-light .ui-root,
+.ui-theme-studio-light .ui-card-description,
+.ui-theme-studio-light .ui-dialog-description,
+.ui-theme-studio-light .ui-alert-description,
+.ui-theme-studio-light .ui-toast-description,
+.ui-theme-studio-light .ui-input,
+.ui-theme-studio-light .ui-switch,
+.ui-theme-studio-light .ui-checkbox,
+.ui-theme-studio-light .ui-slider,
+.ui-theme-studio-light .ui-game-caption,
+.ui-theme-studio-light .ui-shop Label,
+.ui-theme-studio-light .treasury Label {
+    -unity-font-definition: url("Assets/Nunito-SemiBold.ttf");
+    -unity-font: url("Assets/Nunito-SemiBold.ttf");
+    -unity-font-style: normal;
+}
+
+.ui-theme-studio-light .ui-button,
+.ui-theme-studio-light .ui-heading,
+.ui-theme-studio-light .ui-game-title,
+.ui-theme-studio-light .ui-card-title,
+.ui-theme-studio-light .ui-dialog-title,
+.ui-theme-studio-light .ui-alert-title,
+.ui-theme-studio-light .ui-toast-title,
+.ui-theme-studio-light .ui-badge,
+.ui-theme-studio-light .ui-game-currency,
+.ui-theme-studio-light .ui-game-slot-name,
+.ui-theme-studio-light .ui-shop .ui-shop-amount,
+.ui-theme-studio-light .ui-shop .ui-card-title,
+.ui-theme-studio-light .treasury .treasury-title,
+.ui-theme-studio-light .treasury .treasury-feature-title,
+.ui-theme-studio-light .treasury .treasury-prize,
+.ui-theme-studio-light .treasury .treasury-section,
+.ui-theme-studio-light .treasury .treasury-count {
+    -unity-font-definition: var(--ui-display-font, url("Assets/Coiny-Regular.ttf"));
+    -unity-font: var(--ui-display-font, url("Assets/Coiny-Regular.ttf"));
+    -unity-font-style: normal;
+}
+
+.ui-theme-studio-light .ui-button {
+    background-image: url("Assets/cap-minimal.png");
+    -unity-slice-left: 20;
+    -unity-slice-right: 20;
+    -unity-slice-top: 20;
+    -unity-slice-bottom: 20;
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: transparent;
+    min-height: 42px;
+    padding: 5px 16px 8px 16px;
+    font-size: 18px;
+    -unity-text-align: middle-center;
+    transition-property: background-color, border-color, scale, translate;
+}
+
+.ui-theme-studio-light .ui-button--secondary {
+    background-color: var(--ui-surface-hover);
+    color: var(--ui-foreground);
+}
+
+.ui-theme-studio-light .ui-button--danger {
+    background-color: var(--ui-danger);
+    color: #ffffff;
+}
+
+.ui-theme-studio-light .ui-button--ghost {
+    background-image: none;
+    background-color: transparent;
+    color: var(--ui-foreground);
+}
+
+.ui-theme-studio-light .ui-button--secondary:hover {
+    background-color: var(--ui-surface);
+}
+
+.ui-theme-studio-light .ui-button--danger:hover {
+    background-color: var(--ui-danger);
+    -unity-background-image-tint-color: #ffe4e4;
+}
+
+.ui-theme-studio-light .ui-button--ghost:hover {
+    background-color: var(--ui-surface-hover);
+}
+
+.ui-theme-studio-light .ui-tabs-trigger--active,
+.ui-theme-studio-light .ui-tabs-trigger--active:hover {
+    background-image: url("Assets/cap-minimal.png");
+    background-color: var(--ui-primary);
+    color: var(--ui-primary-foreground);
+}
+
+.ui-theme-studio-light .ui-button:focus,
+.ui-theme-studio-light .treasury .treasury-price--selected {
+    border-width: 2px;
+    border-color: var(--ui-primary-foreground);
+}
+
+.ui-theme-studio-light .ui-button--ghost:focus,
+.ui-theme-studio-light .ui-button--secondary:focus {
+    border-color: var(--ui-foreground);
+}
+
+.ui-theme-studio-light .ui-button--primary:active,
+.ui-theme-studio-light .ui-button--secondary:active,
+.ui-theme-studio-light .ui-button--danger:active,
+.ui-theme-studio-light .ui-tabs-trigger--active:active {
+    background-image: url("Assets/cap-minimal-pressed.png");
+}
+
+.ui-theme-studio-light .ui-button:active {
+    translate: 0 2px;
+    scale: 0.99 0.96;
+}
+
+.ui-theme-studio-light .ui-accordion-trigger {
+    -unity-text-align: middle-left;
+}
+
+.ui-theme-studio-light .ui-card,
+.ui-theme-studio-light .ui-toast,
+.ui-theme-studio-light .ui-dialog-content,
+.ui-theme-studio-light .ui-game-currency,
+.ui-theme-studio-light .ui-shop-offer,
+.ui-theme-studio-light .treasury-pack {
+    background-image: url("Assets/frame-minimal.png");
+    -unity-slice-left: 20;
+    -unity-slice-right: 20;
+    -unity-slice-top: 20;
+    -unity-slice-bottom: 20;
+    border-radius: 8px;
+    border-width: 1px;
+    border-color: var(--ui-border);
+}
+
+.ui-theme-studio-light .ui-toast:focus {
+    border-color: var(--ui-primary);
+}
+
+.ui-theme-studio-light .ui-game > .ui-game-title,
+.ui-theme-studio-light .ui-game > .ui-game-caption {
+    color: #293d61;
+}
+
+.ui-theme-studio-light .ui-tabs-list {
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.ui-theme-studio-light .ui-input .unity-base-text-field__input {
+    background-color: var(--ui-surface);
+}
+
+.ui-theme-studio-light .ui-heading,
+.ui-theme-studio-light .ui-game-caption {
+    white-space: normal;
+}
+
+.ui-theme-studio-light .ui-shop-coin {
+    background-image: url("Assets/royal-coin.png");
+    background-color: transparent;
+}
+
+.ui-theme-studio-light .treasury {
+    background-color: var(--ui-shop-board);
+    border-width: 2px;
+    border-color: var(--ui-shop-rim);
+    border-radius: 8px;
+}
+
+.ui-theme-studio-light .treasury-bar {
+    border-bottom-width: 2px;
+    border-bottom-color: var(--ui-shop-rim);
+}
+
+.ui-theme-studio-light .treasury .treasury-title,
+.ui-theme-studio-light .treasury .treasury-section {
+    color: var(--ui-shop-title);
+}
+
+.ui-theme-studio-light .treasury-wallet {
+    background-color: var(--ui-shop-ribbon);
+    color: #fff5df;
+}
+
+.ui-theme-studio-light .treasury-feature {
+    background-image: url("Assets/cover-studio-light.png");
+    background-color: var(--ui-shop-cover);
+    border-color: var(--ui-shop-rim);
+    border-radius: 8px;
+}
+
+.ui-theme-studio-light .treasury .treasury-feature-title,
+.ui-theme-studio-light .treasury .treasury-prize {
+    color: #fff2cc;
+    -unity-text-outline-width: 0.65px;
+    -unity-text-outline-color: var(--ui-shop-ribbon);
+    text-shadow: 0 1px 1px var(--ui-shop-ribbon);
+}
+
+.ui-theme-studio-light .treasury-rewards {
+    background-color: rgba(15, 17, 29, 0.32);
+}
+
+.ui-theme-studio-light .treasury-quantity {
+    color: #fff9e8;
+}
+
+.ui-theme-studio-light .treasury-deal {
+    background-color: var(--ui-shop-ribbon);
+    color: #fff5df;
+    border-top-width: 1px;
+    border-top-color: var(--ui-shop-rim);
+}
+
+.ui-theme-studio-light .treasury-pack,
+.ui-theme-studio-light .ui-shop-offer {
+    background-color: var(--ui-shop-stock);
+    border-color: var(--ui-shop-rim);
+    color: var(--ui-shop-ink);
+}
+
+.ui-theme-studio-light .treasury .treasury-price {
+    width: 103px;
+    min-height: 44px;
+    padding: 2px 4px 5px 4px;
+    font-size: 19px;
+}

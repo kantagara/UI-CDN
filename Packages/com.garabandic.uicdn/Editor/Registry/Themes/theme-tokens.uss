@@ -1,0 +1,31 @@
+:root {
+    --ui-background: rgb(15, 17, 22);
+    --ui-surface: rgb(23, 26, 33);
+    --ui-surface-hover: rgb(35, 40, 50);
+    --ui-foreground: rgb(237, 240, 246);
+    --ui-muted: rgb(153, 163, 182);
+    --ui-border: rgb(51, 59, 73);
+    --ui-primary: rgb(139, 179, 255);
+    --ui-primary-hover: rgb(168, 199, 255);
+    --ui-primary-foreground: rgb(12, 23, 43);
+    --ui-danger: rgb(255, 137, 148);
+    --ui-success: rgb(120, 221, 175);
+    --ui-overlay: rgba(0, 0, 0, 0.72);
+    --ui-radius-sm: 3px;
+    --ui-radius-md: 6px;
+    --ui-radius-lg: 10px;
+    --ui-space-1: 4px;
+    --ui-space-2: 8px;
+    --ui-space-3: 12px;
+    --ui-space-4: 16px;
+    --ui-space-6: 24px;
+    --ui-font-sm: 12px;
+    --ui-font-md: 14px;
+    --ui-font-lg: 20px;
+    --ui-control-height: 36px;
+    --ui-duration-fast: 100ms;
+    --ui-duration-panel: 180ms;
+    --ui-ease: ease-out;
+}
+.ui-root { color: var(--ui-foreground); font-size: var(--ui-font-md); }
+.ui-reduced-motion { --ui-duration-fast: 0ms; --ui-duration-panel: 0ms; }

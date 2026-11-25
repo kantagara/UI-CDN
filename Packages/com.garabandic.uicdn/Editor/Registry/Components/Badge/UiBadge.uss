@@ -1,0 +1,3 @@
+.ui-badge { align-self: flex-start; padding: var(--ui-space-1) var(--ui-space-2); border-radius: var(--ui-radius-sm); background-color: var(--ui-surface-hover); color: var(--ui-foreground); font-size: var(--ui-font-sm); -unity-font-style: bold; }
+.ui-badge--success { background-color: var(--ui-success); color: var(--ui-primary-foreground); }
+.ui-badge--danger { background-color: var(--ui-danger); color: var(--ui-primary-foreground); }

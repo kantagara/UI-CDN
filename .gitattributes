@@ -1,0 +1,7 @@
+* text=auto
+*.uss text eol=lf
+*.uxml text eol=lf
+*.json text eol=lf
+*.mjs text eol=lf
+*.png binary
+*.ttf binary

@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:c="Garabandic.UiCdn.Editor.Preview">
+  <ui:Style src="../../Themes/theme-tokens.uss" />
+  <ui:Style src="../../Themes/theme-dark.uss" />
+  <ui:Style src="../Core/UiCore.uss" />
+  <ui:Style src="../Alert/UiAlert.uss" />
+  <ui:VisualElement class="ui-root ui-stack ui-example">
+    <c:UiAlert variant="success"><c:UiAlertTitle text="Cloud save complete" /><c:UiAlertDescription text="Your progress is ready on your other devices." /></c:UiAlert>
+  </ui:VisualElement>
+</ui:UXML>

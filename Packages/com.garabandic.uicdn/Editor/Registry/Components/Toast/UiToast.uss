@@ -1,0 +1,5 @@
+.ui-toast { padding: var(--ui-space-4); background-color: var(--ui-surface); border-width: 1px; border-color: var(--ui-border); border-radius: var(--ui-radius-md); opacity: 0; translate: 0 8px; transition-property: opacity, translate; transition-duration: var(--ui-duration-panel); transition-timing-function: var(--ui-ease); }
+.ui-toast--open { opacity: 1; translate: 0 0; }
+.ui-toast-title { color: var(--ui-foreground); -unity-font-style: bold; }
+.ui-toast-description { color: var(--ui-muted); white-space: normal; margin-top: var(--ui-space-1); }
+.ui-toast:focus { border-color: var(--ui-primary); }

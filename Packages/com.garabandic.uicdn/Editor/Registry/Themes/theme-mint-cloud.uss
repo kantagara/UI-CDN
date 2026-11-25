@@ -1,0 +1,261 @@
+/* Mint Cloud | soft | SPDX-License-Identifier: MIT */
+.ui-theme-mint-cloud {
+    --ui-background: #dff7f1;
+    --ui-surface: #f6fffc;
+    --ui-surface-hover: #c8eee4;
+    --ui-foreground: #204d49;
+    --ui-muted: #4f7570;
+    --ui-border: #9fcdc1;
+    --ui-primary: #8dd9c2;
+    --ui-primary-hover: #b0ead9;
+    --ui-primary-foreground: #204d49;
+    --ui-danger: #cd526b;
+    --ui-success: #3f956c;
+    --ui-radius-sm: 12px;
+    --ui-radius-md: 22px;
+    --ui-radius-lg: 28px;
+    --ui-font-sm: 12px;
+    --ui-font-md: 14px;
+    --ui-font-lg: 24px;
+    --ui-control-height: 44px;
+    color: var(--ui-foreground);
+    background-color: var(--ui-background);
+    font-size: var(--ui-font-md);
+}
+.ui-theme-mint-cloud {
+    --ui-shop-board: #d9f3eb;
+    --ui-shop-title: #245c58;
+    --ui-shop-cover: #347775;
+    --ui-shop-rim: #a2ddd0;
+    --ui-shop-ribbon: #255a59;
+    --ui-shop-stock: #f3fff9;
+    --ui-shop-ink: #285854;
+}
+
+.ui-theme-mint-cloud .ui-root,
+.ui-theme-mint-cloud .ui-card-description,
+.ui-theme-mint-cloud .ui-dialog-description,
+.ui-theme-mint-cloud .ui-alert-description,
+.ui-theme-mint-cloud .ui-toast-description,
+.ui-theme-mint-cloud .ui-input,
+.ui-theme-mint-cloud .ui-switch,
+.ui-theme-mint-cloud .ui-checkbox,
+.ui-theme-mint-cloud .ui-slider,
+.ui-theme-mint-cloud .ui-game-caption,
+.ui-theme-mint-cloud .ui-shop Label,
+.ui-theme-mint-cloud .treasury Label {
+    -unity-font-definition: url("Assets/Nunito-SemiBold.ttf");
+    -unity-font: url("Assets/Nunito-SemiBold.ttf");
+    -unity-font-style: normal;
+}
+
+.ui-theme-mint-cloud .ui-button,
+.ui-theme-mint-cloud .ui-heading,
+.ui-theme-mint-cloud .ui-game-title,
+.ui-theme-mint-cloud .ui-card-title,
+.ui-theme-mint-cloud .ui-dialog-title,
+.ui-theme-mint-cloud .ui-alert-title,
+.ui-theme-mint-cloud .ui-toast-title,
+.ui-theme-mint-cloud .ui-badge,
+.ui-theme-mint-cloud .ui-game-currency,
+.ui-theme-mint-cloud .ui-game-slot-name,
+.ui-theme-mint-cloud .ui-shop .ui-shop-amount,
+.ui-theme-mint-cloud .ui-shop .ui-card-title,
+.ui-theme-mint-cloud .treasury .treasury-title,
+.ui-theme-mint-cloud .treasury .treasury-feature-title,
+.ui-theme-mint-cloud .treasury .treasury-prize,
+.ui-theme-mint-cloud .treasury .treasury-section,
+.ui-theme-mint-cloud .treasury .treasury-count {
+    -unity-font-definition: var(--ui-display-font, url("Assets/Coiny-Regular.ttf"));
+    -unity-font: var(--ui-display-font, url("Assets/Coiny-Regular.ttf"));
+    -unity-font-style: normal;
+}
+
+.ui-theme-mint-cloud .ui-button {
+    background-image: url("Assets/cap-soft.png");
+    -unity-slice-left: 20;
+    -unity-slice-right: 20;
+    -unity-slice-top: 20;
+    -unity-slice-bottom: 20;
+    border-radius: 18px;
+    border-width: 2px;
+    border-color: transparent;
+    min-height: 46px;
+    padding: 5px 16px 9px 16px;
+    font-size: 18px;
+    -unity-text-align: middle-center;
+    transition-property: background-color, border-color, scale, translate;
+}
+
+.ui-theme-mint-cloud .ui-button--secondary {
+    background-color: var(--ui-surface-hover);
+    color: var(--ui-foreground);
+}
+
+.ui-theme-mint-cloud .ui-button--danger {
+    background-color: var(--ui-danger);
+    color: #ffffff;
+}
+
+.ui-theme-mint-cloud .ui-button--ghost {
+    background-image: none;
+    background-color: transparent;
+    color: var(--ui-foreground);
+}
+
+.ui-theme-mint-cloud .ui-button--secondary:hover {
+    background-color: var(--ui-surface);
+}
+
+.ui-theme-mint-cloud .ui-button--danger:hover {
+    background-color: var(--ui-danger);
+    -unity-background-image-tint-color: #ffe4e4;
+}
+
+.ui-theme-mint-cloud .ui-button--ghost:hover {
+    background-color: var(--ui-surface-hover);
+}
+
+.ui-theme-mint-cloud .ui-tabs-trigger--active,
+.ui-theme-mint-cloud .ui-tabs-trigger--active:hover {
+    background-image: url("Assets/cap-soft.png");
+    background-color: var(--ui-primary);
+    color: var(--ui-primary-foreground);
+}
+
+.ui-theme-mint-cloud .ui-button:focus,
+.ui-theme-mint-cloud .treasury .treasury-price--selected {
+    border-width: 2px;
+    border-color: var(--ui-primary-foreground);
+}
+
+.ui-theme-mint-cloud .ui-button--ghost:focus,
+.ui-theme-mint-cloud .ui-button--secondary:focus {
+    border-color: var(--ui-foreground);
+}
+
+.ui-theme-mint-cloud .ui-button--primary:active,
+.ui-theme-mint-cloud .ui-button--secondary:active,
+.ui-theme-mint-cloud .ui-button--danger:active,
+.ui-theme-mint-cloud .ui-tabs-trigger--active:active {
+    background-image: url("Assets/cap-soft-pressed.png");
+}
+
+.ui-theme-mint-cloud .ui-button:active {
+    translate: 0 2px;
+    scale: 0.99 0.96;
+}
+
+.ui-theme-mint-cloud .ui-accordion-trigger {
+    -unity-text-align: middle-left;
+}
+
+.ui-theme-mint-cloud .ui-card,
+.ui-theme-mint-cloud .ui-toast,
+.ui-theme-mint-cloud .ui-dialog-content,
+.ui-theme-mint-cloud .ui-game-currency,
+.ui-theme-mint-cloud .ui-shop-offer,
+.ui-theme-mint-cloud .treasury-pack {
+    background-image: url("Assets/frame-soft.png");
+    -unity-slice-left: 20;
+    -unity-slice-right: 20;
+    -unity-slice-top: 20;
+    -unity-slice-bottom: 20;
+    border-radius: 18px;
+    border-width: 1px;
+    border-color: var(--ui-border);
+}
+
+.ui-theme-mint-cloud .ui-toast:focus {
+    border-color: var(--ui-primary);
+}
+
+.ui-theme-mint-cloud .ui-game > .ui-game-title,
+.ui-theme-mint-cloud .ui-game > .ui-game-caption {
+    color: #245c58;
+}
+
+.ui-theme-mint-cloud .ui-tabs-list {
+    padding: 4px;
+    border-radius: 18px;
+}
+
+.ui-theme-mint-cloud .ui-input .unity-base-text-field__input {
+    background-color: var(--ui-surface);
+}
+
+.ui-theme-mint-cloud .ui-heading,
+.ui-theme-mint-cloud .ui-game-caption {
+    white-space: normal;
+}
+
+.ui-theme-mint-cloud .ui-shop-coin {
+    background-image: url("Assets/royal-coin.png");
+    background-color: transparent;
+}
+
+.ui-theme-mint-cloud .treasury {
+    background-color: var(--ui-shop-board);
+    border-width: 2px;
+    border-color: var(--ui-shop-rim);
+    border-radius: 18px;
+}
+
+.ui-theme-mint-cloud .treasury-bar {
+    border-bottom-width: 2px;
+    border-bottom-color: var(--ui-shop-rim);
+}
+
+.ui-theme-mint-cloud .treasury .treasury-title,
+.ui-theme-mint-cloud .treasury .treasury-section {
+    color: var(--ui-shop-title);
+}
+
+.ui-theme-mint-cloud .treasury-wallet {
+    background-color: var(--ui-shop-ribbon);
+    color: #fff5df;
+}
+
+.ui-theme-mint-cloud .treasury-feature {
+    background-image: url("Assets/cover-mint-cloud.png");
+    background-color: var(--ui-shop-cover);
+    border-color: var(--ui-shop-rim);
+    border-radius: 18px;
+}
+
+.ui-theme-mint-cloud .treasury .treasury-feature-title,
+.ui-theme-mint-cloud .treasury .treasury-prize {
+    color: #fff2cc;
+    -unity-text-outline-width: 0.65px;
+    -unity-text-outline-color: var(--ui-shop-ribbon);
+    text-shadow: 0 1px 1px var(--ui-shop-ribbon);
+}
+
+.ui-theme-mint-cloud .treasury-rewards {
+    background-color: rgba(15, 17, 29, 0.32);
+}
+
+.ui-theme-mint-cloud .treasury-quantity {
+    color: #fff9e8;
+}
+
+.ui-theme-mint-cloud .treasury-deal {
+    background-color: var(--ui-shop-ribbon);
+    color: #fff5df;
+    border-top-width: 1px;
+    border-top-color: var(--ui-shop-rim);
+}
+
+.ui-theme-mint-cloud .treasury-pack,
+.ui-theme-mint-cloud .ui-shop-offer {
+    background-color: var(--ui-shop-stock);
+    border-color: var(--ui-shop-rim);
+    color: var(--ui-shop-ink);
+}
+
+.ui-theme-mint-cloud .treasury .treasury-price {
+    width: 103px;
+    min-height: 44px;
+    padding: 2px 4px 6px 4px;
+    font-size: 19px;
+}

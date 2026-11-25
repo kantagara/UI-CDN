@@ -1,0 +1,11 @@
+.ui-dialog { position: absolute; left: 0; right: 0; top: 0; bottom: 0; align-items: center; justify-content: center; opacity: 0; transition-property: opacity; transition-duration: var(--ui-duration-panel); transition-timing-function: var(--ui-ease); }
+.ui-dialog--open { opacity: 1; }
+.ui-dialog-overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: var(--ui-overlay); }
+.ui-dialog-content { width: 480px; max-width: 92%; max-height: 90%; padding: var(--ui-space-6); background-color: var(--ui-surface); border-width: 1px; border-color: var(--ui-border); border-radius: var(--ui-radius-lg); translate: 0 8px; transition-property: translate; transition-duration: var(--ui-duration-panel); transition-timing-function: var(--ui-ease); }
+.ui-dialog--open .ui-dialog-content { translate: 0 0; }
+.ui-dialog-header { margin-bottom: var(--ui-space-4); }
+.ui-dialog-title { font-size: var(--ui-font-lg); color: var(--ui-foreground); -unity-font-style: bold; }
+.ui-dialog-description { color: var(--ui-muted); white-space: normal; margin-top: var(--ui-space-2); }
+.ui-dialog-footer { flex-direction: row; justify-content: flex-end; margin-top: var(--ui-space-6); }
+.ui-dialog-footer > * { margin-left: var(--ui-space-2); }
+.ui-dialog:focus { border-color: var(--ui-primary); }

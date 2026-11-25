@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:c="Garabandic.UiCdn.Editor.Preview">
+  <ui:Style src="../../Themes/theme-tokens.uss" />
+  <ui:Style src="../../Themes/theme-dark.uss" />
+  <ui:Style src="../Core/UiCore.uss" />
+  <ui:Style src="../Card/UiCard.uss" />
+  <ui:VisualElement class="ui-root ui-stack ui-example">
+    <c:UiCard><c:UiCardHeader><c:UiCardTitle text="Your next adventure" /><c:UiCardDescription text="Build something that belongs to your game." /></c:UiCardHeader><c:UiCardContent><ui:Label text="Everything here is yours to edit." /></c:UiCardContent><c:UiCardFooter><ui:Label text="No runtime package required" /></c:UiCardFooter></c:UiCard>
+  </ui:VisualElement>
+</ui:UXML>

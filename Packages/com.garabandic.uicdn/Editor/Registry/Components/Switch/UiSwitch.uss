@@ -1,0 +1,7 @@
+.ui-switch { min-height: var(--ui-control-height); margin: var(--ui-space-2) 0; color: var(--ui-foreground); }
+.ui-switch .unity-toggle__input { background-color: transparent; }
+.ui-switch .unity-toggle__checkmark { width: 46px; height: 26px; background-image: none; background-color: var(--ui-surface-hover); border-width: 1px; border-color: var(--ui-border); border-radius: 20px; margin-right: var(--ui-space-2); }
+.ui-switch-thumb { position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; background-color: var(--ui-muted); border-radius: 10px; transition-property: translate, background-color; transition-duration: var(--ui-duration-fast); }
+.ui-switch:checked .ui-switch-thumb { translate: 20px 0; background-color: var(--ui-primary); }
+.ui-switch:focus .unity-toggle__checkmark, .ui-switch .unity-toggle__input:focus .unity-toggle__checkmark { border-color: var(--ui-primary); }
+.ui-switch:disabled { opacity: 0.4; }
