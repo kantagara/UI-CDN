@@ -14,7 +14,7 @@ Choose from chunky hyper-casual styles, soft puzzle palettes, neon arcade, paper
 
 ## Install
 
-From a Unity 6 project directory, use the OpenUPM CLI once the version appears in the [OpenUPM registry](https://openupm.com/packages/com.garabandic.uicdn/).
+Install the [published OpenUPM package](https://openupm.com/packages/com.garabandic.uicdn/) from a Unity 6 project directory.
 
 ```sh
 openupm add com.garabandic.uicdn
