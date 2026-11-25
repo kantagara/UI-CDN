@@ -4,10 +4,11 @@ Validated on Windows with Unity **6000.3.7f1**, 2026-11-25. The minimum declared
 
 ## Engine checks
 
-`tools/verify.ps1` passed **153 assertions** in an isolated project.
+`tools/verify.ps1` passed **171 assertions** in an isolated project.
 
 - Catalog parsing, topological dependency resolution, deduplication, missing dependencies, and cycle detection.
 - Unsafe path rejection, namespace validation, namespace drift prevention, and directory collision preflight.
+- Project folder drag-and-drop, destination reset, relative paths under a nested folder with spaces, stale plans and duplicate namespace detection across folders.
 - Fluent composition, button variants, native fields, progress clamping, motion lifecycle order and idempotence, and tab selection.
 - Import and instantiate every catalog UXML example using the actual source-generated controls.
 - Install the RPG screen with its own art, equip through the fluent API, switch slots, and handle an empty slot.

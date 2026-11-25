@@ -2,7 +2,7 @@
 
 **Copy the components. Keep the code.** An MIT-licensed component registry for Unity 6 runtime UI Toolkit, inspired by shadcn/ui.
 
-The UPM package is an **Editor-only installer**. It copies C#, UXML, USS, themes, and an AI reference guide to `Assets/UI`. Installed components use only the engine's runtime UI Toolkit APIs. You can remove the package afterward.
+The UPM package is an **Editor-only installer**. It copies C#, UXML, USS, themes, and an AI reference guide to your chosen project folder (default `Assets/UI`). Installed components use only the engine's runtime UI Toolkit APIs. You can remove the package afterward.
 
 ![UiCdn component registry](Documentation~/Images/registry.png)
 
@@ -12,7 +12,7 @@ To install a published OpenUPM version, run `openupm add com.garabandic.uicdn` f
 
 Requires Unity 6 (`6000.0` or later). Use Package Manager → **Install package from disk** and select this folder's `package.json`. The package may also be embedded at `Packages/com.garabandic.uicdn` or installed from your Git repository using `?path=/Packages/com.garabandic.uicdn` after the repository URL. No third-party runtime packages are required. The dependency on the engine's built-in `com.unity.modules.uielements` module enables its runtime APIs; keep that module enabled after removing the installer.
 
-Open **Window → UiCdn → Component Registry**. Search the catalog, inspect its dependencies and working preview, set the namespace (default `Game.UI`), and choose **Install** or **Install all**. The first installation also initializes themes, the license, and `Assets/UI/AGENTS.md`. Configuration is a project-local `UiCdnSettings` ScriptableObject saved in `ProjectSettings/UiCdnSettings.asset`.
+Open **Window → UiCdn → Component Registry**. Search the catalog, inspect its dependencies and working preview, set the namespace (default `Game.UI`), and drag a folder from the Project window onto **Install folder**. You can also type an existing Assets path and press Enter. Choose **Install** or **Install all** to copy directly into that folder. Clear the field to restore `Assets/UI`. To relocate an existing installation, move its whole folder in the Project window, then select its new location. The first installation also initializes themes, the license, and `AGENTS.md` in the selected folder. Configuration is a project-local `UiCdnSettings` ScriptableObject saved in `ProjectSettings/UiCdnSettings.asset`.
 
 Choose **Visual style** and **Display font** independently. New configurations start with **Royal Puzzle** and **Theme Default**. Enable **Game UI showcase** and choose a **Genre / screen** to try the casual shop or RPG equipment screen. Choose **Apply appearance** to use the selected theme and display font in installed screens. Coiny has wide, playful lettering. Fredoka SemiBold has softer, narrower letterforms. Nunito SemiBold offers a quieter option for dense menus.
 
@@ -20,7 +20,7 @@ Choose **Visual style** and **Display font** independently. New configurations s
 
 ## Use the installed files
 
-Add `Assets/UI/ui.uss` to your document's style sheets. Add the classes `ui-root ui-theme-selected` to the document root. Use the default runtime theme on your Panel Settings so built-in text inputs, toggles, and sliders have their native visuals. Assign the UXML to your `UIDocument` in your Unity 6 scene.
+Add `ui.uss` from the selected installation folder to your document's style sheets. Add the classes `ui-root ui-theme-selected` to the document root. Use the default runtime theme on your Panel Settings so built-in text inputs, toggles, and sliders have their native visuals. Assign the UXML to your `UIDocument` in your Unity 6 scene.
 
 ```xml
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:g="Game.UI">
@@ -169,7 +169,7 @@ Customize the named `Themes/theme-<id>.uss` preset or add an override stylesheet
 
 ![The same Treasure Shop rendered with ten alternate themes](Documentation~/Images/theme-gallery.png)
 
-Install **TreasureShop** to copy the portrait store shown in the registry. Assign `Components/TreasureShop/TreasureShopExample.uxml` to a UIDocument. Its bundle, rewards, amounts, prices and button IDs are editable in UXML. Subscribe to `shop.OfferSelected` to receive the selected offer ID. The storefront includes six transparent reward illustrations, an enamel background and scalable button surfaces. Text remains editable and all artwork lives under `Assets/UI/Themes/Assets`. To use the screen with another preset, load `ui.uss` and change the root's theme class.
+Install **TreasureShop** to copy the portrait store shown in the registry. Assign `Components/TreasureShop/TreasureShopExample.uxml` to a UIDocument. Its bundle, rewards, amounts, prices and button IDs are editable in UXML. Subscribe to `shop.OfferSelected` to receive the selected offer ID. The storefront includes six transparent reward illustrations, an enamel background and scalable button surfaces. Text remains editable and all artwork lives under `Themes/Assets` in the installation folder. To use the screen with another preset, load `ui.uss` and change the root's theme class.
 
 Royal Puzzle and Pixel Forge are authored directly in their named USS files. To add a palette-based preset, choose a family and palette in `tools/theme-presets.mjs`, supply its shop colors in `tools/game-finishes.mjs` and a cover pattern in `tools/build-theme-assets.mjs`, then run `node tools/build-registry.mjs`. Update the catalog size checks when expanding the bundled themes.
 
@@ -181,7 +181,7 @@ Toasts have no global singleton, queue, or overlay service. Place them where you
 
 ## Ownership and update policy
 
-- All output goes to `Assets/UI`; install never copies `.meta` files, assemblies, or package references.
+- Install and Apply appearance both use the selected installation folder. Unity generates local asset GUIDs for the copied files.
 - Differing existing component, theme, example, documentation, and license files are preserved and reported in the Console. Identical installs do not rewrite them.
 - Incremental installation rebuilds stylesheet imports from the union of installed and selected components.
 - The stored `.uicdn-namespace` prevents accidental mixed namespaces. To migrate, rename existing C# namespaces and UXML prefixes, update that marker, then change settings. `.uicdn-theme` records the installed selected preset separately.
@@ -196,4 +196,4 @@ See the repository's `CONTRIBUTING.md`. Catalog definitions and example markup l
 
 MIT licensed. Preserve `LICENSE.md` when redistributing copied components.
 
-Coiny, Fredoka SemiBold, Nunito SemiBold and Jersey 10 ship under the SIL Open Font License. The installer copies each font and its license to `Assets/UI/Themes/Assets`. When upgrading, merge the updated display-font declarations into any named preset reported as preserved, then apply the appearance again. For an existing Armory installation, merge the themed icon support in `UiArmory.cs` and the `gear-art-*` classes in its example. [Fredoka source](https://github.com/hafontia-zz/Fredoka-One/tree/35c584ff23450c9bcdf8819706e12fcdeefe1712/fonts/ttf) · [Nunito source](https://github.com/google/fonts/tree/c7e2740188205a85323c7385547f6f59b4f2245a/ofl/nunito) · [Jersey 10 source](https://github.com/google/fonts/tree/6e4b84c976cadb3c49a40fd9a1c203e4f7fcf2da/ofl/jersey10)
+Coiny, Fredoka SemiBold, Nunito SemiBold and Jersey 10 ship under the SIL Open Font License. The installer copies each font and its license to `Themes/Assets` inside the installation folder. When upgrading, merge the updated display-font declarations into any named preset reported as preserved, then apply the appearance again. For an existing Armory installation, merge the themed icon support in `UiArmory.cs` and the `gear-art-*` classes in its example. [Fredoka source](https://github.com/hafontia-zz/Fredoka-One/tree/35c584ff23450c9bcdf8819706e12fcdeefe1712/fonts/ttf) · [Nunito source](https://github.com/google/fonts/tree/c7e2740188205a85323c7385547f6f59b4f2245a/ofl/nunito) · [Jersey 10 source](https://github.com/google/fonts/tree/6e4b84c976cadb3c49a40fd9a1c203e4f7fcf2da/ofl/jersey10)

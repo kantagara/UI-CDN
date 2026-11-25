@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0 — 2026-11-25
+
+- Drag a project folder onto **Install folder** in the registry to choose where components, themes, and examples are installed. Clear the field to restore `Assets/UI`.
+- The installer checks for an existing copy of the same component namespace and shows its location before a second install can introduce duplicate classes.
+
 ## 0.2.1 — 2026-11-25
 
 - Armory can refresh repeatedly when an equipment slot is empty.

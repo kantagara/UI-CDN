@@ -44,6 +44,7 @@ namespace Garabandic.UiCdn.Editor
                 rootVisualElement.Add(new Label("Copy the components. Keep the code.") { name = "subtitle" });
                 namespaceField = new TextField("Installed namespace") { value = UiCdnSettings.instance.ComponentNamespace };
                 rootVisualElement.Add(namespaceField);
+                rootVisualElement.Add(CreateInstallFolderField());
                 rootVisualElement.Add(CreateAppearanceControls());
                 rootVisualElement.Add(CreateShowcaseControls());
                 var search = new ToolbarSearchField();
@@ -52,12 +53,53 @@ namespace Garabandic.UiCdn.Editor
                 catalog = new ScrollView { name = "catalog" };
                 detail = new ScrollView { name = "detail" };
                 rootVisualElement.Add(new VisualElement { name = "body" }.With(catalog, detail));
-                status = new Label("Installs to Assets/UI. Existing differing files are preserved.") { name = "status" };
+                status = new Label("Drop a Project folder into Install folder to choose where files are copied.") { name = "status" };
                 rootVisualElement.Add(status);
                 selected = manifest.components.First(c => c.id != "core");
                 RenderSelection();
             }
             catch (Exception ex) { rootVisualElement.Add(new HelpBox(ex.Message, HelpBoxMessageType.Error)); }
+        }
+
+        private TextField CreateInstallFolderField()
+        {
+            var settings = UiCdnSettings.instance;
+            var field = new TextField("Install folder")
+            {
+                name = "install-folder", value = settings.InstallFolder, isDelayed = true,
+                tooltip = "Drop a folder from the Project window or enter its Assets path. Clear to restore Assets/UI."
+            };
+            void SelectFolder(string path)
+            {
+                try
+                {
+                    settings.SelectInstallFolder(string.IsNullOrEmpty(path) ? UiCdnSettings.DefaultInstallFolder : path);
+                    status.text = $"Install destination: {settings.InstallFolder}";
+                    RenderDetail();
+                }
+                catch (Exception ex) { status.text = ex.Message; }
+                field.SetValueWithoutNotify(settings.InstallFolder);
+            }
+            field.RegisterValueChangedCallback(evt => SelectFolder(evt.newValue));
+            field.RegisterCallback<DragUpdatedEvent>(evt =>
+            {
+                var paths = DragAndDrop.paths;
+                DragAndDrop.visualMode = paths.Length == 1 && AssetDatabase.IsValidFolder(paths[0]) &&
+                    (paths[0] == "Assets" || paths[0].StartsWith("Assets/", StringComparison.Ordinal))
+                    ? DragAndDropVisualMode.Copy : DragAndDropVisualMode.Rejected;
+                evt.StopPropagation();
+            }, TrickleDown.TrickleDown);
+            field.RegisterCallback<DragPerformEvent>(evt =>
+            {
+                if (DragAndDrop.paths.Length == 1)
+                {
+                    var path = DragAndDrop.paths[0];
+                    SelectFolder(path);
+                    if (settings.InstallFolder == path) DragAndDrop.AcceptDrag();
+                }
+                evt.StopPropagation();
+            }, TrickleDown.TrickleDown);
+            return field;
         }
 
         private VisualElement CreateAppearanceControls()
@@ -140,7 +182,7 @@ namespace Garabandic.UiCdn.Editor
             actions.Add(new Button(() => Install(Array.Empty<string>())) { text = "Apply appearance" });
             detail.Add(actions);
             var files = new Foldout { text = "Copied files", value = false };
-            var paths = displayed.SelectMany(c => c.files).Select(f => "Assets/UI/" + f.target);
+            var paths = displayed.SelectMany(c => c.files).Select(f => UiCdnSettings.instance.InstallFolder + "/" + f.target);
             files.Add(new Label("Files copied:\n" + string.Join("\n", paths)).Class("wrap"));
             detail.Add(files);
         }
@@ -188,7 +230,7 @@ namespace Garabandic.UiCdn.Editor
                 UiCdnSettings.instance.Configure(plan.Namespace);
                 var count = UiCdnInstaller.Apply(plan);
                 var fontName = ObjectNames.NicifyVariableName(UiCdnSettings.instance.DisplayFont.ToString());
-                status.text = $"{theme.name} · {fontName}. Wrote {count} files and preserved {plan.Conflicts.Count}. Use ui-root ui-theme-selected with Assets/UI/ui.uss.";
+                status.text = $"{theme.name} · {fontName}. Wrote {count} files and preserved {plan.Conflicts.Count}. Use ui-root ui-theme-selected with {UiCdnSettings.instance.InstallFolder}/ui.uss.";
                 if (plan.Conflicts.Count > 0) Debug.Log("UiCdn preserved user-owned files:\n" + string.Join("\n", plan.Conflicts));
             }
             catch (Exception ex) { status.text = ex.Message; Debug.LogException(ex); }

@@ -11,6 +11,9 @@ namespace Garabandic.UiCdn.Editor
     [FilePath("ProjectSettings/UiCdnSettings.asset", FilePathAttribute.Location.ProjectFolder)]
     public sealed class UiCdnSettings : ScriptableSingleton<UiCdnSettings>
     {
+        public const string DefaultInstallFolder = "Assets/UI";
+        [SerializeField] private string installFolder = DefaultInstallFolder;
+        public string InstallFolder => string.IsNullOrEmpty(installFolder) ? DefaultInstallFolder : installFolder;
         [SerializeField] private string componentNamespace = "Game.UI";
         public string ComponentNamespace => componentNamespace;
         [SerializeField] private string selectedTheme = "royal-puzzle";
@@ -35,6 +38,14 @@ namespace Garabandic.UiCdn.Editor
         {
             UiCdnManifest.Load().Theme(id);
             selectedTheme = id;
+            Save(true);
+        }
+
+        public void SelectInstallFolder(string assetPath)
+        {
+            assetPath = assetPath?.Replace('\\', '/');
+            UiCdnInstaller.ResolveInstallFolder(assetPath);
+            installFolder = assetPath;
             Save(true);
         }
 

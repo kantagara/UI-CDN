@@ -27,6 +27,37 @@ public static class UiCdnVerification
         try
         {
             var manifest = UiCdnManifest.Load();
+            var settings = UiCdnSettings.instance;
+            Check(settings.InstallFolder == "Assets/UI", "default location before first install");
+            AssetDatabase.CreateFolder("Assets", "Components");
+            AssetDatabase.CreateFolder("Assets/Components", "HUD Kit");
+            const string customFolder = "Assets/Components/HUD Kit";
+            foreach (var path in new[] { "Packages", "AssetsElsewhere", "Assets/../Packages", "Assets/Editor", "Assets/StreamingAssets", "Assets/missing", "Assets/Editor/Verification.cs" })
+                Throws(() => settings.SelectInstallFolder(path), "invalid install directory " + path);
+            Check(settings.InstallFolder == "Assets/UI", "invalid selection preserves destination");
+            var defaultPlan = UiCdnInstaller.Plan(manifest, new[] { "button" }, "Game.UI");
+            var window = ScriptableObject.CreateInstance<UiCdnRegistryWindow>();
+            window.Show();
+            window.CreateGUI();
+            var field = window.rootVisualElement.Q<TextField>("install-folder");
+            Check(field.value == settings.InstallFolder, "folder field reflects project setting");
+            DragAndDrop.PrepareStartDrag();
+            DragAndDrop.paths = new[] { customFolder };
+            using (var drop = DragPerformEvent.GetPooled(new Event { type = EventType.DragPerform }))
+            {
+                drop.target = field;
+                field.SendEvent(drop);
+            }
+            Check(field.value == customFolder && settings.InstallFolder == customFolder,
+                $"Project folder drop updates destination (panel {field.panel != null}, paths {string.Join(", ", DragAndDrop.paths)}, status {window.rootVisualElement.Q<Label>("status").text})");
+            Check(window.rootVisualElement.Query<Label>().ToList().Any(label => label.text?.Contains(customFolder + "/Components/") == true), "copied file list follows drop");
+            Throws(() => UiCdnInstaller.Apply(defaultPlan), "stale plan refused after folder change");
+            Check(!Directory.Exists(defaultPlan.Root), "choosing a folder does not write into default location");
+            field.value = "";
+            Check(settings.InstallFolder == "Assets/UI" && field.value == settings.InstallFolder, "clear restores default");
+            if (Environment.GetEnvironmentVariable("UICDN_VERIFY_DEFAULT_FOLDER") != "1") field.value = customFolder;
+            var destination = settings.InstallFolder;
+            File.WriteAllText(Path.Combine(Application.dataPath, "../install-root.txt"), destination);
             Check(manifest.themes.Length == 12, "theme catalog size");
             foreach (UiCdnDisplayFont font in Enum.GetValues(typeof(UiCdnDisplayFont)))
             {
@@ -125,24 +156,30 @@ public static class UiCdnVerification
             Check(plan.BinaryFiles.Count == manifest.foundations.Concat(manifest.components.SelectMany(c => c.files)).Count(f => f.binary), "every bundled font, illustration and surface copied as binary");
             Check(plan.Files.Values.All(s => !s.Contains(UiCdnManifest.PreviewNamespace)), "namespace replacement");
             Check(UiCdnInstaller.Apply(plan) > 0, "installation writes files");
+            Check(AssetDatabase.IsValidFolder(destination) && !Directory.Exists(Path.Combine(plan.Root, "UI")), "installer uses chosen folder directly");
+            var alternateFolder = destination == customFolder ? "Assets/UI" : customFolder;
+            settings.SelectInstallFolder(alternateFolder);
+            Throws(() => UiCdnInstaller.Plan(manifest, new[] { "button" }, "Game.UI"), "duplicate runtime namespace across installation folders");
+            settings.SelectInstallFolder(destination);
             foreach (var file in manifest.foundations.Where(f => f.pointFilter))
             {
-                var pixel = AssetImporter.GetAtPath("Assets/UI/" + file.target) as TextureImporter;
+                var pixel = AssetImporter.GetAtPath(destination + "/" + file.target) as TextureImporter;
                 Check(pixel != null && pixel.filterMode == FilterMode.Point && !pixel.mipmapEnabled &&
                     pixel.textureCompression == TextureImporterCompression.Uncompressed && pixel.npotScale == TextureImporterNPOTScale.None,
                     "native pixel grid survives installation: " + file.target);
             }
             var artPath = Path.Combine(UiCdnInstaller.OutputRoot, "Themes", "Assets", "royal-action.png");
             Check(File.ReadAllBytes(artPath).SequenceEqual(plan.BinaryFiles[artPath]), "artwork copied without text conversion");
-            var artImporter = AssetImporter.GetAtPath("Assets/UI/Themes/Assets/royal-action.png") as TextureImporter;
+            var artImporter = AssetImporter.GetAtPath(destination + "/Themes/Assets/royal-action.png") as TextureImporter;
             Check(artImporter != null && !artImporter.mipmapEnabled && artImporter.npotScale == TextureImporterNPOTScale.None && artImporter.textureCompression == TextureImporterCompression.Uncompressed, "UI artwork imported without resizing or compression");
-            var customPath = Path.GetFullPath(Path.Combine(Application.dataPath, "UI/Components/Button/UiButton.cs"));
+            var customPath = Path.Combine(plan.Root, "Components", "Button", "UiButton.cs");
             File.AppendAllText(customPath, "\n// user customization\n");
             var repeat = UiCdnInstaller.Plan(manifest, new[] { "button" }, "Game.UI");
             Check(repeat.Conflicts.Contains(customPath), "edited files reported");
             UiCdnInstaller.Apply(repeat);
             Check(File.ReadAllText(customPath).Contains("// user customization"), "edited files preserved");
-            Check(File.ReadAllText(Path.Combine(Application.dataPath, "UI/ui.uss")).Contains("Components/Dialog/UiDialog.uss"), "incremental import union");
+            var imports = File.ReadAllLines(Path.Combine(plan.Root, "ui.uss"));
+            Check(imports.Any(line => line.Contains("Components/Dialog/UiDialog.uss")) && imports.Distinct().Count() == imports.Length, "incremental imports stay unique under any folder name");
             Throws(() => UiCdnInstaller.Plan(manifest, new[] { "card" }, "Other.UI"), "namespace drift blocked");
             var directoryCollision = UiCdnInstaller.Plan(manifest, new[] { "core" }, "Game.UI");
             var occupied = Path.Combine(UiCdnInstaller.OutputRoot, "directory-collision.cs");
@@ -176,10 +213,10 @@ public static class UiCdnVerification
             Check(File.ReadAllText(aggregatePath).Contains("Themes/font-fredoka.uss"), "display font applied to existing screens");
             Check(File.ReadAllText(customPath).Contains("// user customization"), "theme switching preserves runtime component edits");
             // Confirm a real EditorWindow can construct its full catalog and preview.
-            var window = ScriptableObject.CreateInstance<UiCdnRegistryWindow>();
             window.CreateGUI();
             Check(window.rootVisualElement.Q("preview") != null, "registry window builds");
-            UnityEngine.Object.DestroyImmediate(window);
+            Check(window.rootVisualElement.Q<TextField>("install-folder").value == destination, "reopening registry restores destination");
+            window.Close();
             File.WriteAllText(Path.Combine(Application.dataPath, "../stage1-result.txt"), $"PASS: {count} assertions\n");
             Debug.Log($"UICDN PASS: {count} assertions");
             EditorApplication.Exit(0);

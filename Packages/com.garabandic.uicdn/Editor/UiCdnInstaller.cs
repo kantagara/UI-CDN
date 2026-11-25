@@ -22,7 +22,21 @@ namespace Garabandic.UiCdn.Editor
 
     public static class UiCdnInstaller
     {
-        public static string OutputRoot => Path.GetFullPath(Path.Combine(Application.dataPath, "UI"));
+        public static string OutputRoot => ResolveInstallFolder(UiCdnSettings.instance.InstallFolder);
+
+        internal static string ResolveInstallFolder(string assetPath)
+        {
+            if (string.IsNullOrEmpty(assetPath) || (assetPath != "Assets" && !assetPath.StartsWith("Assets/", StringComparison.Ordinal)))
+                throw new ArgumentException("Choose a project folder under Assets.");
+            var full = SafePath(Path.GetDirectoryName(Application.dataPath), assetPath);
+            var segments = assetPath.Split('/');
+            if (segments.Contains("Editor", StringComparer.OrdinalIgnoreCase) ||
+                (segments.Length > 1 && segments[1].Equals("StreamingAssets", StringComparison.OrdinalIgnoreCase)))
+                throw new ArgumentException("Choose a runtime asset folder outside Editor and StreamingAssets.");
+            if (!AssetDatabase.IsValidFolder(assetPath) && (assetPath != UiCdnSettings.DefaultInstallFolder || File.Exists(full)))
+                throw new ArgumentException("Choose an existing folder from the Project window.");
+            return full;
+        }
 
         // Reject traversal and links, including links in an existing ancestor of the root.
         public static string SafePath(string root, string relative)
@@ -51,8 +65,22 @@ namespace Garabandic.UiCdn.Editor
             var plan = new UiCdnInstallPlan { Namespace = targetNamespace, Root = OutputRoot, Theme = theme.id };
             var namespacePath = SafePath(plan.Root, ".uicdn-namespace");
             if (File.Exists(namespacePath) && File.ReadAllText(namespacePath).Trim() != targetNamespace)
-                throw new InvalidOperationException("Assets/UI already uses another namespace. Migrate the existing files and .uicdn-namespace together before changing it.");
-            foreach (var file in manifest.foundations.Concat(manifest.Resolve(ids).SelectMany(c => c.files)))
+                throw new InvalidOperationException($"{UiCdnSettings.instance.InstallFolder} already uses another namespace. Migrate the existing files and .uicdn-namespace together before changing it.");
+            var components = manifest.Resolve(ids);
+            if (components.Count > 0 && !File.Exists(SafePath(plan.Root, "Components/Core/UiCore.cs")))
+            {
+                const string corePath = "/Components/Core/UiCore.cs";
+                foreach (var guid in AssetDatabase.FindAssets("UiCore t:MonoScript", new[] { "Assets" }))
+                {
+                    var path = AssetDatabase.GUIDToAssetPath(guid);
+                    if (!path.EndsWith(corePath, StringComparison.Ordinal)) continue;
+                    var folder = path.Substring(0, path.Length - corePath.Length);
+                    var marker = SafePath(Path.GetDirectoryName(Application.dataPath), folder + "/.uicdn-namespace");
+                    if (File.Exists(marker) && File.ReadAllText(marker).Trim() == targetNamespace)
+                        throw new InvalidOperationException($"{targetNamespace} components are already installed in {folder}. To relocate them, move the installed folder in the Project window and select its new location.");
+                }
+            }
+            foreach (var file in manifest.foundations.Concat(components.SelectMany(c => c.files)))
             {
                 var target = SafePath(plan.Root, file.target);
                 var source = SafePath(packageRoot, file.source);
@@ -91,9 +119,12 @@ namespace Garabandic.UiCdn.Editor
             var styles = new SortedSet<string>(StringComparer.Ordinal);
             var directory = SafePath(plan.Root, "Components");
             if (Directory.Exists(directory)) CollectStyles(directory, plan.Root, styles);
-            var componentSegment = Path.DirectorySeparatorChar + "Components" + Path.DirectorySeparatorChar;
-            foreach (var path in plan.Files.Keys.Where(p => p.EndsWith(".uss", StringComparison.Ordinal) && p.Contains(componentSegment)))
-                styles.Add(path.Substring(plan.Root.Length + 1).Replace('\\', '/'));
+            foreach (var path in plan.Files.Keys)
+            {
+                var relative = path.Substring(plan.Root.Length + 1).Replace('\\', '/');
+                if (relative.StartsWith("Components/", StringComparison.Ordinal) && relative.EndsWith(".uss", StringComparison.Ordinal))
+                    styles.Add(relative);
+            }
             var imports = new List<string> { "Themes/theme-tokens.uss" };
             imports.AddRange(styles);
             imports.Add("Themes/theme-game.uss");
@@ -141,7 +172,7 @@ namespace Garabandic.UiCdn.Editor
         // Existing differing files are always preserved. No silent upgrade or overwrite mode.
         public static int Apply(UiCdnInstallPlan plan)
         {
-            if (plan.Root != OutputRoot) throw new InvalidOperationException("Install plans may only write to Assets/UI.");
+            if (plan.Root != OutputRoot) throw new InvalidOperationException("The install folder changed. Create a new plan before installing.");
             var payload = plan.Files.Select(file => new KeyValuePair<string, byte[]>(file.Key, Encoding.UTF8.GetBytes(file.Value)))
                 .Concat(plan.BinaryFiles).ToArray();
             if (payload.Select(p => p.Key).Distinct(StringComparer.OrdinalIgnoreCase).Count() != payload.Length)
@@ -179,7 +210,7 @@ namespace Garabandic.UiCdn.Editor
                     catch (Exception rollbackFailure) { failures.Add(rollbackFailure); }
                 }
                 if (failures.Count > 0)
-                    throw new AggregateException("Install failed and some files could not be restored. Inspect Assets/UI before retrying.", new[] { original }.Concat(failures));
+                    throw new AggregateException($"Install failed and some files could not be restored. Inspect {plan.Root} before retrying.", new[] { original }.Concat(failures));
                 throw;
             }
             finally
@@ -195,8 +226,8 @@ namespace Garabandic.UiCdn.Editor
         {
             foreach (var path in paths)
             {
-                if (!path.StartsWith(root + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
-                    throw new IOException("Install target is outside Assets/UI: " + path);
+                if (!path.StartsWith(root + Path.DirectorySeparatorChar, StringComparison.Ordinal))
+                    throw new IOException("Install target is outside the selected folder: " + path);
                 SafePath(root, path.Substring(root.Length + 1));
                 if (Directory.Exists(path)) throw new IOException("A directory occupies a registry file path: " + path);
                 for (var parent = Path.GetDirectoryName(path); parent != null; parent = Path.GetDirectoryName(parent))
