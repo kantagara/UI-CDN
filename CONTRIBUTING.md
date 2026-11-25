@@ -14,7 +14,7 @@ Verification uses the installed engine directly; no third-party test or runtime 
 
 For rendered review and attached-panel interaction tests, run `./tools/visual-review.ps1 -ProjectPath '<temp verification project>'` after `verify.ps1`. This briefly opens the registry in a separate Editor, checks focus, submit/cancel, directional navigation, and transitions, saves screenshots under `artifacts/ui-review`, and closes that Editor. Inspect the images before publishing. It accepts only disposable verification projects created by the test script.
 
-Theme definitions live in `tools/theme-presets.mjs`. Shop palettes and button profiles are in `tools/game-finishes.mjs`. The artwork generator in `tools/build-theme-assets.mjs` builds the normal and pressed surfaces, frames and shop covers. Keep their committed importer metadata configured for GUI use, no compression, no mipmaps, clamp wrapping, and no NPOT resizing. Installation initializes these settings for newly copied PNGs. The visual checker captures the dedicated native Editor window.
+Edit Royal Puzzle and Pixel Forge directly in `Editor/Registry/Themes/theme-royal-puzzle.uss` and `theme-pixel-forge.uss` inside the package. The other presets share palettes in `tools/theme-presets.mjs` and shop finishes in `tools/game-finishes.mjs`. The artwork generator in `tools/build-theme-assets.mjs` builds the normal and pressed surfaces, frames and shop covers. Keep their committed importer metadata configured for GUI use, no compression, no mipmaps, clamp wrapping, and no NPOT resizing. Installation initializes these settings for newly copied PNGs. The visual checker captures the dedicated native Editor window.
 
 Keep public changes documented in `CHANGELOG.md`. Contributions are provided under MIT.
 

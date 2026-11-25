@@ -83,6 +83,7 @@ namespace Garabandic.UiCdn.Editor.Preview
         private readonly Label attackDelta = new Label(), guardDelta = new Label();
         private readonly UiButton equip = new UiButton().Class("armory-equip");
         private GearSlot slot;
+        private IEnumerable<UiGearItem> Items => inventory.Children().OfType<UiGearItem>();
         public override VisualElement contentContainer => inventory;
         [UxmlAttribute] public string Title { get => heading.text; set => heading.text = value; }
         [UxmlAttribute] public string Location { get => region.text; set => region.text = value; }
@@ -137,14 +138,15 @@ namespace Garabandic.UiCdn.Editor.Preview
 
         public void Refresh()
         {
-            var items = inventory.Children().OfType<UiGearItem>().ToList();
+            var items = Items.ToList();
             foreach (var type in filters.Keys)
             {
-                if (loadout.TryGetValue(type, out var current) && current.Slot == type && items.Contains(current)) continue;
+                var current = GetEquipped(type);
+                if (current?.Slot == type && items.Contains(current)) continue;
                 loadout[type] = items.FirstOrDefault(i => i.Slot == type && i.InitiallyEquipped);
             }
-            var initial = items.FirstOrDefault(i => !string.IsNullOrEmpty(InitialItem) && i.name == InitialItem);
-            if (!items.Contains(Selected)) Selected = initial ?? items.FirstOrDefault();
+            if (!items.Contains(Selected))
+                Selected = items.FirstOrDefault(i => !string.IsNullOrEmpty(InitialItem) && i.name == InitialItem) ?? items.FirstOrDefault();
             ShowSlot(Selected?.Slot ?? slot, Selected);
         }
 
@@ -152,12 +154,17 @@ namespace Garabandic.UiCdn.Editor.Preview
         private UiArmory ShowSlot(GearSlot type, UiGearItem preferred)
         {
             slot = type;
-            var items = inventory.Children().OfType<UiGearItem>().ToList();
-            foreach (var item in items) item.style.display = item.Slot == type ? DisplayStyle.Flex : DisplayStyle.None;
+            var equipped = GetEquipped(type);
+            var available = Items.Where(i => i.Slot == type).ToList();
+            Selected = preferred ?? equipped ?? available.FirstOrDefault();
+            foreach (var card in Items)
+            {
+                card.style.display = card.Slot == type ? DisplayStyle.Flex : DisplayStyle.None;
+                card.Present(card == Selected, card == GetEquipped(card.Slot));
+            }
             foreach (var tab in filters) tab.Value.EnableInClassList("armory-filter--active", tab.Key == type);
-            count.text = items.Count(i => i.Slot == type) + " ITEMS";
-            loadout.TryGetValue(type, out var equipped);
-            UpdateSelection(preferred ?? equipped ?? items.FirstOrDefault(i => i.Slot == type));
+            count.text = available.Count + " ITEMS";
+            ShowComparison(Selected, equipped);
             return this;
         }
 
@@ -169,22 +176,18 @@ namespace Garabandic.UiCdn.Editor.Preview
 
         public void EquipSelected()
         {
-            if (Selected == null || GetEquipped(slot) == Selected) return;
             var item = Selected;
+            if (item == null || GetEquipped(slot) == item) return;
             loadout[slot] = item;
-            UpdateSelection(item);
+            ShowSlot(slot, item);
             if (panel != null) item.Focus();
             Equipped?.Invoke(item);
         }
 
         public UiGearItem GetEquipped(GearSlot type) => loadout.TryGetValue(type, out var item) ? item : null;
 
-        private void UpdateSelection(UiGearItem item)
+        private void ShowComparison(UiGearItem item, UiGearItem current)
         {
-            Selected = item;
-            var current = GetEquipped(slot);
-            foreach (var card in inventory.Children().OfType<UiGearItem>())
-                card.Present(card == item, card == GetEquipped(card.Slot));
             RefreshPortrait();
             rarity.text = item == null ? "" : (item.Rarity + "  /  " + item.Slot).ToUpperInvariant();
             itemName.text = item?.ItemName ?? "Empty slot";

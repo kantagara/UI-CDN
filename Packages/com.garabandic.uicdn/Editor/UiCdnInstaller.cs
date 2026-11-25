@@ -47,6 +47,7 @@ namespace Garabandic.UiCdn.Editor
             var theme = manifest.Theme(themeId ?? UiCdnSettings.instance.SelectedTheme);
             var fontSheet = UiCdnSettings.FontSheet(displayFont ?? UiCdnSettings.instance.DisplayFont);
             var examples = new HashSet<string>(manifest.components.Select(c => c.preview), StringComparer.Ordinal);
+            var packageRoot = UiCdnManifest.PackageRoot;
             var plan = new UiCdnInstallPlan { Namespace = targetNamespace, Root = OutputRoot, Theme = theme.id };
             var namespacePath = SafePath(plan.Root, ".uicdn-namespace");
             if (File.Exists(namespacePath) && File.ReadAllText(namespacePath).Trim() != targetNamespace)
@@ -54,14 +55,16 @@ namespace Garabandic.UiCdn.Editor
             foreach (var file in manifest.foundations.Concat(manifest.Resolve(ids).SelectMany(c => c.files)))
             {
                 var target = SafePath(plan.Root, file.target);
+                var source = SafePath(packageRoot, file.source);
                 if (file.binary)
                 {
-                    plan.BinaryFiles.Add(target, File.ReadAllBytes(SafePath(UiCdnManifest.PackageRoot, file.source)));
+                    var bytes = File.ReadAllBytes(source);
+                    plan.BinaryFiles.Add(target, bytes);
                     if (file.pointFilter) plan.PointFiltered.Add(target);
-                    if (File.Exists(target) && !File.ReadAllBytes(target).SequenceEqual(plan.BinaryFiles[target])) plan.Conflicts.Add(target);
+                    if (File.Exists(target) && !File.ReadAllBytes(target).SequenceEqual(bytes)) plan.Conflicts.Add(target);
                     continue;
                 }
-                var contents = File.ReadAllText(SafePath(UiCdnManifest.PackageRoot, file.source));
+                var contents = File.ReadAllText(source);
                 contents = contents.Replace(UiCdnManifest.PreviewNamespace, targetNamespace).Replace("{{NAMESPACE}}", targetNamespace);
                 if (examples.Contains(file.source)) contents = InstalledExample(contents, file.target);
                 plan.Files.Add(target, contents);
@@ -72,22 +75,7 @@ namespace Garabandic.UiCdn.Editor
             var preset = File.Exists(presetPath) ? File.ReadAllText(presetPath) : plan.Files[presetPath];
             plan.Files[SafePath(plan.Root, "Themes/theme-active.uss")] = "/* Generated selected theme. Edit the named preset instead. */\n" + preset.Replace("." + theme.cssClass, ".ui-theme-selected");
             plan.Files[SafePath(plan.Root, ".uicdn-theme")] = theme.id + "\n";
-            // Rebuild imports from the union of installed and requested component styles.
-            var styles = new SortedSet<string>(StringComparer.Ordinal);
-            var componentsRoot = SafePath(plan.Root, "Components");
-            if (Directory.Exists(componentsRoot))
-            {
-                CollectStyles(componentsRoot, plan.Root, styles);
-            }
-            foreach (var file in plan.Files.Keys.Where(p => p.EndsWith(".uss", StringComparison.Ordinal) && p.Contains(Path.DirectorySeparatorChar + "Components" + Path.DirectorySeparatorChar)))
-                styles.Add(file.Substring(plan.Root.Length + 1).Replace('\\', '/'));
-            var imports = new StringBuilder("/* UiCdn generated imports. Customize themes and component files directly. */\n@import url(\"Themes/theme-tokens.uss\");\n");
-            foreach (var style in styles) imports.Append("@import url(\"").Append(style).Append("\");\n");
-            imports.Append("@import url(\"Themes/theme-game.uss\");\n");
-            foreach (var item in manifest.themes) imports.Append("@import url(\"Themes/theme-").Append(item.id).Append(".uss\");\n");
-            imports.Append("@import url(\"Themes/theme-active.uss\");\n");
-            if (fontSheet != null) imports.Append("@import url(\"").Append(fontSheet).Append("\");\n");
-            plan.Files[SafePath(plan.Root, "ui.uss")] = imports.ToString();
+            plan.Files[SafePath(plan.Root, "ui.uss")] = BuildStylesheet(plan, manifest, fontSheet);
             foreach (var file in plan.Files)
             {
                 if (Directory.Exists(file.Key)) throw new IOException("A directory occupies a registry file path: " + file.Key);
@@ -96,6 +84,24 @@ namespace Garabandic.UiCdn.Editor
                 if (!IsGenerated(plan.Root, file.Key)) plan.Conflicts.Add(file.Key);
             }
             return plan;
+        }
+
+        private static string BuildStylesheet(UiCdnInstallPlan plan, UiCdnManifest manifest, string fontSheet)
+        {
+            var styles = new SortedSet<string>(StringComparer.Ordinal);
+            var directory = SafePath(plan.Root, "Components");
+            if (Directory.Exists(directory)) CollectStyles(directory, plan.Root, styles);
+            var componentSegment = Path.DirectorySeparatorChar + "Components" + Path.DirectorySeparatorChar;
+            foreach (var path in plan.Files.Keys.Where(p => p.EndsWith(".uss", StringComparison.Ordinal) && p.Contains(componentSegment)))
+                styles.Add(path.Substring(plan.Root.Length + 1).Replace('\\', '/'));
+            var imports = new List<string> { "Themes/theme-tokens.uss" };
+            imports.AddRange(styles);
+            imports.Add("Themes/theme-game.uss");
+            imports.AddRange(manifest.themes.Select(t => $"Themes/theme-{t.id}.uss"));
+            imports.Add("Themes/theme-active.uss");
+            if (fontSheet != null) imports.Add(fontSheet);
+            return "/* UiCdn generated imports. Customize themes and component files directly. */\n" +
+                string.Concat(imports.Select(path => $"@import url(\"{path}\");\n"));
         }
 
         // Package previews load their local sheets individually. Owned examples follow the
@@ -136,25 +142,15 @@ namespace Garabandic.UiCdn.Editor
         public static int Apply(UiCdnInstallPlan plan)
         {
             if (plan.Root != OutputRoot) throw new InvalidOperationException("Install plans may only write to Assets/UI.");
-            var payload = plan.Files.Select(file => new KeyValuePair<string, byte[]>(file.Key, new UTF8Encoding(false).GetBytes(file.Value)))
+            var payload = plan.Files.Select(file => new KeyValuePair<string, byte[]>(file.Key, Encoding.UTF8.GetBytes(file.Value)))
                 .Concat(plan.BinaryFiles).ToArray();
             if (payload.Select(p => p.Key).Distinct(StringComparer.OrdinalIgnoreCase).Count() != payload.Length)
                 throw new InvalidOperationException("Duplicate text and binary install targets.");
-            foreach (var path in payload.Select(p => p.Key))
-            {
-                if (!path.StartsWith(plan.Root + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
-                    throw new IOException("Install target is outside Assets/UI: " + path);
-                SafePath(plan.Root, path.Substring(plan.Root.Length + 1));
-                if (Directory.Exists(path)) throw new IOException("A directory occupies a registry file path: " + path);
-                for (var parent = Path.GetDirectoryName(path); parent != null; parent = Path.GetDirectoryName(parent))
-                    if (File.Exists(parent)) throw new IOException("A file occupies an install directory: " + parent);
-            }
+            ValidateTargets(plan.Root, payload.Select(p => p.Key));
             var namespacePath = SafePath(plan.Root, ".uicdn-namespace");
             if (File.Exists(namespacePath) && File.ReadAllText(namespacePath).Trim() != plan.Namespace)
                 throw new InvalidOperationException("The project namespace changed since this install was planned.");
-            var written = new List<string>();
             var backups = new Dictionary<string, byte[]>();
-            var refresh = false;
             AssetDatabase.StartAssetEditing();
             try
             {
@@ -162,13 +158,13 @@ namespace Garabandic.UiCdn.Editor
                 {
                     SafePath(plan.Root, file.Key.Substring(plan.Root.Length + 1));
                     var exists = File.Exists(file.Key);
-                    if (exists && (!IsGenerated(plan.Root, file.Key) || File.ReadAllBytes(file.Key).SequenceEqual(file.Value))) continue;
-                    backups[file.Key] = exists ? File.ReadAllBytes(file.Key) : null;
+                    if (exists && !IsGenerated(plan.Root, file.Key)) continue;
+                    var previous = exists ? File.ReadAllBytes(file.Key) : null;
+                    if (previous != null && previous.SequenceEqual(file.Value)) continue;
+                    backups.Add(file.Key, previous);
                     Directory.CreateDirectory(Path.GetDirectoryName(file.Key));
                     File.WriteAllBytes(file.Key, file.Value);
-                    written.Add(file.Key);
                 }
-                refresh = true;
             }
             catch (Exception original)
             {
@@ -189,8 +185,27 @@ namespace Garabandic.UiCdn.Editor
             finally
             {
                 AssetDatabase.StopAssetEditing();
-                if (refresh) AssetDatabase.Refresh();
             }
+            AssetDatabase.Refresh();
+            ImportTextures(plan, backups.Keys);
+            return backups.Count;
+        }
+
+        private static void ValidateTargets(string root, IEnumerable<string> paths)
+        {
+            foreach (var path in paths)
+            {
+                if (!path.StartsWith(root + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
+                    throw new IOException("Install target is outside Assets/UI: " + path);
+                SafePath(root, path.Substring(root.Length + 1));
+                if (Directory.Exists(path)) throw new IOException("A directory occupies a registry file path: " + path);
+                for (var parent = Path.GetDirectoryName(path); parent != null; parent = Path.GetDirectoryName(parent))
+                    if (File.Exists(parent)) throw new IOException("A file occupies an install directory: " + parent);
+            }
+        }
+
+        private static void ImportTextures(UiCdnInstallPlan plan, IEnumerable<string> written)
+        {
             foreach (var path in written.Where(p => plan.BinaryFiles.ContainsKey(p) && p.EndsWith(".png", StringComparison.OrdinalIgnoreCase)))
             {
                 var assetPath = "Assets/" + path.Substring(Path.GetFullPath(Application.dataPath).Length + 1).Replace('\\', '/');
@@ -204,7 +219,6 @@ namespace Garabandic.UiCdn.Editor
                 importer.textureCompression = TextureImporterCompression.Uncompressed;
                 importer.SaveAndReimport();
             }
-            return written.Count;
         }
     }
 }

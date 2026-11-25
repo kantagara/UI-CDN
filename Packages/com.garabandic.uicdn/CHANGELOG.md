@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1 — 2026-11-25
+
+- Armory can refresh repeatedly when an equipment slot is empty.
+- Selecting a component from the genre showcase now redraws its preview once.
+- Simplified installation planning and file writes. Edited component files are preserved, and failed writes still roll back.
+- Contributors can edit Royal Puzzle and Pixel Forge directly in their USS files.
+
 ## 0.2.0 — 2026-11-25
 
 - Choose **Pixel Forge** in the visual style picker for pixel-art equipment, shop items, and a forge backdrop. The installer preserves point filtering for the pixel textures.

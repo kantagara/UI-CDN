@@ -1,6 +1,6 @@
 {
   "name": "com.garabandic.uicdn",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "displayName": "UiCdn",
   "description": "Own your runtime UI Toolkit components. An Editor-only, copy-paste component registry for Unity 6.",
   "unity": "6000.0",

@@ -2,7 +2,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using Garabandic.UiCdn.Editor;
 using Garabandic.UiCdn.Editor.Preview;
@@ -48,8 +47,10 @@ public static class UiCdnVisualVerification
     }
     private static void Select(string id)
     {
-        var component = UiCdnManifest.Load().components.First(c => c.id == id);
-        typeof(UiCdnRegistryWindow).GetMethod("Select", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(window, new object[] { component });
+        var catalog = window.rootVisualElement.Q("catalog");
+        var button = catalog.Query<Button>().ToList().First(b => b.text.StartsWith(id + "  /", StringComparison.OrdinalIgnoreCase));
+        button.Focus();
+        using (var submit = NavigationSubmitEvent.GetPooled()) button.SendEvent(submit);
     }
     private static void Capture(string name)
     {
@@ -327,6 +328,9 @@ public static class UiCdnVisualVerification
             {
                 Check(blade.DisplayedIcon == blade.Icon && gear.Q(className: "armory-portrait").resolvedStyle.backgroundImage.texture == blade.Icon,
                     "removing the theme restores user artwork on the same item");
+                Select("card");
+                Check(!root.Q<Toggle>("theme-showcase").value && !root.Q("genre-picker").enabledSelf && root.Q<UiCard>() != null,
+                    "selecting a catalog entry exits the genre preview");
                 UiCdnSettings.instance.SelectTheme("dark");
                 File.WriteAllText(Path.Combine(output, "result.txt"), $"PASS: {assertions} attached-panel assertions, including genre screens and pixel art.");
                 window.Close(); EditorApplication.Exit(0);

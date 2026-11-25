@@ -50,15 +50,8 @@ namespace Garabandic.UiCdn.Editor
         public UiCdnTheme[] themes;
         public const string PreviewNamespace = "Garabandic.UiCdn.Editor.Preview";
 
-        public static string PackageRoot
-        {
-            get
-            {
-                var info = PackageInfo.FindForAssembly(typeof(UiCdnManifest).Assembly);
-                if (info != null) return info.resolvedPath;
-                throw new InvalidOperationException("UiCdn must be installed as a local, embedded, or Git UPM package.");
-            }
-        }
+        public static string PackageRoot => PackageInfo.FindForAssembly(typeof(UiCdnManifest).Assembly)?.resolvedPath
+            ?? throw new InvalidOperationException("UiCdn must be installed as a local, embedded, or Git UPM package.");
 
         public static UiCdnManifest Load()
         {
@@ -78,12 +71,13 @@ namespace Garabandic.UiCdn.Editor
                     throw new InvalidDataException("Invalid or duplicate component ID: " + c.id);
             }
             var targets = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var packageRoot = PackageRoot;
             foreach (var file in foundations.Concat(components.SelectMany(c => c.files)))
             {
-                UiCdnInstaller.SafePath(PackageRoot, file.source);
+                var source = UiCdnInstaller.SafePath(packageRoot, file.source);
                 UiCdnInstaller.SafePath(Path.GetTempPath(), file.target);
                 if (!targets.Add(file.target)) throw new InvalidDataException("Duplicate target: " + file.target);
-                if (!File.Exists(Path.Combine(PackageRoot, file.source))) throw new FileNotFoundException(file.source);
+                if (!File.Exists(source)) throw new FileNotFoundException(file.source);
             }
             Resolve(components.Select(c => c.id));
             var themeIds = new HashSet<string>(StringComparer.Ordinal);

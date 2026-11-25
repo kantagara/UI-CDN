@@ -4,7 +4,7 @@ Validated on Windows with Unity **6000.3.7f1**, 2026-11-25. The minimum declared
 
 ## Engine checks
 
-`tools/verify.ps1` passed **152 assertions** in an isolated project.
+`tools/verify.ps1` passed **153 assertions** in an isolated project.
 
 - Catalog parsing, topological dependency resolution, deduplication, missing dependencies, and cycle detection.
 - Unsafe path rejection, namespace validation, namespace drift prevention, and directory collision preflight.
@@ -25,7 +25,7 @@ Two subsequent Editor launches confirmed installed C# compilation, source-genera
 
 ## Rendered checks
 
-`tools/visual-review.ps1` passed **192 attached-panel assertions**. It captured seven component views, twelve themes, four font choices, and the RPG comparisons in both illustrated and pixel styles.
+`tools/visual-review.ps1` passed **193 attached-panel assertions**. It captured seven component views, twelve themes, four font choices, and the RPG comparisons in both illustrated and pixel styles.
 
 - Actual layout and resolved theme variables.
 - Native NavigationSubmit activation and tab selection.

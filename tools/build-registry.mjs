@@ -1,7 +1,7 @@
 // Catalog source and deterministic UXML example generator. Run: node tools/build-registry.mjs
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
-import { themes, themeUss } from './theme-presets.mjs';
+import { themes, paletteUss } from './theme-presets.mjs';
 import { themeAssets } from './build-theme-assets.mjs';
 import { shopMarkup } from './treasure-shop.mjs';
 const root = resolve('Packages/com.garabandic.uicdn');
@@ -37,7 +37,8 @@ const armoryMarkup = `<c:UiArmory title="Armory" location="SUNFALL FORGE" initia
 entries.push(['Armory', 'Screens', 'Inspect weapons and shields, compare attack and guard, and equip an item in its slot.', ['core', 'button'], armoryMarkup]);
 const screenGenres = { TreasureShop: 'Casual · Treasure shop', Armory: 'RPG · Equipment' };
 function write(path, content) { const full = resolve(root, path); mkdirSync(dirname(full), { recursive: true }); writeFileSync(full, content); }
-for (const theme of themes) write(`Editor/Registry/Themes/theme-${theme.id}.uss`, themeUss(theme));
+for (const theme of themes.filter(t => t.colors))
+  write(`Editor/Registry/Themes/theme-${theme.id}.uss`, paletteUss(theme));
 const fonts = { coiny: 'Coiny-Regular', nunito: 'Nunito-SemiBold', fredoka: 'Fredoka-SemiBold', jersey10: 'Jersey10-Regular' };
 for (const [id, font] of Object.entries(fonts))
   write(`Editor/Registry/Themes/font-${id}.uss`, `/* Display type override. SPDX-License-Identifier: MIT */\n.ui-root { --ui-display-font: url("Assets/${font}.ttf"); }\n`);

@@ -60,6 +60,8 @@ public static class UiCdnVerification
             Check(armory.Selected == null && !armory.Q<Button>("equip").enabledSelf, "empty slot is safe");
             armory.ShowSlot(GearSlot.Weapon);
             Check(armory.Selected == dawn && armoryEntry.genre.Contains("RPG"), "return to equipped weapon");
+            armory.Refresh();
+            Check(armory.Selected == dawn && armory.GetEquipped(GearSlot.Shield) == null, "refresh with an empty shield slot");
             var resolved = manifest.Resolve(new[] { "dialog", "tabs" });
             Check(resolved[0].id == "core" && resolved.Count(c => c.id == "button") == 1, "topological order and deduplication");
             Throws(() => manifest.Resolve(new[] { "missing" }), "missing dependency");
