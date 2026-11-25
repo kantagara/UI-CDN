@@ -12,7 +12,15 @@ Choose from chunky hyper-casual styles, soft puzzle palettes, neon arcade, paper
 
 ![Coiny, Fredoka and Nunito on the same price button](Packages/com.garabandic.uicdn/Documentation~/Images/font-choices.png)
 
-In Package Manager, choose **Install package from git URL** and paste this address.
+## Install
+
+From a Unity 6 project directory, use the OpenUPM CLI once the version appears in the [OpenUPM registry](https://openupm.com/packages/com.garabandic.uicdn/).
+
+```sh
+openupm add com.garabandic.uicdn
+```
+
+You can also download the `.tgz` from [GitHub Releases](https://github.com/kantagara/UI-CDN/releases) and choose **Install package from tarball** in Package Manager. For Git installation, choose **Install package from git URL** and paste this address.
 
 ```text
 https://github.com/kantagara/UI-CDN.git?path=/Packages/com.garabandic.uicdn

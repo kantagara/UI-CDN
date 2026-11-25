@@ -8,6 +8,7 @@ const manifest = JSON.parse(read('Editor/Registry/manifest.json'));
 assert.equal(pkg.name, 'com.garabandic.uicdn');
 assert.equal(pkg.license, 'MIT');
 assert.equal(manifest.schemaVersion, 1);
+assert.equal(manifest.version, pkg.version, 'registry and UPM versions must match');
 assert.deepEqual(JSON.parse(read('Editor/Garabandic.UiCdn.Editor.asmdef')).includePlatforms, ['Editor']);
 const entries = new Map();
 assert.equal(manifest.themes.length, 11);

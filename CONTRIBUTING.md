@@ -17,3 +17,11 @@ For rendered review and attached-panel interaction tests, run `./tools/visual-re
 Theme definitions live in `tools/theme-presets.mjs`. Shop palettes and button profiles are in `tools/game-finishes.mjs`. The artwork generator in `tools/build-theme-assets.mjs` builds the normal and pressed surfaces, frames and shop covers. Keep their committed importer metadata configured for GUI use, no compression, no mipmaps, clamp wrapping, and no NPOT resizing. Installation initializes these settings for newly copied PNGs. The visual checker captures the dedicated native Editor window.
 
 Keep public changes documented in `CHANGELOG.md`. Contributions are provided under MIT.
+
+## Publishing a version
+
+Update `Packages/com.garabandic.uicdn/package.json` and add a matching version heading to both changelogs. Run `node tools/build-registry.mjs` and `node tools/validate-registry.mjs`, then commit the changes on `main`. Select **Actions → Release UiCdn → Run workflow** or run `gh workflow run release.yml --ref main`. The workflow validates the catalog, compares the unpacked tarball with the package directory, creates the matching `v<version>` tag, and attaches the archive to a GitHub Release. Pushing an exact version tag also starts the workflow. Tags such as `v0.2.0-preview.1` produce a GitHub prerelease.
+
+After OpenUPM accepts the catalog entry, it discovers new versions by tag and publishes the archive attached to the matching GitHub Release. Verify availability with `npm view com.garabandic.uicdn@<version> version --registry=https://package.openupm.com`.
+
+For an engine check before publishing, run `npm pack ./Packages/com.garabandic.uicdn --ignore-scripts` from the repository root and test the resulting archive with `./tools/verify.ps1 -PackageArchive ./com.garabandic.uicdn-<version>.tgz`. [OpenUPM publishing guide](https://openupm.com/docs/adding-upm-package.html)

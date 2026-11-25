@@ -5,6 +5,14 @@
   "description": "Own your runtime UI Toolkit components. An Editor-only, copy-paste component registry for Unity 6.",
   "unity": "6000.0",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kantagara/UI-CDN.git",
+    "directory": "Packages/com.garabandic.uicdn"
+  },
+  "documentationUrl": "https://github.com/kantagara/UI-CDN/blob/main/Packages/com.garabandic.uicdn/README.md",
+  "changelogUrl": "https://github.com/kantagara/UI-CDN/blob/main/CHANGELOG.md",
+  "licensesUrl": "https://github.com/kantagara/UI-CDN/blob/main/Packages/com.garabandic.uicdn/LICENSE.md",
   "dependencies": { "com.unity.modules.uielements": "1.0.0" },
   "author": { "name": "Garabandic" },
   "keywords": ["ui-toolkit", "components", "registry", "editor"]

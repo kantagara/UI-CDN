@@ -1,5 +1,5 @@
 // Catalog source and deterministic UXML example generator. Run: node tools/build-registry.mjs
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { themes, themeUss } from './theme-presets.mjs';
 import { themeAssets } from './build-theme-assets.mjs';
@@ -43,5 +43,6 @@ for (const font of Object.keys(fonts)) {
   foundations.push({ source: 'Editor/Registry/' + target, target });
 }
 foundations.push(...themeAssets.map(target => ({ source: `Editor/Registry/${target}`, target, binary: true })));
-write('Editor/Registry/manifest.json', JSON.stringify({ schemaVersion: 1, version: '0.1.0', foundations, themes: themes.map(({id,name,family,description}) => ({id,name,family,description, cssClass: `ui-theme-${id}`, source: `Editor/Registry/Themes/theme-${id}.uss`})), components }, null, 2) + '\n');
+const { version } = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'));
+write('Editor/Registry/manifest.json', JSON.stringify({ schemaVersion: 1, version, foundations, themes: themes.map(({id,name,family,description}) => ({id,name,family,description, cssClass: `ui-theme-${id}`, source: `Editor/Registry/Themes/theme-${id}.uss`})), components }, null, 2) + '\n');
 console.log(`Generated ${components.length} catalog entries and UXML examples.`);

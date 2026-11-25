@@ -1,10 +1,13 @@
-param([string]$EditorPath = 'C:/Program Files/Unity/Hub/Editor/6000.3.7f1/Editor/Unity.exe')
+param(
+    [string]$EditorPath = 'C:/Program Files/Unity/Hub/Editor/6000.3.7f1/Editor/Unity.exe',
+    [string]$PackageArchive
+)
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path $PSScriptRoot -Parent
 $checkRoot = Join-Path ([System.IO.Path]::GetTempPath()) ('uicdn-validation-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Force -Path "$checkRoot/Assets/Editor", "$checkRoot/Packages", "$checkRoot/ProjectSettings" | Out-Null
-$packageRoot = (Join-Path $repoRoot 'Packages/com.garabandic.uicdn').Replace('\', '/')
-@{ dependencies = @{ 'com.garabandic.uicdn' = "file:$packageRoot"; 'com.unity.modules.uielements' = '1.0.0' } } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath "$checkRoot/Packages/manifest.json"
+$packagePath = if ($PackageArchive) { (Resolve-Path -LiteralPath $PackageArchive).Path } else { Join-Path $repoRoot 'Packages/com.garabandic.uicdn' }
+@{ dependencies = @{ 'com.garabandic.uicdn' = 'file:' + $packagePath.Replace('\', '/'); 'com.unity.modules.uielements' = '1.0.0' } } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath "$checkRoot/Packages/manifest.json"
 'm_EditorVersion: 6000.3.7f1' | Set-Content -LiteralPath "$checkRoot/ProjectSettings/ProjectVersion.txt"
 Copy-Item -LiteralPath "$PSScriptRoot/Verification.cs" -Destination "$checkRoot/Assets/Editor/Verification.cs"
 Write-Output "Validation project: $checkRoot"

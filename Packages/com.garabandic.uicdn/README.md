@@ -8,6 +8,8 @@ The UPM package is an **Editor-only installer**. It copies C#, UXML, USS, themes
 
 ## Install the tool
 
+To install a published OpenUPM version, run `openupm add com.garabandic.uicdn` from your Unity project directory. In Package Manager settings you can also add a scoped registry named `OpenUPM` with URL `https://package.openupm.com` and scope `com.garabandic.uicdn`, then install UiCdn from **My Registries**. Downloadable tarballs are available from [GitHub Releases](https://github.com/kantagara/UI-CDN/releases).
+
 Requires Unity 6 (`6000.0` or later). Use Package Manager → **Install package from disk** and select this folder's `package.json`. The package may also be embedded at `Packages/com.garabandic.uicdn` or installed from your Git repository using `?path=/Packages/com.garabandic.uicdn` after the repository URL. No third-party runtime packages are required. The dependency on the engine's built-in `com.unity.modules.uielements` module enables its runtime APIs; keep that module enabled after removing the installer.
 
 Open **Window → UiCdn → Component Registry**. Search the catalog, inspect its dependencies and working preview, set the namespace (default `Game.UI`), and choose **Install** or **Install all**. The first installation also initializes themes, the license, and `Assets/UI/AGENTS.md`. Configuration is a project-local `UiCdnSettings` ScriptableObject saved in `ProjectSettings/UiCdnSettings.asset`.
