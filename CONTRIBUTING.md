@@ -18,6 +18,10 @@ Edit Royal Puzzle and Pixel Forge directly in `Editor/Registry/Themes/theme-roya
 
 Keep public changes documented in `CHANGELOG.md`. Contributions are provided under MIT.
 
+## Commit titles
+
+Start every new commit title with `feat: `, `fix: `, or `chore: ` followed by a description. For example, `feat: choose an install folder`. This applies to merge, squash and release commits too. Enable the local check once per clone with `git config --local core.hooksPath .githooks`. GitHub Actions checks the new commits in each branch push and pull request.
+
 ## Publishing a version
 
 Update `Packages/com.garabandic.uicdn/package.json` and add a matching version heading to both changelogs. Run `node tools/build-registry.mjs` and `node tools/validate-registry.mjs`, then commit the changes on `main`. Select **Actions → Release UiCdn → Run workflow** or run `gh workflow run release.yml --ref main`. The workflow validates the catalog, compares the unpacked tarball with the package directory, creates the matching `v<version>` tag, and attaches the archive to a GitHub Release. Pushing an exact version tag also starts the workflow. Tags such as `v0.2.0-preview.1` produce a GitHub prerelease.

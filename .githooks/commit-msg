@@ -1,0 +1,6 @@
+#!/bin/sh
+
+if ! head -n 1 "$1" | grep -Eq '^(feat|fix|chore): [^[:space:]]'; then
+    echo 'Start the commit title with "feat: ", "fix: ", or "chore: " followed by a description.' >&2
+    exit 1
+fi
