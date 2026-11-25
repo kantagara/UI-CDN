@@ -17,6 +17,8 @@ jobs:
     if: ${{ !github.event.deleted }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    outputs:
+      tag: ${{ steps.version.outputs.tag }}
     env:
       PACKAGE_DIR: Packages/com.garabandic.uicdn
     steps:
@@ -29,6 +31,7 @@ jobs:
           package-manager-cache: false
 
       - name: Check version and prepare release notes
+        id: version
         run: |
           set -euo pipefail
           version=$(jq -er '.version' "$PACKAGE_DIR/package.json")
@@ -51,6 +54,7 @@ jobs:
           awk -v version="$version" '/^## / { if (found) exit; found=($2 == version); next } found' "$PACKAGE_DIR/CHANGELOG.md" > "$RUNNER_TEMP/release-notes.md"
           grep -q '[[:alnum:]]' "$RUNNER_TEMP/release-notes.md" || { echo "::error::Missing changelog entry for $version"; exit 1; }
           echo "TAG=$tag" >> "$GITHUB_ENV"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
           echo "TARBALL=com.garabandic.uicdn-$version.tgz" >> "$GITHUB_ENV"
 
       - name: Validate the catalog and packed files
@@ -95,3 +99,11 @@ jobs:
             gh release create "$TAG" "$RUNNER_TEMP/$TARBALL" --verify-tag --title "UiCdn $TAG" --notes-file "$RUNNER_TEMP/release-notes.md" "${options[@]}"
           fi
           gh release view "$TAG" --json url --jq .url >> "$GITHUB_STEP_SUMMARY"
+
+  openupm:
+    needs: release
+    permissions:
+      contents: read
+    uses: ./.github/workflows/openupm.yml
+    with:
+      tag: ${{ needs.release.outputs.tag }}

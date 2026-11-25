@@ -1,0 +1,53 @@
+name: Verify OpenUPM publication
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        type: string
+        required: true
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing UiCdn release tag, for example v0.1.0
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Verify the registry serves the GitHub release archive
+        env:
+          TAG: ${{ inputs.tag }}
+          PACKAGE: com.garabandic.uicdn
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          [[ "$TAG" =~ ^v[0-9][0-9A-Za-z.-]*$ ]] || { echo "::error::Expected a version tag"; exit 1; }
+          version=${TAG#v}
+          asset="$PACKAGE-$version.tgz"
+          digest=$(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json assets | jq -er --arg name "$asset" '.assets[] | select(.name == $name) | .digest')
+          [[ "$digest" =~ ^sha256:[0-9a-f]{64}$ ]]
+          for attempt in {1..41}; do
+            status=$(curl --silent --show-error --location --retry 2 --max-time 20 --output metadata.json --write-out '%{http_code}' "https://package.openupm.com/$PACKAGE")
+            case "$status" in
+              200)
+                url=$(jq -r --arg v "$version" '.versions[$v].dist.tarball // empty' metadata.json)
+                if [[ -n "$url" ]]; then
+                  curl --fail --silent --show-error --location --proto '=https' --retry 3 --max-time 90 --output "$asset" "$url"
+                  echo "${digest#sha256:}  $asset" | sha256sum --check
+                  echo "Verified [$PACKAGE@$version](https://openupm.com/packages/$PACKAGE/) against the GitHub release." >> "$GITHUB_STEP_SUMMARY"
+                  exit 0
+                fi ;;
+              404) ;;
+              *) echo "::error::OpenUPM returned HTTP $status"; exit 1 ;;
+            esac
+            if (( attempt < 41 )); then sleep 45; fi
+          done
+          echo "::error::OpenUPM has not indexed $PACKAGE@$version yet. Check its build status and rerun this verification."
+          exit 1
