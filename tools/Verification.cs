@@ -27,7 +27,7 @@ public static class UiCdnVerification
         try
         {
             var manifest = UiCdnManifest.Load();
-            Check(manifest.themes.Length == 11, "theme catalog size");
+            Check(manifest.themes.Length == 12, "theme catalog size");
             foreach (UiCdnDisplayFont font in Enum.GetValues(typeof(UiCdnDisplayFont)))
             {
                 var appearance = UiCdnInstaller.Plan(manifest, new[] { "treasureshop" }, "Game.UI", "candy-pop", font);
@@ -44,7 +44,22 @@ public static class UiCdnVerification
                 Check(activeSheet.Contains(".ui-theme-selected") && !activeSheet.Contains("." + theme.cssClass), "selected alias generated for " + theme.id);
                 Check(themedPlan.Files[Path.Combine(UiCdnInstaller.OutputRoot, "ui.uss")].Contains("theme-" + theme.id + ".uss"), "theme import " + theme.id);
             }
-            Check(manifest.components.Length == 16, "catalog size");
+            Check(manifest.components.Length == 17, "catalog size");
+            var armoryEntry = manifest.components.First(c => c.id == "armory");
+            var armoryPlan = UiCdnInstaller.Plan(manifest, new[] { "armory" }, "Game.UI");
+            Check(armoryPlan.BinaryFiles.Keys.Count(p => p.Contains(Path.DirectorySeparatorChar + "Armory" + Path.DirectorySeparatorChar)) == 7, "isolated armory illustration install");
+            var iron = new UiGearItem("Iron", GearSlot.Weapon, 24, 8) { InitiallyEquipped = true };
+            var dawn = new UiGearItem("Dawn", GearSlot.Weapon, 38, 5);
+            var armory = new UiArmory().WithItems(iron, dawn);
+            int equipEvents = 0;
+            armory.Equipped += _ => equipEvents++;
+            armory.Inspect(dawn).EquipSelected();
+            armory.EquipSelected();
+            Check(equipEvents == 1 && armory.GetEquipped(GearSlot.Weapon) == dawn, "equip replaces only once");
+            armory.ShowSlot(GearSlot.Shield);
+            Check(armory.Selected == null && !armory.Q<Button>("equip").enabledSelf, "empty slot is safe");
+            armory.ShowSlot(GearSlot.Weapon);
+            Check(armory.Selected == dawn && armoryEntry.genre.Contains("RPG"), "return to equipped weapon");
             var resolved = manifest.Resolve(new[] { "dialog", "tabs" });
             Check(resolved[0].id == "core" && resolved.Count(c => c.id == "button") == 1, "topological order and deduplication");
             Throws(() => manifest.Resolve(new[] { "missing" }), "missing dependency");
@@ -105,9 +120,16 @@ public static class UiCdnVerification
             Check(alternate.Files.Values.Any(s => s.Contains("xmlns:c=\"Studio.Interface\"")), "custom UXML namespace");
             Check(alternate.Files.Values.Any(s => s.Contains("Namespace: `Studio.Interface`")), "custom agent guide namespace");
             var plan = UiCdnInstaller.Plan(manifest, manifest.components.Select(c => c.id), "Game.UI");
-            Check(plan.BinaryFiles.Count == manifest.foundations.Count(f => f.binary), "every bundled font, illustration and surface copied as binary");
+            Check(plan.BinaryFiles.Count == manifest.foundations.Concat(manifest.components.SelectMany(c => c.files)).Count(f => f.binary), "every bundled font, illustration and surface copied as binary");
             Check(plan.Files.Values.All(s => !s.Contains(UiCdnManifest.PreviewNamespace)), "namespace replacement");
             Check(UiCdnInstaller.Apply(plan) > 0, "installation writes files");
+            foreach (var file in manifest.foundations.Where(f => f.pointFilter))
+            {
+                var pixel = AssetImporter.GetAtPath("Assets/UI/" + file.target) as TextureImporter;
+                Check(pixel != null && pixel.filterMode == FilterMode.Point && !pixel.mipmapEnabled &&
+                    pixel.textureCompression == TextureImporterCompression.Uncompressed && pixel.npotScale == TextureImporterNPOTScale.None,
+                    "native pixel grid survives installation: " + file.target);
+            }
             var artPath = Path.Combine(UiCdnInstaller.OutputRoot, "Themes", "Assets", "royal-action.png");
             Check(File.ReadAllBytes(artPath).SequenceEqual(plan.BinaryFiles[artPath]), "artwork copied without text conversion");
             var artImporter = AssetImporter.GetAtPath("Assets/UI/Themes/Assets/royal-action.png") as TextureImporter;

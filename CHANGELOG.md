@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0 — 2026-11-25
+
+- Choose **Pixel Forge** in the visual style picker for pixel-art equipment, shop items, and a forge backdrop. The installer preserves point filtering for the pixel textures.
+- Install **Armory** to inspect six weapons and shields, compare attack and guard with the equipped item, and equip a selection using pointer or gamepad controls.
+- Switch between the RPG equipment screen and the casual treasure shop in **Game UI showcase → Genre / screen**. The GitHub README includes screenshots of both screens captured in Unity.
+- Select **Jersey 10** independently in the display font picker. It is the default typeface for Pixel Forge.
+
 ## 0.1.0 — 2026-11-25
 
 - First public UPM release for Unity 6. The Editor registry copies C#, UXML and USS into the project's Assets/UI directory.

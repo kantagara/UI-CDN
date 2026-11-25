@@ -6,8 +6,9 @@ Namespace: `{{NAMESPACE}}`. No UiCdn package reference is required at runtime.
 - Compose in UXML or C#. Use `[UxmlElement]`, `[UxmlAttribute]`, and `partial` classes.
 - Add `Assets/UI/ui.uss` to the document and `ui-root ui-theme-selected` to its root.
 - `ui.uss`, `Themes/theme-active.uss`, and `.uicdn-theme` are installer-owned. Edit named theme presets, tokens, component styles, or a separate override stylesheet.
-- Eleven named themes are installed. Use `ui-theme-selected` for the installer selection or one explicit `ui-theme-<id>` class to choose a preset in UXML or C#. Keep one theme class per root.
-- The registry's Display font picker controls headings, buttons and prices through `--ui-display-font`. Apply appearance updates the aggregate for existing screens. Keep the OFL notices with the three bundled typefaces.
+- Twelve named themes are installed. Use `ui-theme-selected` for the installer selection or one explicit `ui-theme-<id>` class to choose a preset in UXML or C#. Keep one theme class per root.
+- The registry's Display font picker controls headings, buttons and prices through `--ui-display-font`. Apply appearance updates the aggregate for existing screens. Keep the OFL notices with the four bundled typefaces.
+- Pixel Forge uses Jersey 10 by default. Keep pixel textures point-filtered, uncompressed and free of mipmaps. Gear items can override their base icon through the themed USS property `--ui-gear-icon`.
 - Royal Puzzle is the default for new configurations. Its 9-slice PNG surfaces and coin are project-owned files under `Themes/Assets`; preserve their relative USS URLs. UI textures are installed uncompressed, without mipmaps or NPOT resizing.
 - Casual Royal, Candy Pop, Toy Box, and Jungle Quest provide chunky game styling; Sunny Puzzle and Mint Cloud are soft; Neon Arcade, Paper Play, Studio Dark, and Studio Light offer other directions.
 - `theme-game.uss` includes game layout utilities and common/rare/epic/legendary rarity classes. Illustration sprites and font assets are project-owned, separate from USS styling.

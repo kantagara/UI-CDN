@@ -40,9 +40,18 @@ public static class InstalledVerification
                 if (tree == null || !tree.CloneTree().Query<VisualElement>().ToList().Any(e => e.GetType().Namespace == "Game.UI") && !path.Contains("CoreExample")) throw new Exception("Installed UXML failed: " + path);
             }
             var shopAssets = AssetDatabase.GetDependencies("Assets/UI/Components/TreasureShop/TreasureShopExample.uxml", true);
+            if (!shopAssets.Contains("Assets/UI/Themes/Assets/Pixel/dawn.png") || !shopAssets.Contains("Assets/UI/Themes/Assets/Jersey10-Regular.ttf"))
+                throw new Exception("Pixel theme art and typeface must resolve from the installed project.");
             if (!shopAssets.Contains("Assets/UI/Themes/font-fredoka.uss") || !shopAssets.Contains("Assets/UI/Themes/Assets/Fredoka-SemiBold.ttf") ||
                 shopAssets.Any(p => p.StartsWith("Packages/com.garabandic.uicdn/", StringComparison.Ordinal)))
                 throw new Exception("Installed shop must import the selected project-owned font and styles.");
+            const string armoryPath = "Assets/UI/Components/Armory/ArmoryExample.uxml";
+            var gear = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(armoryPath).CloneTree().Q<Game.UI.UiArmory>();
+            gear.Refresh();
+            var items = gear.Query<Game.UI.UiGearItem>().ToList();
+            if (items.Count != 6 || items.Any(i => i.Icon == null || !AssetDatabase.GetAssetPath(i.Icon).StartsWith("Assets/UI/Components/Armory/Art/")) ||
+                gear.Selected.name != "dawn" || gear.GetEquipped(Game.UI.GearSlot.Shield)?.name != "oak")
+                throw new Exception("Installed armory failed to load its owned icons or slot assignments.");
             File.WriteAllText(Application.dataPath + "/../installed-result.txt", "PASS: installed C#, source-generated UXML, zero package references");
             EditorApplication.Exit(0);
         }

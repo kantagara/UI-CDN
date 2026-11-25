@@ -13,6 +13,7 @@ namespace Garabandic.UiCdn.Editor
     {
         public readonly Dictionary<string, string> Files = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         public readonly Dictionary<string, byte[]> BinaryFiles = new Dictionary<string, byte[]>(StringComparer.OrdinalIgnoreCase);
+        internal readonly HashSet<string> PointFiltered = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         public readonly List<string> Conflicts = new List<string>();
         public string Namespace { get; internal set; }
         public string Root { get; internal set; }
@@ -56,6 +57,7 @@ namespace Garabandic.UiCdn.Editor
                 if (file.binary)
                 {
                     plan.BinaryFiles.Add(target, File.ReadAllBytes(SafePath(UiCdnManifest.PackageRoot, file.source)));
+                    if (file.pointFilter) plan.PointFiltered.Add(target);
                     if (File.Exists(target) && !File.ReadAllBytes(target).SequenceEqual(plan.BinaryFiles[target])) plan.Conflicts.Add(target);
                     continue;
                 }
@@ -198,7 +200,7 @@ namespace Garabandic.UiCdn.Editor
                 importer.npotScale = TextureImporterNPOTScale.None;
                 importer.alphaIsTransparency = true;
                 importer.wrapMode = TextureWrapMode.Clamp;
-                importer.filterMode = FilterMode.Bilinear;
+                importer.filterMode = plan.PointFiltered.Contains(path) ? FilterMode.Point : FilterMode.Bilinear;
                 importer.textureCompression = TextureImporterCompression.Uncompressed;
                 importer.SaveAndReimport();
             }

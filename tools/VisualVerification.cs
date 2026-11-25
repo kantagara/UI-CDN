@@ -193,7 +193,7 @@ public static class UiCdnVisualVerification
 
     private static void ReviewFont(int index)
     {
-        var choices = new[] { UiCdnDisplayFont.Fredoka, UiCdnDisplayFont.Nunito, UiCdnDisplayFont.Coiny, UiCdnDisplayFont.ThemeDefault };
+        var choices = new[] { UiCdnDisplayFont.Fredoka, UiCdnDisplayFont.Nunito, UiCdnDisplayFont.Coiny, UiCdnDisplayFont.Jersey10, UiCdnDisplayFont.ThemeDefault };
         if (index == choices.Length) { ReviewTheme(0); return; }
         var value = choices[index];
         var root = window.rootVisualElement;
@@ -218,9 +218,7 @@ public static class UiCdnVisualVerification
         var themes = UiCdnManifest.Load().themes;
         if (index == themes.Length)
         {
-            UiCdnSettings.instance.SelectTheme("dark");
-            File.WriteAllText(Path.Combine(output, "result.txt"), $"PASS: {assertions} attached-panel assertions; seven component and {themes.Length} theme screenshots.");
-            window.Close(); EditorApplication.Exit(0); return;
+            ReviewArmory(); return;
         }
         var theme = themes[index];
         window.Focus();
@@ -240,11 +238,12 @@ public static class UiCdnVisualVerification
             var cap = action.resolvedStyle.backgroundImage.texture;
             Check(cap != null && cap.name == (theme.family == "royal" ? "royal-action" : "cap-" + theme.family), "theme button artwork " + theme.id);
             var feature = preview.Q(className: "treasury-feature");
-            Check(feature.resolvedStyle.backgroundImage.texture?.name == (theme.family == "royal" ? "treasury-enamel" : "cover-" + theme.id), "themed cover " + theme.id);
+            string cover = theme.family == "pixel" ? "forge" : theme.family == "royal" ? "treasury-enamel" : "cover-" + theme.id;
+            Check(feature.resolvedStyle.backgroundImage.texture?.name == cover, "themed cover " + theme.id);
             var prices = preview.Query<UiButton>(className: "treasury-price").ToList();
             Check(prices.Count == 4 && prices.All(b => Mathf.Abs(b.worldBound.width - 103) < 1), "consistent price width " + theme.id);
             Check(prices.Skip(1).All(b => Mathf.Abs(b.worldBound.xMax - prices[1].worldBound.xMax) < 1), "aligned prices " + theme.id);
-            Check(action.resolvedStyle.unityFont?.name.StartsWith("Coiny") == true, "default display lettering " + theme.id);
+            Check(action.resolvedStyle.unityFont?.name.StartsWith(theme.family == "pixel" ? "Jersey10" : "Coiny") == true, "default display lettering " + theme.id);
             var initialBounds = action.layout;
             action.Focus();
             using (var submit = NavigationSubmitEvent.GetPooled()) action.SendEvent(submit);
@@ -262,6 +261,75 @@ public static class UiCdnVisualVerification
                         amount.MeasureTextSize(amount.text, 0, VisualElement.MeasureMode.Undefined, 0, VisualElement.MeasureMode.Undefined).x <= amount.contentRect.width), "320px coin amounts fit " + theme.id);
                     ReviewTheme(index + 1);
                 });
+            });
+        });
+    }
+
+    private static void ReviewArmory()
+    {
+        var root = window.rootVisualElement;
+        root.Q<DropdownField>("theme-picker").value = "Royal Puzzle";
+        root.Q<EnumField>("font-picker").value = UiCdnDisplayFont.Fredoka;
+        root.Q<DropdownField>("genre-picker").value = "RPG · Equipment";
+        Later(350, () =>
+        {
+            var armory = root.Q<UiArmory>();
+            var blade = armory.Q<UiGearItem>("dawn");
+            Check(armory.Selected == blade && blade.Icon != null, "initial weapon and original artwork");
+            Check(armory.Q(className: "armory-banner").resolvedStyle.backgroundImage.texture?.name == "forge", "forge illustration");
+            Check(armory.Q(className: "armory-heading").resolvedStyle.unityFont?.name.StartsWith("Fredoka") == true, "armory display font override");
+            Check(armory.Query<Label>(className: "armory-delta").ToList().Select(l => l.text).SequenceEqual(new[] { "+14", "-3" }), "meaningful item tradeoff");
+            Capture("genre-rpg-weapons");
+            var equip = armory.Q<UiButton>("equip");
+            equip.Focus();
+            using (var submit = NavigationSubmitEvent.GetPooled()) equip.SendEvent(submit);
+            var shieldTab = armory.Q<Button>("slot-Shield");
+            shieldTab.Focus();
+            using (var submit = NavigationSubmitEvent.GetPooled()) shieldTab.SendEvent(submit);
+            var moon = armory.Q<UiGearItem>("moon");
+            moon.Focus();
+            using (var submit = NavigationSubmitEvent.GetPooled()) moon.SendEvent(submit);
+            Later(240, () =>
+            {
+                Check(armory.Selected == moon && moon.Icon != null && armory.GetEquipped(GearSlot.Weapon) == blade, "shield inspection preserves equipped weapon");
+                Check(armory.GetEquipped(GearSlot.Shield).name == "oak", "inspection leaves current shield equipped");
+                Capture("genre-rpg-shields");
+                armory.style.width = 320;
+                using (var cancel = NavigationCancelEvent.GetPooled()) moon.SendEvent(cancel);
+                Later(180, () =>
+                {
+                    Check(armory.Selected.name == "oak" && armory.panel.focusController.focusedElement == shieldTab, "cancel restores equipped selection and slot focus");
+                    Check(armory.Query<UiGearItem>().ToList().Where(i => i.Slot == GearSlot.Shield).All(i => i.worldBound.xMin >= armory.worldBound.xMin && i.worldBound.xMax <= armory.worldBound.xMax), "320px inventory fits");
+                    ReviewPixelArmory();
+                });
+            });
+        });
+    }
+
+    private static void ReviewPixelArmory()
+    {
+        var root = window.rootVisualElement;
+        root.Q<EnumField>("font-picker").value = UiCdnDisplayFont.ThemeDefault;
+        root.Q<DropdownField>("theme-picker").value = "Pixel Forge";
+        Later(350, () =>
+        {
+            var gear = root.Q<UiArmory>();
+            var blade = gear.Selected;
+            Check(blade.DisplayedIcon != blade.Icon && blade.DisplayedIcon.width == 24 && blade.DisplayedIcon.filterMode == FilterMode.Point, "themed weapon sprite");
+            Check(gear.Q(className: "armory-portrait").resolvedStyle.backgroundImage.texture == blade.DisplayedIcon, "portrait matches the selected sprite");
+            Check(gear.Q(className: "armory-heading").resolvedStyle.unityFont?.name.StartsWith("Jersey10") == true, "retro title font");
+            Capture("pixel-armory");
+            // Swap a class on the same attached tree, as a game can do at runtime.
+            var host = root.Q("preview");
+            host.RemoveFromClassList("ui-theme-pixel-forge");
+            host.AddToClassList("ui-theme-royal-puzzle");
+            Later(180, () =>
+            {
+                Check(blade.DisplayedIcon == blade.Icon && gear.Q(className: "armory-portrait").resolvedStyle.backgroundImage.texture == blade.Icon,
+                    "removing the theme restores user artwork on the same item");
+                UiCdnSettings.instance.SelectTheme("dark");
+                File.WriteAllText(Path.Combine(output, "result.txt"), $"PASS: {assertions} attached-panel assertions, including genre screens and pixel art.");
+                window.Close(); EditorApplication.Exit(0);
             });
         });
     }

@@ -24,6 +24,7 @@ namespace Garabandic.UiCdn.Editor
         public string source;
         public string target;
         public bool binary;
+        public bool pointFilter;
     }
 
     [Serializable]
@@ -32,6 +33,7 @@ namespace Garabandic.UiCdn.Editor
         public string id;
         public string name;
         public string category;
+        public string genre;
         public string description;
         public string[] dependencies = Array.Empty<string>();
         public UiCdnFile[] files = Array.Empty<UiCdnFile>();

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Garabandic.UiCdn.Editor
 {
-    public enum UiCdnDisplayFont { ThemeDefault, Coiny, Fredoka, Nunito }
+    public enum UiCdnDisplayFont { ThemeDefault, Coiny, Fredoka, Nunito, Jersey10 }
 
     [FilePath("ProjectSettings/UiCdnSettings.asset", FilePathAttribute.Location.ProjectFolder)]
     public sealed class UiCdnSettings : ScriptableSingleton<UiCdnSettings>

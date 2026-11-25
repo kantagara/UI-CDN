@@ -23,18 +23,38 @@ const entries = [
   ['Toast', 'Feedback', 'Dismissible notifications with hover/focus pause and motion lifecycle.', ['core', 'button'], '<c:UiButton name="show-toast" text="Show notification" /><c:UiToast duration-ms="4000"><c:UiToastTitle text="Quest complete" /><c:UiToastDescription text="The next chapter is ready. Submit or cancel to dismiss." /></c:UiToast>'],
 ];
 entries.push(['TreasureShop', 'Screens', 'Illustrated portrait shop with a treasure bundle and three coin packs.', ['core','button'], shopMarkup]);
+const gear = [
+  ['iron', 'Ironbrand', 'Weapon', 'Common', 24, 8, true],
+  ['dawn', 'Dawnshard', 'Weapon', 'Rare', 38, 5, false],
+  ['cinder', 'Cinder Axe', 'Weapon', 'Epic', 43, 2, false],
+  ['oak', 'Iron Round', 'Shield', 'Common', 2, 18, true],
+  ['sun', 'Sunward', 'Shield', 'Rare', 6, 25, false],
+  ['moon', 'Moonveil', 'Shield', 'Epic', 3, 32, false],
+];
+const armoryMarkup = `<c:UiArmory title="Armory" location="SUNFALL FORGE" initial-item="dawn">
+      ${gear.map(([id, title, slot, rarity, attack, guard, worn]) => `<c:UiGearItem name="${id}" class="gear-art-${id}" item-name="${title}" equipment-slot="${slot}" rarity="${rarity}" attack="${attack}" guard="${guard}" initially-equipped="${worn}" icon="Art/${id}.png" />`).join('\n      ')}
+    </c:UiArmory>`;
+entries.push(['Armory', 'Screens', 'Inspect weapons and shields, compare attack and guard, and equip an item in its slot.', ['core', 'button'], armoryMarkup]);
+const screenGenres = { TreasureShop: 'Casual · Treasure shop', Armory: 'RPG · Equipment' };
 function write(path, content) { const full = resolve(root, path); mkdirSync(dirname(full), { recursive: true }); writeFileSync(full, content); }
 for (const theme of themes) write(`Editor/Registry/Themes/theme-${theme.id}.uss`, themeUss(theme));
-const fonts = { coiny: 'Coiny-Regular', nunito: 'Nunito-SemiBold', fredoka: 'Fredoka-SemiBold' };
+const fonts = { coiny: 'Coiny-Regular', nunito: 'Nunito-SemiBold', fredoka: 'Fredoka-SemiBold', jersey10: 'Jersey10-Regular' };
 for (const [id, font] of Object.entries(fonts))
   write(`Editor/Registry/Themes/font-${id}.uss`, `/* Display type override. SPDX-License-Identifier: MIT */\n.ui-root { --ui-display-font: url("Assets/${font}.ttf"); }\n`);
 const components = entries.map(([name, category, description, dependencies, markup]) => {
   const id = name.toLowerCase();
   const base = `Editor/Registry/Components/${name}`;
   const example = `<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:c="Garabandic.UiCdn.Editor.Preview">\n  <ui:Style src="../../Themes/theme-tokens.uss" />\n  <ui:Style src="../../Themes/theme-dark.uss" />\n${[...dependencies.map(d => entries.find(e => e[0].toLowerCase() === d)[0]), name].map(n => `  <ui:Style src="../${n}/Ui${n}.uss" />`).join('\n')}\n  <ui:VisualElement class="ui-root ui-stack ui-example">\n    ${markup}\n  </ui:VisualElement>\n</ui:UXML>\n`;
-  const document = name === 'TreasureShop' ? example.replace('class="ui-root ui-stack ui-example"', 'class="ui-root ui-theme-royal-puzzle"').replace('  <ui:VisualElement class="ui-root', '  <ui:Style src="../../Themes/theme-royal-puzzle.uss" />\n  <ui:VisualElement class="ui-root') : example;
+  const document = screenGenres[name] ? example.replace('class="ui-root ui-stack ui-example"', 'class="ui-root ui-theme-royal-puzzle"').replace('  <ui:VisualElement class="ui-root', '  <ui:Style src="../../Themes/theme-royal-puzzle.uss" />\n  <ui:VisualElement class="ui-root') : example;
   write(`${base}/${name}Example.uxml`, document);
-  return { id, name, category, description, dependencies, preview: `${base}/${name}Example.uxml`, files: ['cs', 'uss'].map(ext => ({ source: `${base}/Ui${name}.${ext}`, target: `Components/${name}/Ui${name}.${ext}` })).concat({ source: `${base}/${name}Example.uxml`, target: `Components/${name}/${name}Example.uxml` }) };
+  const owned = [`Ui${name}.cs`, `Ui${name}.uss`, `${name}Example.uxml`];
+  const files = owned.map(file => ({ source: `${base}/${file}`, target: `Components/${name}/${file}` }));
+  if (name === 'Armory') {
+    for (const art of ['forge', ...gear.map(([key]) => key)]) {
+      files.push({ source: `${base}/Art/${art}.png`, target: `Components/${name}/Art/${art}.png`, binary: true });
+    }
+  }
+  return { id, name, category, genre: screenGenres[name], description, dependencies, preview: `${base}/${name}Example.uxml`, files };
 });
 const foundations = ['Themes/theme-tokens.uss', 'Themes/theme-game.uss', ...themes.map(t => `Themes/theme-${t.id}.uss`), ...Object.keys(fonts).map(id => `Themes/font-${id}.uss`), 'Docs/AGENTS.md'].map(p => ({ source: `Editor/Registry/${p}`, target: p === 'Docs/AGENTS.md' ? 'AGENTS.md' : p }));
 foundations.push({ source: 'LICENSE.md', target: 'LICENSE.md' });
@@ -42,7 +62,8 @@ for (const font of Object.keys(fonts)) {
   const target = 'Themes/Assets/' + font[0].toUpperCase() + font.slice(1) + '-License.txt';
   foundations.push({ source: 'Editor/Registry/' + target, target });
 }
-foundations.push(...themeAssets.map(target => ({ source: `Editor/Registry/${target}`, target, binary: true })));
+foundations.push(...themeAssets.map(target => ({ source: `Editor/Registry/${target}`, target, binary: true,
+  pointFilter: target.startsWith('Themes/Assets/Pixel/') || undefined })));
 const { version } = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'));
 write('Editor/Registry/manifest.json', JSON.stringify({ schemaVersion: 1, version, foundations, themes: themes.map(({id,name,family,description}) => ({id,name,family,description, cssClass: `ui-theme-${id}`, source: `Editor/Registry/Themes/theme-${id}.uss`})), components }, null, 2) + '\n');
 console.log(`Generated ${components.length} catalog entries and UXML examples.`);

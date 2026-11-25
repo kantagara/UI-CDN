@@ -4,9 +4,17 @@ An MIT-licensed, Editor-only copy-paste component registry for **Unity 6 Runtime
 
 Install components into `Assets/UI`, customize them, and own every line. Remove the installer package whenever you want; installed UI has zero runtime dependency on it.
 
-The catalog includes Button, Card, Dialog, Tabs, Accordion, Checkbox, Switch, Input, Slider, Badge, Alert, Progress, Separator, and Toast, with composable parts, UXML examples, fluent C# construction, eleven selectable USS themes, focus styling, and navigation support.
+The catalog includes Button, Card, Dialog, Tabs, Accordion, Checkbox, Switch, Input, Slider, Badge, Alert, Progress, Separator, and Toast, with composable parts, UXML examples, fluent C# construction, twelve selectable USS themes, focus styling, and navigation support.
 
-Choose from chunky hyper-casual styles, soft puzzle palettes, neon arcade, paper, and light/dark themes. Compare the same shop in each style and pick Coiny, Fredoka or Nunito for titles, actions and prices. The theme and display font apply to both UXML and C# layouts.
+Choose from chunky hyper-casual styles, soft puzzle palettes, pixel art, neon arcade, paper, and light/dark themes. Pick Coiny, Fredoka, Nunito or Jersey 10 for titles, actions and prices. The theme and display font apply to both UXML and C# layouts.
+
+Select **Visual style → Pixel Forge** and **Display font → Theme Default** for the pixel sprites and retro lettering shown here.
+
+![Pixel Forge armory and shop captured in Unity](Packages/com.garabandic.uicdn/Documentation~/Images/pixel-forge.png)
+
+In **Game UI showcase → Genre / screen**, choose the casual treasure shop or the RPG armory. The armory lets you inspect weapons and shields, compare attack and guard against your current equipment, and equip your selection.
+
+![RPG equipment comparison for weapons and shields](Packages/com.garabandic.uicdn/Documentation~/Images/armory.png)
 
 ![Treasure Shop in ten alternate themes](Packages/com.garabandic.uicdn/Documentation~/Images/theme-gallery.png)
 

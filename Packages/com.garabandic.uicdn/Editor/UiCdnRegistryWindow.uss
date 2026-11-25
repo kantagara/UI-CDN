@@ -5,6 +5,9 @@
 #appearance { flex-direction: row; margin-bottom: 12px; }
 #appearance > .unity-base-field { flex-grow: 1; flex-basis: 0; }
 #font-picker { margin-left: 16px; }
+#showcase { flex-direction: row; align-items: center; margin-bottom: 12px; }
+#theme-showcase { margin-right: 20px; }
+#genre-picker { flex-grow: 1; }
 .registry > ToolbarSearchField { width: 100%; }
 #body { flex-direction: row; flex-grow: 1; margin-top: 12px; }
 #catalog { width: 220px; min-width: 200px; border-right-width: 1px; border-right-color: #333b49; padding-right: 12px; }

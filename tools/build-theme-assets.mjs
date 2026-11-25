@@ -4,6 +4,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { profiles, shopFinishes } from './game-finishes.mjs';
+import { buildPixelArt } from './pixel-art.mjs';
 const output = resolve('Packages/com.garabandic.uicdn/Editor/Registry/Themes/Assets');
 mkdirSync(output, { recursive: true });
 const crc = bytes => {
@@ -84,7 +85,7 @@ png('royal-coin', 80, 80, (x, y) => {
   return [...rgb,255];
 });
 export const themeAssets = ['royal-action','royal-secondary','royal-panel','royal-parchment','royal-coin'].map(name => `Themes/Assets/${name}.png`);
-themeAssets.push('Themes/Assets/Coiny-Regular.ttf', 'Themes/Assets/Nunito-SemiBold.ttf', 'Themes/Assets/Fredoka-SemiBold.ttf');
+themeAssets.push('Themes/Assets/Coiny-Regular.ttf', 'Themes/Assets/Nunito-SemiBold.ttf', 'Themes/Assets/Fredoka-SemiBold.ttf', 'Themes/Assets/Jersey10-Regular.ttf');
 for (const id of ['chest', 'rocket', 'hammer', 'heart', 'coins', 'pouch']) themeAssets.push(`Themes/Assets/loot-${id}.png`);
 // Painted enamel behind the loot. The broad alternating rays converge behind the chest.
 png('treasury-enamel', 384, 192, (x, y) => {
@@ -101,16 +102,19 @@ const empty = [0, 0, 0, 0];
 const shade = alpha => [10, 16, 28, Math.round(alpha * 255)];
 const shine = alpha => [255, 254, 247, Math.round(alpha * 255)];
 const importSettings = readFileSync(resolve(output, 'royal-action.png.meta'), 'utf8');
-function addArtwork(name, width, height, paint) {
+function addArtwork(name, width, height, paint, pointFilter = false) {
   png(name, width, height, paint);
   const target = 'Themes/Assets/' + name + '.png';
   themeAssets.push(target);
   const meta = resolve(output, name + '.png.meta');
   if (!existsSync(meta)) {
     const guid = createHash('sha256').update('com.garabandic.uicdn/' + target).digest('hex').slice(0, 32);
-    writeFileSync(meta, importSettings.replace(/^guid: [a-f0-9]+/m, 'guid: ' + guid));
+    const settings = pointFilter ? importSettings.replace('filterMode: 1', 'filterMode: 0') : importSettings;
+    writeFileSync(meta, settings.replace(/^guid: [a-f0-9]+/m, 'guid: ' + guid));
   }
 }
+mkdirSync(resolve(output, 'Pixel'), { recursive: true });
+buildPixelArt(addArtwork);
 for (const [family, p] of Object.entries(profiles)) {
   function capPixel(x, y, depth) {
     const outside = -roundDistance(x, y, 64, 64, p.radius);

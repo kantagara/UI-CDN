@@ -1,6 +1,8 @@
 import { gameFinishUss } from './game-finishes.mjs';
+import { pixelFinishUss } from './pixel-finish.mjs';
 // Theme data is shared by the registry generator; each preset produces an editable standalone USS.
 export const themes = [
+  { id: 'pixel-forge', name: 'Pixel Forge', family: 'pixel', description: 'A dusk-lit 16-bit forge with pixel sprites, stepped brass controls and Jersey 10 lettering.', colors: ['#171727','#28263c','#383348','#fff0cd','#c9bbbd','#6c6074','#efb64f','#ffe190','#211d2c','#fd8a87','#85d7a0'] },
   { id: 'royal-puzzle', name: 'Royal Puzzle', family: 'royal', description: 'A focused casual/puzzle direction: gold-trimmed controls, parchment offers and a deep royal canvas.', colors: ['#1d2451','#343b75','#454d88','#fff5d9','#d0cce7','#bea056','#83c92b','#a8df42','#ffffff','#e76d64','#83c92b'] },
   { id: 'dark', name: 'Studio Dark', family: 'minimal', description: 'Sharp dark surfaces and restrained blue accents.', colors: ['#0f1116','#171a21','#232832','#edf0f6','#99a3b6','#333b49','#8bb3ff','#a8c7ff','#0c172b','#ff8994','#78ddaf'] },
   { id: 'casual-royal', name: 'Casual Royal', family: 'chunky', description: 'Reference-inspired sky blue, lime actions, thick ink outlines and bold game panels.', colors: ['#29a7f2','#0868c9','#167cde','#ffffff','#d5edff','#10223b','#87df32','#9be64b','#193b23','#ff626e','#80ed08'] },
@@ -18,10 +20,11 @@ export function themeUss(theme) {
   const selector = `.ui-theme-${theme.id}`;
   const keys = ['background','surface','surface-hover','foreground','muted','border','primary','primary-hover','primary-foreground','danger','success'];
   const chunky = theme.family === 'chunky', soft = theme.family === 'soft', paper = theme.family === 'paper';
-  const radius = chunky ? [10,16,22] : soft ? [12,22,28] : paper ? [0,2,3] : theme.family === 'neon' ? [2,4,8] : [3,6,10];
+  const radius = theme.family === 'pixel' ? [0,0,0] : chunky ? [10,16,22] : soft ? [12,22,28] : paper ? [0,2,3] : theme.family === 'neon' ? [2,4,8] : [3,6,10];
   let css = `/* ${theme.name} | ${theme.family} | SPDX-License-Identifier: MIT */\n${selector} {\n`;
   css += keys.map((key, i) => `    --ui-${key}: ${theme.colors[i]};`).join('\n');
   css += `\n    --ui-radius-sm: ${radius[0]}px;\n    --ui-radius-md: ${radius[1]}px;\n    --ui-radius-lg: ${radius[2]}px;\n    --ui-font-sm: ${chunky ? 14 : 12}px;\n    --ui-font-md: ${chunky ? 16 : 14}px;\n    --ui-font-lg: ${chunky ? 26 : soft ? 24 : 20}px;\n    --ui-control-height: ${chunky ? 52 : soft ? 44 : 36}px;\n    color: var(--ui-foreground);\n    background-color: var(--ui-background);\n    font-size: var(--ui-font-md);\n}\n`;
+  if (theme.family === 'pixel') return css + pixelFinishUss(selector);
   if (theme.family !== 'royal') return css + gameFinishUss(theme);
   {
     const sliced = (asset) => `background-image: url("Assets/${asset}.png"); background-color: transparent; -unity-background-image-tint-color: white; -unity-slice-left: 20; -unity-slice-right: 20; -unity-slice-top: 20; -unity-slice-bottom: 20; border-width: 0;`;

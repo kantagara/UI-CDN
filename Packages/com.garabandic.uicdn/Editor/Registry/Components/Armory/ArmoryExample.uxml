@@ -1,0 +1,18 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:c="Garabandic.UiCdn.Editor.Preview">
+  <ui:Style src="../../Themes/theme-tokens.uss" />
+  <ui:Style src="../../Themes/theme-dark.uss" />
+  <ui:Style src="../Core/UiCore.uss" />
+  <ui:Style src="../Button/UiButton.uss" />
+  <ui:Style src="../Armory/UiArmory.uss" />
+  <ui:Style src="../../Themes/theme-royal-puzzle.uss" />
+  <ui:VisualElement class="ui-root ui-theme-royal-puzzle">
+    <c:UiArmory title="Armory" location="SUNFALL FORGE" initial-item="dawn">
+      <c:UiGearItem name="iron" class="gear-art-iron" item-name="Ironbrand" equipment-slot="Weapon" rarity="Common" attack="24" guard="8" initially-equipped="true" icon="Art/iron.png" />
+      <c:UiGearItem name="dawn" class="gear-art-dawn" item-name="Dawnshard" equipment-slot="Weapon" rarity="Rare" attack="38" guard="5" initially-equipped="false" icon="Art/dawn.png" />
+      <c:UiGearItem name="cinder" class="gear-art-cinder" item-name="Cinder Axe" equipment-slot="Weapon" rarity="Epic" attack="43" guard="2" initially-equipped="false" icon="Art/cinder.png" />
+      <c:UiGearItem name="oak" class="gear-art-oak" item-name="Iron Round" equipment-slot="Shield" rarity="Common" attack="2" guard="18" initially-equipped="true" icon="Art/oak.png" />
+      <c:UiGearItem name="sun" class="gear-art-sun" item-name="Sunward" equipment-slot="Shield" rarity="Rare" attack="6" guard="25" initially-equipped="false" icon="Art/sun.png" />
+      <c:UiGearItem name="moon" class="gear-art-moon" item-name="Moonveil" equipment-slot="Shield" rarity="Epic" attack="3" guard="32" initially-equipped="false" icon="Art/moon.png" />
+    </c:UiArmory>
+  </ui:VisualElement>
+</ui:UXML>

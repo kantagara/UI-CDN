@@ -1,0 +1,115 @@
+/* Pixel Forge | pixel | SPDX-License-Identifier: MIT */
+.ui-theme-pixel-forge {
+    --ui-background: #171727;
+    --ui-surface: #28263c;
+    --ui-surface-hover: #383348;
+    --ui-foreground: #fff0cd;
+    --ui-muted: #c9bbbd;
+    --ui-border: #6c6074;
+    --ui-primary: #efb64f;
+    --ui-primary-hover: #ffe190;
+    --ui-primary-foreground: #211d2c;
+    --ui-danger: #fd8a87;
+    --ui-success: #85d7a0;
+    --ui-radius-sm: 0px;
+    --ui-radius-md: 0px;
+    --ui-radius-lg: 0px;
+    --ui-font-sm: 12px;
+    --ui-font-md: 14px;
+    --ui-font-lg: 20px;
+    --ui-control-height: 36px;
+    color: var(--ui-foreground);
+    background-color: var(--ui-background);
+    font-size: var(--ui-font-md);
+}
+.ui-theme-pixel-forge .ui-button,
+.ui-theme-pixel-forge .ui-game-title,
+.ui-theme-pixel-forge .ui-heading,
+.ui-theme-pixel-forge .ui-card-title,
+.ui-theme-pixel-forge .ui-dialog-title,
+.ui-theme-pixel-forge .ui-toast-title,
+.ui-theme-pixel-forge .ui-alert-title,
+.ui-theme-pixel-forge .ui-badge,
+.ui-theme-pixel-forge .treasury Label,
+.ui-theme-pixel-forge .armory .armory-heading,
+.ui-theme-pixel-forge .armory .armory-item-name,
+.ui-theme-pixel-forge .armory .armory-value,
+.ui-theme-pixel-forge .armory-filter,
+.ui-theme-pixel-forge .gear-item .gear-caption { -unity-font: var(--ui-display-font, url("Assets/Jersey10-Regular.ttf")); -unity-font-definition: var(--ui-display-font, url("Assets/Jersey10-Regular.ttf")); -unity-font-style: normal; }
+.ui-theme-pixel-forge .ui-card,
+.ui-theme-pixel-forge .ui-dialog-content,
+.ui-theme-pixel-forge .ui-toast,
+.ui-theme-pixel-forge .treasury,
+.ui-theme-pixel-forge .armory { border-radius: 0; border-width: 2px; border-color: #69617a; border-top-color: #afa0aa; border-bottom-color: #100f1e; background-color: #28263c; }
+.ui-theme-pixel-forge .ui-button { border-radius: 0; border-width: 2px; border-color: #62556b; min-height: 44px; font-size: 24px; }
+.ui-theme-pixel-forge .ui-button--primary,
+.ui-theme-pixel-forge .ui-tabs-trigger--active { background-image: url("Assets/Pixel/cap-pixel.png"); -unity-slice-left: 5; -unity-slice-right: 5; -unity-slice-top: 5; -unity-slice-bottom: 5; background-color: transparent; color: #251c29; border-color: transparent; padding: 1px 10px 3px 10px; }
+.ui-theme-pixel-forge .ui-button--secondary { background-color: #3c374d; color: #fff0cd; }
+.ui-theme-pixel-forge .ui-button--ghost { background-color: transparent; border-color: transparent; }
+.ui-theme-pixel-forge .ui-button--danger { background-color: #9a4354; color: #fff0cd; }
+.ui-theme-pixel-forge .ui-button:focus,
+.ui-theme-pixel-forge .treasury .treasury-price--selected { border-width: 2px; border-color: #fff2bc; }
+.ui-theme-pixel-forge .ui-button:active { translate: 0 2px; -unity-background-image-tint-color: #e6c991; }
+.ui-theme-pixel-forge .treasury-bar,
+.ui-theme-pixel-forge .treasury-wallet,
+.ui-theme-pixel-forge .treasury-feature,
+.ui-theme-pixel-forge .treasury-rewards,
+.ui-theme-pixel-forge .treasury-deal,
+.ui-theme-pixel-forge .treasury-pack,
+.ui-theme-pixel-forge .armory-sheet,
+.ui-theme-pixel-forge .armory-portrait,
+.ui-theme-pixel-forge .gear-item,
+.ui-theme-pixel-forge .gear-item .gear-equipped,
+.ui-theme-pixel-forge .armory-filter { border-radius: 0; }
+.ui-theme-pixel-forge .treasury .treasury-title,
+.ui-theme-pixel-forge .treasury .treasury-section { color: #ffe09d; }
+.ui-theme-pixel-forge .treasury-bar { border-bottom-width: 2px; border-bottom-color: #6b5b73; }
+.ui-theme-pixel-forge .treasury-feature,
+.ui-theme-pixel-forge .armory-banner { background-image: url("Assets/Pixel/forge.png"); -unity-background-scale-mode: scale-and-crop; border-color: #af8267; }
+.ui-theme-pixel-forge .treasury-feature { -unity-background-image-tint-color: #a49ba6; }
+.ui-theme-pixel-forge .treasury .treasury-feature-title,
+.ui-theme-pixel-forge .treasury .treasury-prize { color: #fff1c2; text-shadow: 2px 2px 0 #191725; }
+.ui-theme-pixel-forge .treasury-wallet,
+.ui-theme-pixel-forge .treasury-deal,
+.ui-theme-pixel-forge .treasury-rewards { background-color: #262237; color: #ffdfa0; }
+.ui-theme-pixel-forge .treasury-pack { background-color: #363047; color: #fff0cd; border-width: 2px; border-color: #665970; border-bottom-color: #191628; }
+.ui-theme-pixel-forge .treasury .treasury-price { width: 103px; min-height: 44px; padding: 1px 3px 3px 3px; font-size: 23px; }
+.ui-theme-pixel-forge .treasury .art-chest { background-image: url("Assets/Pixel/chest.png"); }
+.ui-theme-pixel-forge .treasury .art-rocket { background-image: url("Assets/Pixel/rocket.png"); }
+.ui-theme-pixel-forge .treasury .art-hammer { background-image: url("Assets/Pixel/hammer.png"); }
+.ui-theme-pixel-forge .treasury .art-heart { background-image: url("Assets/Pixel/heart.png"); }
+.ui-theme-pixel-forge .treasury .art-coins { background-image: url("Assets/Pixel/coins.png"); }
+.ui-theme-pixel-forge .treasury .art-pouch { background-image: url("Assets/Pixel/pouch.png"); }
+.ui-theme-pixel-forge .treasury-wallet-coin,
+.ui-theme-pixel-forge .ui-shop-coin { background-image: url("Assets/Pixel/coins.png"); -unity-background-scale-mode: scale-to-fit; }
+.ui-theme-pixel-forge .armory .armory-heading { font-size: 48px; color: #fff1b3; text-shadow: 2px 2px 0 #241b31; }
+.ui-theme-pixel-forge .armory .armory-item-name { font-size: 30px; color: #ffdf96; }
+.ui-theme-pixel-forge .armory-region { color: #f5c489; text-shadow: 1px 1px 0 #241b31; }
+.ui-theme-pixel-forge .armory-filter { font-size: 21px; padding: 0 8px; background-color: #302b41; border-width: 2px; border-color: #675975; color: #efe3d7; }
+.ui-theme-pixel-forge .armory-filter--active { background-color: #e9bd72; border-color: #ffdf9c; color: #292438; }
+.ui-theme-pixel-forge .armory-count { color: #cec4cf; }
+.ui-theme-pixel-forge .gear-item,
+.ui-theme-pixel-forge .armory-portrait { background-color: #1d1c31; border-color: #696279; }
+.ui-theme-pixel-forge .gear-item--rare { border-color: #529a9f; }
+.ui-theme-pixel-forge .gear-item--epic { border-color: #a375ae; }
+.ui-theme-pixel-forge .gear-item--selected { border-color: #f1bc69; background-color: #322b3c; }
+.ui-theme-pixel-forge .gear-item:focus,
+.ui-theme-pixel-forge .armory-filter:focus { border-color: #fff1b3; }
+.ui-theme-pixel-forge .gear-item .gear-caption { font-size: 20px; color: #f4e9d5; }
+.ui-theme-pixel-forge .gear-item .gear-equipped { background-color: #95c7a8; color: #222d37; }
+.ui-theme-pixel-forge .armory-sheet { background-color: #342e43; border-color: #766479; border-width: 2px; }
+.ui-theme-pixel-forge .armory-rarity { color: #e4b678; }
+.ui-theme-pixel-forge .armory-baseline,
+.ui-theme-pixel-forge .armory-stat-title { color: #e1d5d2; }
+.ui-theme-pixel-forge .armory-value { font-size: 22px; color: #fff2c7; }
+.ui-theme-pixel-forge .armory-stat { border-top-color: #5d5063; }
+.ui-theme-pixel-forge .armory-delta { color: #d1c5cd; }
+.ui-theme-pixel-forge .armory-delta--up { color: #90dda6; }
+.ui-theme-pixel-forge .armory-delta--down { color: #ffa09b; }
+.ui-theme-pixel-forge .armory .armory-equip { font-size: 25px; }
+.ui-theme-pixel-forge .gear-art-iron { --ui-gear-icon: url("Assets/Pixel/iron.png"); }
+.ui-theme-pixel-forge .gear-art-dawn { --ui-gear-icon: url("Assets/Pixel/dawn.png"); }
+.ui-theme-pixel-forge .gear-art-cinder { --ui-gear-icon: url("Assets/Pixel/cinder.png"); }
+.ui-theme-pixel-forge .gear-art-oak { --ui-gear-icon: url("Assets/Pixel/oak.png"); }
+.ui-theme-pixel-forge .gear-art-sun { --ui-gear-icon: url("Assets/Pixel/sun.png"); }
+.ui-theme-pixel-forge .gear-art-moon { --ui-gear-icon: url("Assets/Pixel/moon.png"); }

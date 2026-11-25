@@ -11,7 +11,7 @@ assert.equal(manifest.schemaVersion, 1);
 assert.equal(manifest.version, pkg.version, 'registry and UPM versions must match');
 assert.deepEqual(JSON.parse(read('Editor/Garabandic.UiCdn.Editor.asmdef')).includePlatforms, ['Editor']);
 const entries = new Map();
-assert.equal(manifest.themes.length, 11);
+assert.equal(manifest.themes.length, 12);
 const themeIds = new Set();
 for (const theme of manifest.themes) {
   assert(!themeIds.has(theme.id)); themeIds.add(theme.id);
@@ -28,6 +28,8 @@ for (const theme of manifest.themes) {
 }
 for (const f of manifest.foundations.filter(f => f.binary && f.target.endsWith(".png")))
   assert.deepEqual([...readFileSync(resolve(root, f.source)).subarray(0, 8)], [137,80,78,71,13,10,26,10]);
+for (const f of manifest.foundations.filter(f => f.pointFilter))
+  assert.match(read(f.source + '.meta'), /filterMode: 0/, 'point filtering in the preview: ' + f.target);
 const targets = new Set();
 for (const c of manifest.components) { assert(!entries.has(c.id)); entries.set(c.id, c); }
 function safe(path) { assert(path && !isAbsolute(path) && !path.split(/[\\/]/).some(p => ['..', '.', ''].includes(p))); }

@@ -4,18 +4,20 @@ Validated on Windows with Unity **6000.3.7f1**, 2026-11-25. The minimum declared
 
 ## Engine checks
 
-`tools/verify.ps1` passed **127 assertions** in an isolated project.
+`tools/verify.ps1` passed **152 assertions** in an isolated project.
 
 - Catalog parsing, topological dependency resolution, deduplication, missing dependencies, and cycle detection.
 - Unsafe path rejection, namespace validation, namespace drift prevention, and directory collision preflight.
 - Fluent composition, button variants, native fields, progress clamping, motion lifecycle order and idempotence, and tab selection.
 - Import and instantiate every catalog UXML example using the actual source-generated controls.
+- Install the RPG screen with its own art, equip through the fluent API, switch slots, and handle an empty slot.
 - Inherited declarative motion attributes, initial toast state, and non-first UXML tab selection.
 - Custom namespace replacement in C#, UXML, and the copied agent guide.
 - Installation, conflict reporting, preservation of edited code, and incremental stylesheet import union.
 - Rollback after a simulated write failure against a read-only aggregate stylesheet.
 - Registry EditorWindow construction.
-- Eleven-theme catalog, generated selected-theme aliases, theme-only application, and preservation of edited palettes.
+- Twelve-theme catalog, generated selected-theme aliases, theme-only application, and preservation of edited palettes.
+- Verified point filtering for every installed pixel sprite, preservation of its native dimensions, and project-owned Pixel Forge dependencies.
 - Independent typeface selection, generated font imports and installed examples that follow the selected appearance.
 - Binary PNG installation without text conversion and initial GUI import settings with no compression, mipmaps, or NPOT resizing.
 
@@ -23,7 +25,7 @@ Two subsequent Editor launches confirmed installed C# compilation, source-genera
 
 ## Rendered checks
 
-`tools/visual-review.ps1` passed **165 attached-panel assertions**. It captured seven component views, eleven themes and three font choices.
+`tools/visual-review.ps1` passed **192 attached-panel assertions**. It captured seven component views, twelve themes, four font choices, and the RPG comparisons in both illustrated and pixel styles.
 
 - Actual layout and resolved theme variables.
 - Native NavigationSubmit activation and tab selection.
@@ -33,6 +35,7 @@ Two subsequent Editor launches confirmed installed C# compilation, source-genera
 - Declarative accordion expansion and toast enter transitions.
 - Theme and typeface selection persistence, resolved font on a live price button, normal and focused geometry, and interactive shop offer selection.
 - Per-theme artwork resolution, aligned price columns and space for the largest coin amount on a 320 px shop.
+- The genre picker, armory artwork, stat gains and losses, equipment changes by submit, cancel focus and a 320 px inventory.
 
 Reviewed Button, Tabs, Dialog, Switch, Input, Accordion, Toast and the shop across all presets. Screenshots come from the dedicated native Editor window and are generated locally in `artifacts/ui-review`. The package includes the [alternate theme gallery](Images/theme-gallery.png) and [three-font comparison](Images/font-choices.png).
 

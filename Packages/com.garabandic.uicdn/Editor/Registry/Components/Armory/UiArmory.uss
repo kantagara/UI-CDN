@@ -1,0 +1,60 @@
+.armory {
+    width: 100%; max-width: 442px; align-self: center;
+    background-color: #122c32; border-width: 2px; border-color: #497273;
+    border-top-color: #9b9b76; border-bottom-color: #0b1d22;
+    border-radius: 14px; overflow: hidden;
+    color: #f7efdb; -unity-font: url("../../Themes/Assets/Nunito-SemiBold.ttf");
+    -unity-font-definition: url("../../Themes/Assets/Nunito-SemiBold.ttf");
+}
+.armory Label { margin: 0; padding: 0; }
+.armory-banner {
+    height: 113px; flex-shrink: 0; justify-content: flex-end; padding: 0 18px 13px 18px;
+    background-image: url("Art/forge.png"); -unity-background-scale-mode: scale-and-crop;
+    border-bottom-width: 2px; border-bottom-color: #b09861;
+}
+.armory-region, .armory-rarity, .armory-count { font-size: 11px; letter-spacing: 1px; -unity-font-style: bold; }
+.armory-region { color: #ffd77f; text-shadow: 0 1px 2px #08191e; }
+.armory .armory-heading, .armory .armory-item-name {
+    -unity-font: var(--ui-display-font, url("../../Themes/Assets/Fredoka-SemiBold.ttf"));
+    -unity-font-definition: var(--ui-display-font, url("../../Themes/Assets/Fredoka-SemiBold.ttf"));
+}
+.armory-heading { font-size: 43px; color: #fff3ce; text-shadow: 0 2px 2px #0a2123; }
+.armory-bar { flex-direction: row; align-items: center; margin: 10px 12px 7px 12px; }
+.armory-filter {
+    flex-shrink: 0; height: 37px; min-width: 72px; margin: 0 4px 0 0; padding: 2px 10px;
+    background-image: none; background-color: #17383d; border-width: 1px; border-color: #456566;
+    border-radius: 6px; color: #d5e3d9; font-size: 14px; -unity-font-style: bold;
+}
+.armory-filter--active { border-color: #e3c577; background-color: #e5cc91; color: #222c29; }
+.armory-count { flex-grow: 1; -unity-text-align: middle-right; color: #c5d2c1; }
+.armory-inventory { flex-direction: row; flex-wrap: wrap; margin: 0 9px 5px 9px; }
+.gear-item {
+    width: 31%; flex-grow: 1; min-width: 68px; margin: 3px; padding: 2px; overflow: hidden;
+    border-width: 2px; border-radius: 8px; border-color: #617b7e; background-image: none; background-color: #102b33;
+    align-items: stretch; justify-content: center; transition-property: border-color; transition-duration: var(--ui-duration-fast); transition-timing-function: ease-out;
+}
+.gear-icon { height: 64px; -unity-background-scale-mode: scale-to-fit; }
+.gear-item .gear-caption { -unity-text-align: middle-center; color: #e9ebdf; font-size: 13px; -unity-font-style: bold; }
+.gear-item--rare { border-color: #67a7b8; }
+.gear-item--epic { border-color: #ae83bb; }
+.gear-item--selected { border-color: #f2c463; }
+.gear-item .gear-equipped {
+    position: absolute; top: 3px; left: 3px; padding: 0 4px; height: 15px;
+    background-color: #ccdfc9; color: #183831; border-radius: 3px; font-size: 9px; -unity-font-style: bold; -unity-text-align: middle-center;
+}
+.armory-sheet { background-color: #f2e9d2; color: #203738; border-width: 1px; border-color: #cfbd8d; border-radius: 9px; margin: 2px 12px 0 12px; padding: 10px 12px; }
+.armory-inspect { flex-direction: row; align-items: center; margin-bottom: 6px; }
+.armory-portrait { height: 62px; width: 62px; flex-shrink: 0; border-radius: 7px; border-width: 2px; border-color: #9a885e; background-color: #102b33; -unity-background-scale-mode: scale-to-fit; }
+.armory-copy { flex-grow: 1; min-width: 0; margin-left: 10px; }
+.armory-rarity { color: #665127; }
+.armory-item-name { color: #21383a; font-size: 25px; white-space: normal; }
+.armory-baseline { color: #505b50; font-size: 13px; white-space: normal; }
+.armory-stat { height: 25px; flex-direction: row; align-items: center; border-top-width: 1px; border-top-color: #d7cbad; }
+.armory-stat-title { flex-grow: 1; font-size: 14px; color: #424e45; }
+.armory-value { min-width: 30px; -unity-text-align: middle-right; font-size: 16px; -unity-font-style: bold; }
+.armory-delta { width: 43px; -unity-text-align: middle-right; font-size: 13px; color: #626963; }
+.armory-delta--up { color: #21643d; }
+.armory-delta--down { color: #943b30; }
+.armory .armory-equip { margin: 9px 12px 12px 12px; min-height: 43px; }
+.armory-filter:focus, .gear-item:focus { border-color: #fff4c3; border-width: 2px; }
+.gear-item:hover { border-color: #e2cf92; }

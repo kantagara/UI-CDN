@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "foundations": [
     {
       "source": "Editor/Registry/Themes/theme-tokens.uss",
@@ -9,6 +9,10 @@
     {
       "source": "Editor/Registry/Themes/theme-game.uss",
       "target": "Themes/theme-game.uss"
+    },
+    {
+      "source": "Editor/Registry/Themes/theme-pixel-forge.uss",
+      "target": "Themes/theme-pixel-forge.uss"
     },
     {
       "source": "Editor/Registry/Themes/theme-royal-puzzle.uss",
@@ -67,6 +71,10 @@
       "target": "Themes/font-fredoka.uss"
     },
     {
+      "source": "Editor/Registry/Themes/font-jersey10.uss",
+      "target": "Themes/font-jersey10.uss"
+    },
+    {
       "source": "Editor/Registry/Docs/AGENTS.md",
       "target": "AGENTS.md"
     },
@@ -85,6 +93,10 @@
     {
       "source": "Editor/Registry/Themes/Assets/Fredoka-License.txt",
       "target": "Themes/Assets/Fredoka-License.txt"
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Jersey10-License.txt",
+      "target": "Themes/Assets/Jersey10-License.txt"
     },
     {
       "source": "Editor/Registry/Themes/Assets/royal-action.png",
@@ -127,6 +139,11 @@
       "binary": true
     },
     {
+      "source": "Editor/Registry/Themes/Assets/Jersey10-Regular.ttf",
+      "target": "Themes/Assets/Jersey10-Regular.ttf",
+      "binary": true
+    },
+    {
       "source": "Editor/Registry/Themes/Assets/loot-chest.png",
       "target": "Themes/Assets/loot-chest.png",
       "binary": true
@@ -160,6 +177,90 @@
       "source": "Editor/Registry/Themes/Assets/treasury-enamel.png",
       "target": "Themes/Assets/treasury-enamel.png",
       "binary": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Pixel/forge.png",
+      "target": "Themes/Assets/Pixel/forge.png",
+      "binary": true,
+      "pointFilter": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Pixel/iron.png",
+      "target": "Themes/Assets/Pixel/iron.png",
+      "binary": true,
+      "pointFilter": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Pixel/dawn.png",
+      "target": "Themes/Assets/Pixel/dawn.png",
+      "binary": true,
+      "pointFilter": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Pixel/cinder.png",
+      "target": "Themes/Assets/Pixel/cinder.png",
+      "binary": true,
+      "pointFilter": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Pixel/oak.png",
+      "target": "Themes/Assets/Pixel/oak.png",
+      "binary": true,
+      "pointFilter": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Pixel/sun.png",
+      "target": "Themes/Assets/Pixel/sun.png",
+      "binary": true,
+      "pointFilter": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Pixel/moon.png",
+      "target": "Themes/Assets/Pixel/moon.png",
+      "binary": true,
+      "pointFilter": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Pixel/chest.png",
+      "target": "Themes/Assets/Pixel/chest.png",
+      "binary": true,
+      "pointFilter": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Pixel/heart.png",
+      "target": "Themes/Assets/Pixel/heart.png",
+      "binary": true,
+      "pointFilter": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Pixel/hammer.png",
+      "target": "Themes/Assets/Pixel/hammer.png",
+      "binary": true,
+      "pointFilter": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Pixel/rocket.png",
+      "target": "Themes/Assets/Pixel/rocket.png",
+      "binary": true,
+      "pointFilter": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Pixel/coins.png",
+      "target": "Themes/Assets/Pixel/coins.png",
+      "binary": true,
+      "pointFilter": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Pixel/pouch.png",
+      "target": "Themes/Assets/Pixel/pouch.png",
+      "binary": true,
+      "pointFilter": true
+    },
+    {
+      "source": "Editor/Registry/Themes/Assets/Pixel/cap-pixel.png",
+      "target": "Themes/Assets/Pixel/cap-pixel.png",
+      "binary": true,
+      "pointFilter": true
     },
     {
       "source": "Editor/Registry/Themes/Assets/cap-chunky.png",
@@ -288,6 +389,14 @@
     }
   ],
   "themes": [
+    {
+      "id": "pixel-forge",
+      "name": "Pixel Forge",
+      "family": "pixel",
+      "description": "A dusk-lit 16-bit forge with pixel sprites, stepped brass controls and Jersey 10 lettering.",
+      "cssClass": "ui-theme-pixel-forge",
+      "source": "Editor/Registry/Themes/theme-pixel-forge.uss"
+    },
     {
       "id": "royal-puzzle",
       "name": "Royal Puzzle",
@@ -744,6 +853,7 @@
       "id": "treasureshop",
       "name": "TreasureShop",
       "category": "Screens",
+      "genre": "Casual · Treasure shop",
       "description": "Illustrated portrait shop with a treasure bundle and three coin packs.",
       "dependencies": [
         "core",
@@ -762,6 +872,67 @@
         {
           "source": "Editor/Registry/Components/TreasureShop/TreasureShopExample.uxml",
           "target": "Components/TreasureShop/TreasureShopExample.uxml"
+        }
+      ]
+    },
+    {
+      "id": "armory",
+      "name": "Armory",
+      "category": "Screens",
+      "genre": "RPG · Equipment",
+      "description": "Inspect weapons and shields, compare attack and guard, and equip an item in its slot.",
+      "dependencies": [
+        "core",
+        "button"
+      ],
+      "preview": "Editor/Registry/Components/Armory/ArmoryExample.uxml",
+      "files": [
+        {
+          "source": "Editor/Registry/Components/Armory/UiArmory.cs",
+          "target": "Components/Armory/UiArmory.cs"
+        },
+        {
+          "source": "Editor/Registry/Components/Armory/UiArmory.uss",
+          "target": "Components/Armory/UiArmory.uss"
+        },
+        {
+          "source": "Editor/Registry/Components/Armory/ArmoryExample.uxml",
+          "target": "Components/Armory/ArmoryExample.uxml"
+        },
+        {
+          "source": "Editor/Registry/Components/Armory/Art/forge.png",
+          "target": "Components/Armory/Art/forge.png",
+          "binary": true
+        },
+        {
+          "source": "Editor/Registry/Components/Armory/Art/iron.png",
+          "target": "Components/Armory/Art/iron.png",
+          "binary": true
+        },
+        {
+          "source": "Editor/Registry/Components/Armory/Art/dawn.png",
+          "target": "Components/Armory/Art/dawn.png",
+          "binary": true
+        },
+        {
+          "source": "Editor/Registry/Components/Armory/Art/cinder.png",
+          "target": "Components/Armory/Art/cinder.png",
+          "binary": true
+        },
+        {
+          "source": "Editor/Registry/Components/Armory/Art/oak.png",
+          "target": "Components/Armory/Art/oak.png",
+          "binary": true
+        },
+        {
+          "source": "Editor/Registry/Components/Armory/Art/sun.png",
+          "target": "Components/Armory/Art/sun.png",
+          "binary": true
+        },
+        {
+          "source": "Editor/Registry/Components/Armory/Art/moon.png",
+          "target": "Components/Armory/Art/moon.png",
+          "binary": true
         }
       ]
     }

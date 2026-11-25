@@ -21,6 +21,8 @@ namespace Garabandic.UiCdn.Editor
         private string selectedId;
         private string themeId;
         private bool gamePreview;
+        private string showcaseId;
+        private Toggle showcaseToggle;
 
         [MenuItem("Window/UiCdn/Component Registry")]
         public static void Open() => GetWindow<UiCdnRegistryWindow>("UiCdn");
@@ -58,9 +60,24 @@ namespace Garabandic.UiCdn.Editor
                 });
                 appearance.Add(fontPicker);
                 rootVisualElement.Add(appearance);
-                var showcaseToggle = new Toggle("Game UI showcase") { name = "theme-showcase", value = gamePreview };
-                showcaseToggle.RegisterValueChangedCallback(evt => { gamePreview = evt.newValue; Select(manifest.components.First(c => c.id == selectedId)); });
-                rootVisualElement.Add(showcaseToggle);
+                var screens = manifest.components.Where(c => !string.IsNullOrEmpty(c.genre)).ToList();
+                if (!screens.Any(c => c.id == showcaseId)) showcaseId = screens.First().id;
+                var showcase = new VisualElement { name = "showcase" };
+                showcaseToggle = new Toggle("Game UI showcase") { name = "theme-showcase", value = gamePreview };
+                var genres = new DropdownField("Genre / screen", screens.Select(c => c.genre).ToList(), screens.FindIndex(c => c.id == showcaseId)) { name = "genre-picker" };
+                genres.SetEnabled(gamePreview);
+                showcaseToggle.RegisterValueChangedCallback(evt =>
+                {
+                    gamePreview = evt.newValue;
+                    genres.SetEnabled(gamePreview);
+                    Select(manifest.components.First(c => c.id == selectedId));
+                });
+                genres.RegisterValueChangedCallback(evt =>
+                {
+                    showcaseId = screens.First(c => c.genre == evt.newValue).id;
+                    Select(manifest.components.First(c => c.id == selectedId));
+                });
+                showcase.Add(showcaseToggle); showcase.Add(genres); rootVisualElement.Add(showcase);
                 var search = new ToolbarSearchField();
                 search.RegisterValueChangedCallback(evt => { query = evt.newValue; RenderCatalog(); });
                 rootVisualElement.Add(search);
@@ -82,11 +99,11 @@ namespace Garabandic.UiCdn.Editor
         {
             catalog.Clear();
             foreach (var component in manifest.components.Where(c => c.id != "core" &&
-                         (c.name + " " + c.description + " " + c.category).IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0))
+                         (c.name + " " + c.description + " " + c.category + " " + c.genre).IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0))
             {
-                var button = new Button(() => Select(component)) { text = component.name + "  /  " + component.category };
+                var button = new Button(() => { showcaseToggle.value = false; Select(component); }) { text = component.name + "  /  " + component.category };
                 button.AddToClassList("catalog-item");
-                button.EnableInClassList("catalog-item--selected", component.id == selectedId);
+                button.EnableInClassList("catalog-item--selected", component.id == (gamePreview ? showcaseId : selectedId));
                 catalog.Add(button);
             }
             if (catalog.childCount == 0) catalog.Add(new Label("No matching components."));
@@ -97,12 +114,13 @@ namespace Garabandic.UiCdn.Editor
             selectedId = component.id;
             RenderCatalog();
             detail.Clear();
-            var componentIds = gamePreview ? new[] { "treasureshop" } : new[] { component.id };
+            var sample = gamePreview ? manifest.components.First(c => c.id == showcaseId) : component;
+            var componentIds = new[] { sample.id };
             var displayed = manifest.Resolve(componentIds);
-            detail.Add(new Label(gamePreview ? "Game UI showcase" : component.name) { name = "component-title" });
-            var description = new Label(gamePreview ? "Choose a bundle or a coin pack." : component.description);
+            detail.Add(new Label(gamePreview ? sample.genre : sample.name) { name = "component-title" });
+            var description = new Label(sample.description);
             description.AddToClassList("wrap"); detail.Add(description);
-            var dependencies = displayed.Where(c => gamePreview || c.id != component.id).Select(c => c.name);
+            var dependencies = displayed.Where(c => c.id != sample.id).Select(c => c.name);
             detail.Add(new Label("Dependencies: " + string.Join(" → ", dependencies)));
             var theme = manifest.Theme(themeId);
             var themeDescription = new Label(theme.name + " · " + theme.family + "\n" + theme.description);
@@ -114,11 +132,11 @@ namespace Garabandic.UiCdn.Editor
                 preview.styleSheets.Add(AssetDatabase.LoadAssetAtPath<StyleSheet>(package.assetPath + "/" + foundation.source));
             foreach (var style in displayed.SelectMany(c => c.files).Where(f => f.source.EndsWith(".uss", StringComparison.Ordinal)))
                 preview.styleSheets.Add(AssetDatabase.LoadAssetAtPath<StyleSheet>(package.assetPath + "/" + style.source));
-            var sample = gamePreview ? manifest.components.First(c => c.id == "treasureshop") : component;
             var tree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(package.assetPath + "/" + sample.preview);
             if (tree != null) tree.CloneTree(preview);
             else preview.Add(new HelpBox("Preview could not be loaded.", HelpBoxMessageType.Warning));
-            if (sample.id == "treasureshop") preview.Q<UiTreasureShop>()?.parent.RemoveFromClassList("ui-theme-royal-puzzle");
+            if (!string.IsNullOrEmpty(sample.genre))
+                foreach (var host in preview.Children()) host.RemoveFromClassList("ui-theme-royal-puzzle");
             // Same cascade order as the installed aggregate: tokens, components, then theme overrides.
             foreach (var foundation in manifest.foundations.Where(f => f.target.StartsWith("Themes/theme-", StringComparison.Ordinal) && f.target != "Themes/theme-tokens.uss"))
                 preview.styleSheets.Add(AssetDatabase.LoadAssetAtPath<StyleSheet>(package.assetPath + "/" + foundation.source));
@@ -131,7 +149,7 @@ namespace Garabandic.UiCdn.Editor
             var paths = new Label("Files copied:\n" + string.Join("\n", displayed.SelectMany(c => c.files).Select(f => "Assets/UI/" + f.target)));
             paths.AddToClassList("wrap");
             var actions = new VisualElement(); actions.AddToClassList("actions");
-            actions.Add(new Button(() => Install(componentIds)) { text = gamePreview ? "Install shop screen" : "Install " + component.name });
+            actions.Add(new Button(() => Install(componentIds)) { text = "Install " + sample.name });
             actions.Add(new Button(() => Install(manifest.components.Select(c => c.id).ToArray())) { text = "Install all" });
             actions.Add(new Button(() => Install(Array.Empty<string>())) { text = "Apply appearance" });
             detail.Add(actions);

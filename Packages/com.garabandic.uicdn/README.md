@@ -14,7 +14,7 @@ Requires Unity 6 (`6000.0` or later). Use Package Manager → **Install package 
 
 Open **Window → UiCdn → Component Registry**. Search the catalog, inspect its dependencies and working preview, set the namespace (default `Game.UI`), and choose **Install** or **Install all**. The first installation also initializes themes, the license, and `Assets/UI/AGENTS.md`. Configuration is a project-local `UiCdnSettings` ScriptableObject saved in `ProjectSettings/UiCdnSettings.asset`.
 
-Choose **Visual style** and **Display font** independently. New configurations start with **Royal Puzzle** and **Theme Default**. Toggle **Game UI showcase** to compare an interactive shop, then choose **Apply appearance** to use your selection in installed screens. Coiny has wide, playful lettering. Fredoka SemiBold has softer, narrower letterforms. Nunito SemiBold offers a quieter option for dense menus. The preview prices are editable sample text.
+Choose **Visual style** and **Display font** independently. New configurations start with **Royal Puzzle** and **Theme Default**. Enable **Game UI showcase** and choose a **Genre / screen** to try the casual shop or RPG equipment screen. Choose **Apply appearance** to use the selected theme and display font in installed screens. Coiny has wide, playful lettering. Fredoka SemiBold has softer, narrower letterforms. Nunito SemiBold offers a quieter option for dense menus.
 
 ![Coiny, Fredoka and Nunito on the same coin pack](Documentation~/Images/font-choices.png)
 
@@ -81,6 +81,25 @@ root.AddToClassList("ui-theme-selected");
 | Progress | Native determinate progress, `WithValue` | Core |
 | Separator | Horizontal/vertical, `WithVertical` | Core |
 | Toast | Toast, Title, Description; `DurationMs`, `Show`, `Hide` | Core, Button |
+| TreasureShop | `UiTreasureShop`, `OfferSelected` | Core, Button |
+| Armory | `UiArmory`, `UiGearItem`, `ShowSlot`, `Inspect`, `Equipped` | Core, Button |
+
+### RPG equipment
+
+![Weapon and shield comparisons captured in the registry](Documentation~/Images/armory.png)
+
+Install **Armory** and assign `Components/Armory/ArmoryExample.uxml` to a UIDocument. Each item in the example declares its equipment slot, rarity, attack, guard and icon. Selecting an item compares it with the one worn in that slot. **Equip** commits the change. Cancel returns focus to the slot selector. A game controller can subscribe to `Equipped` and save the selected item's stable UXML `name`.
+
+```csharp
+var iron = new UiGearItem("Ironbrand", GearSlot.Weapon, 24, 8)
+    { name = "iron", InitiallyEquipped = true };
+var dawn = new UiGearItem("Dawnshard", GearSlot.Weapon, 38, 5)
+    { name = "dawn", Rarity = GearRarity.Rare };
+var armory = new UiArmory { InitialItem = "dawn" }.WithItems(iron, dawn);
+root.Add(armory);
+```
+
+The comparison follows a pattern used in Final Fantasy XIV and World of Warcraft. Inspecting loot keeps the currently equipped item's values available before the player commits. The forge illustration and six item icons were generated for this example. [FFXIV comparison guide](https://na.finalfantasyxiv.com/uiguide/equipment/equipment-compare/equipment_compare.html) · [World of Warcraft equipment guide](https://media.battle.net/documents/wow/WoW-BradyGAMES-enUS-Guide.pdf)
 
 Core is copied project source, containing fluent helpers and the small `UiMotionElement` base. It is never a runtime package dependency. Complex components remain composed from small elements rather than hiding a generated hierarchy behind one control.
 
@@ -111,11 +130,12 @@ Use unique, matching `value` strings on each `UiTabsTrigger` and `UiTabsContent`
 
 ## Themes and animation
 
-`theme-tokens.uss` supplies semantic colors, radii, spacing, type sizes, and timings. Eleven standalone presets change colors **and** component shapes, typography sizes, border weight, and button depth:
+`theme-tokens.uss` supplies semantic colors, radii, spacing, type sizes, and timings. Twelve standalone presets define component shapes, colors, typography and button depth.
 
 | Style | Direction | Root class |
 | --- | --- | --- |
 | Royal Puzzle | Gold-trimmed 9-slice surfaces, royal panels, parchment offers | `ui-theme-royal-puzzle` |
+| Pixel Forge | Dusk landscape, pixel inventory sprites, brass controls and Jersey 10 lettering | `ui-theme-pixel-forge` |
 | Casual Royal | Blue and lime hyper-casual, thick ink borders | `ui-theme-casual-royal` |
 | Candy Pop | Pink canvas, purple panels, lemon actions | `ui-theme-candy-pop` |
 | Toy Box | Bright primary colors and toy-like controls | `ui-theme-toy-box` |
@@ -126,6 +146,10 @@ Use unique, matching `value` strings on each `UiTabsTrigger` and `UiTabsContent`
 | Paper Play | Warm paper and pencil outlines | `ui-theme-paper-play` |
 | Studio Light | Clean light utility UI | `ui-theme-studio-light` |
 | Studio Dark | Original dark blue-accent UI | `ui-theme-dark` |
+
+![Pixel Forge on RPG equipment and the casual store](Documentation~/Images/pixel-forge.png)
+
+Pixel Forge uses 24×24 gear sprites, 16×16 shop sprites and point-filtered textures. To supply themed artwork for a custom `UiGearItem`, assign it a class and set `--ui-gear-icon: url("MySprite.png");` on that class inside your theme. Its `icon` UXML attribute supplies the default art when the theme has no override. The selected-item portrait follows the same sprite.
 
 Use `ui-root ui-theme-selected` for the style chosen in the installer. It generates `Themes/theme-active.uss` as an alias of that preset. Every named preset is also installed, so you can choose an explicit class instead or switch at runtime with normal UI Toolkit APIs:
 
@@ -172,4 +196,4 @@ See the repository's `CONTRIBUTING.md`. Catalog definitions and example markup l
 
 MIT licensed. Preserve `LICENSE.md` when redistributing copied components.
 
-Coiny, Fredoka SemiBold and Nunito SemiBold ship under the SIL Open Font License. The installer copies each font and its license to `Assets/UI/Themes/Assets`. When upgrading, merge the updated display-font declarations into any named preset reported as preserved, then apply the appearance again. [Fredoka source](https://github.com/hafontia-zz/Fredoka-One/tree/35c584ff23450c9bcdf8819706e12fcdeefe1712/fonts/ttf) · [Nunito source](https://github.com/google/fonts/tree/c7e2740188205a85323c7385547f6f59b4f2245a/ofl/nunito)
+Coiny, Fredoka SemiBold, Nunito SemiBold and Jersey 10 ship under the SIL Open Font License. The installer copies each font and its license to `Assets/UI/Themes/Assets`. When upgrading, merge the updated display-font declarations into any named preset reported as preserved, then apply the appearance again. For an existing Armory installation, merge the themed icon support in `UiArmory.cs` and the `gear-art-*` classes in its example. [Fredoka source](https://github.com/hafontia-zz/Fredoka-One/tree/35c584ff23450c9bcdf8819706e12fcdeefe1712/fonts/ttf) · [Nunito source](https://github.com/google/fonts/tree/c7e2740188205a85323c7385547f6f59b4f2245a/ofl/nunito) · [Jersey 10 source](https://github.com/google/fonts/tree/6e4b84c976cadb3c49a40fd9a1c203e4f7fcf2da/ofl/jersey10)
