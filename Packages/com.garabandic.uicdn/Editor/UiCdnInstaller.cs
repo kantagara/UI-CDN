@@ -41,9 +41,7 @@ namespace Garabandic.UiCdn.Editor
         // Reject traversal and links, including links in an existing ancestor of the root.
         public static string SafePath(string root, string relative)
         {
-            if (string.IsNullOrWhiteSpace(relative) || Path.IsPathRooted(relative) || relative.Contains(":") ||
-                relative.Replace('\\', '/').Split('/').Any(p => p == ".." || p == "." || p.Length == 0))
-                throw new InvalidDataException("Unsafe registry path: " + relative);
+            ValidateRelative(relative);
             var fullRoot = Path.GetFullPath(root).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
             var full = Path.GetFullPath(Path.Combine(fullRoot, relative));
             if (!full.StartsWith(fullRoot + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
@@ -52,6 +50,17 @@ namespace Garabandic.UiCdn.Editor
                 if ((Directory.Exists(current) || File.Exists(current)) && (File.GetAttributes(current) & FileAttributes.ReparsePoint) != 0)
                     throw new IOException("UiCdn does not follow symbolic links: " + current);
             return full;
+        }
+
+        /// <summary>
+        /// Lexical check of a registry-relative path, without touching the file system. Validation must
+        /// not resolve a real root: on macOS the temp folder lives under /var, itself a symbolic link.
+        /// </summary>
+        public static void ValidateRelative(string relative)
+        {
+            if (string.IsNullOrWhiteSpace(relative) || Path.IsPathRooted(relative) || relative.Contains(":") ||
+                relative.Replace('\\', '/').Split('/').Any(p => p == ".." || p == "." || p.Length == 0))
+                throw new InvalidDataException("Unsafe registry path: " + relative);
         }
 
         public static UiCdnInstallPlan Plan(UiCdnManifest manifest, IEnumerable<string> ids, string targetNamespace, string themeId = null, UiCdnDisplayFont? displayFont = null)
