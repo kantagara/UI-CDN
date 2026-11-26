@@ -1,8 +1,9 @@
 # Changelog
 
-## Unreleased
+## 0.4.0 — 2026-11-26
 
 - Checkbox draws a contrasting tick on a filled square for the checked state and a dash for mixed values across all twelve themes.
+- Preview any component or genre screen in an interactive portrait or landscape phone viewport. Rotating or returning to full width keeps the current example's state.
 
 ## 0.3.0 — 2026-11-25
 
