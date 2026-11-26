@@ -10,6 +10,9 @@ namespace Garabandic.UiCdn.Editor.Preview
         public UiCheckbox()
         {
             AddToClassList("ui-checkbox"); focusable = true;
+            var tick = new VisualElement { pickingMode = PickingMode.Ignore };
+            tick.AddToClassList("ui-checkbox__tick");
+            this.Q(className: Toggle.checkmarkUssClassName).Add(tick);
             RegisterCallback<NavigationCancelEvent>(evt => { if (Cancelled == null) return; Cancelled.Invoke(); evt.StopPropagation(); });
         }
         public UiCheckbox(string text, bool value = false) : this() { this.text = text; SetValueWithoutNotify(value); }

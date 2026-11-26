@@ -1,6 +1,6 @@
 # Validation record
 
-Validated on Windows with Unity **6000.3.7f1**, 2026-11-25. The minimum declared package version is 6000.0; this run did not execute another Editor version or a physical gamepad.
+Validated on Windows with Unity **6000.3.7f1**, 2026-11-26. The minimum declared package version is 6000.0; this run did not execute another Editor version or a physical gamepad.
 
 ## Engine checks
 
@@ -26,9 +26,10 @@ Two subsequent Editor launches confirmed installed C# compilation, source-genera
 
 ## Rendered checks
 
-`tools/visual-review.ps1` passed **193 attached-panel assertions**. It captured seven component views, twelve themes, four font choices, and the RPG comparisons in both illustrated and pixel styles.
+`tools/visual-review.ps1` passed **232 attached-panel assertions**. It captured eight component views, twelve themes, four font choices, and the RPG comparisons in both illustrated and pixel styles.
 
 - Actual layout and resolved theme variables.
+- Checkbox tick visibility and at least 3:1 contrast against its fill in every preset, plus navigation submit, silent value changes and the mixed-state dash.
 - Native NavigationSubmit activation and tab selection.
 - Directional NavigationMove tab switching.
 - Reduced-motion token overrides.

@@ -9,6 +9,7 @@
     --ui-primary: #83c92b;
     --ui-primary-hover: #a8df42;
     --ui-primary-foreground: #ffffff;
+    --ui-checkbox-ink: #193518;
     --ui-danger: #e76d64;
     --ui-success: #83c92b;
     --ui-radius-sm: 3px;

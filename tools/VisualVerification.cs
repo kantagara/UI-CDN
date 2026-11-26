@@ -161,10 +161,70 @@ public static class UiCdnVisualVerification
             {
                 Check(!dialog.Open && dialog.resolvedStyle.display == DisplayStyle.None, "Cancel closes dialog after transition");
                 Check(opener.panel.focusController.focusedElement == opener, "Dialog restores focus");
-                Select("switch");
-                Later(250, () => { Capture("04-switch"); ReviewRemaining(); });
+                Select("checkbox");
+                ReviewCheckbox(0);
             });
         });
+    }
+    private static void ReviewCheckbox(int index)
+    {
+        var root = window.rootVisualElement;
+        var themes = UiCdnManifest.Load().themes;
+        if (index == themes.Length)
+        {
+            root.Q<DropdownField>("theme-picker").value = "Studio Dark";
+            Select("switch");
+            Later(250, () => { Capture("04-switch"); ReviewRemaining(); });
+            return;
+        }
+        var theme = themes[index];
+        root.Q<DropdownField>("theme-picker").value = theme.name;
+        Later(250, () =>
+        {
+            var boxes = root.Q("preview").Query<UiCheckbox>().ToList();
+            var check = boxes[0];
+            var tick = check.Q(className: "ui-checkbox__tick");
+            var box = tick.parent;
+            Check(check.value && tick.resolvedStyle.display == DisplayStyle.Flex && tick.worldBound.width > 10,
+                "UXML checked indicator " + theme.name);
+            Check(!boxes[1].value && boxes[1].Q(className: "ui-checkbox__tick").resolvedStyle.display == DisplayStyle.None,
+                "unchecked box has no tick " + theme.name);
+            var ink = tick.resolvedStyle.borderBottomColor;
+            var fill = box.resolvedStyle.backgroundColor;
+            Check(ink.a > 0.99f && fill.a > 0.99f && Contrast(ink, fill) >= 3f && box.resolvedStyle.backgroundImage == default(Background),
+                "opaque, contrasting tick on a solid fill " + theme.name);
+            if (theme.id != "casual-royal") { ReviewCheckbox(index + 1); return; }
+            Capture("04-checkbox");
+            int changes = 0;
+            check.OnChanged(_ => changes++);
+            check.Focus();
+            using (var submit = NavigationSubmitEvent.GetPooled()) check.SendEvent(submit);
+            Later(150, () =>
+            {
+                Check(!check.value && changes == 1 && tick.resolvedStyle.display == DisplayStyle.None, "submit clears checkmark");
+                check.SetValueWithoutNotify(true);
+                Later(150, () =>
+                {
+                    Check(changes == 1 && tick.resolvedStyle.display == DisplayStyle.Flex, "silent update restores checkmark");
+                    check.showMixedValue = true;
+                    Later(150, () =>
+                    {
+                        Check(tick.resolvedStyle.height == 3 && tick.resolvedStyle.borderLeftWidth == 0, "mixed checkbox shows a dash");
+                        ReviewCheckbox(index + 1);
+                    });
+                });
+            });
+        });
+    }
+    private static float Contrast(Color a, Color b)
+    {
+        float Luminance(Color color)
+        {
+            var linear = color.linear;
+            return 0.2126f * linear.r + 0.7152f * linear.g + 0.0722f * linear.b;
+        }
+        float first = Luminance(a), second = Luminance(b);
+        return (Mathf.Max(first, second) + 0.05f) / (Mathf.Min(first, second) + 0.05f);
     }
     private static void ReviewRemaining()
     {

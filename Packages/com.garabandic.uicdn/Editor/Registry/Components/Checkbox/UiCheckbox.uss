@@ -1,6 +1,44 @@
 .ui-checkbox { margin: var(--ui-space-2) 0; color: var(--ui-foreground); min-height: 24px; }
 .ui-checkbox .unity-toggle__input { background-color: transparent; }
-.ui-checkbox .unity-toggle__checkmark { width: 20px; height: 20px; border-width: 1px; border-color: var(--ui-border); border-radius: var(--ui-radius-sm); background-color: var(--ui-surface); transition-property: background-color, border-color; transition-duration: var(--ui-duration-fast); }
-.ui-checkbox:checked .unity-toggle__checkmark { background-color: var(--ui-primary); -unity-background-image-tint-color: var(--ui-primary-foreground); }
-.ui-checkbox:focus .unity-toggle__checkmark, .ui-checkbox .unity-toggle__input:focus .unity-toggle__checkmark { border-color: var(--ui-primary); border-width: 2px; }
-.ui-checkbox:disabled { opacity: 0.4; }
+.ui-checkbox .unity-toggle__checkmark {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-right: 7px;
+    border-width: 2px;
+    border-color: var(--ui-border);
+    border-radius: var(--ui-checkbox-radius, 4px);
+    background-image: none;
+    background-color: var(--ui-surface);
+    transition-property: background-color, border-color;
+    transition-duration: var(--ui-duration-fast);
+}
+.ui-checkbox__tick {
+    display: none;
+    width: 13px;
+    height: 8px;
+    border-left-width: 3px;
+    border-bottom-width: 3px;
+    border-color: var(--ui-checkbox-ink, var(--ui-primary-foreground));
+    rotate: -45deg;
+    translate: 0 -1px;
+}
+.ui-checkbox:checked .unity-toggle__checkmark,
+.ui-checkbox .unity-toggle__mixed-values {
+    background-image: none;
+    background-color: var(--ui-primary);
+}
+.ui-checkbox:checked .ui-checkbox__tick { display: flex; }
+.ui-checkbox .unity-toggle__mixed-values .ui-checkbox__tick {
+    display: flex;
+    height: 3px;
+    border-left-width: 0;
+    rotate: 0deg;
+    translate: 0 0;
+}
+.ui-checkbox:focus .unity-toggle__checkmark,
+.ui-checkbox .unity-toggle__input:focus .unity-toggle__checkmark { border-color: var(--ui-foreground); }
+.ui-checkbox:disabled { opacity: 0.65; }

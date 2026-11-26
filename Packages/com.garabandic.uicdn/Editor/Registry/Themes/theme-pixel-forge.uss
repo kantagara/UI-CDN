@@ -12,6 +12,7 @@
     --ui-danger: #fd8a87;
     --ui-success: #85d7a0;
     --ui-radius-sm: 0px;
+    --ui-checkbox-radius: 0px;
     --ui-radius-md: 0px;
     --ui-radius-lg: 0px;
     --ui-font-sm: 12px;

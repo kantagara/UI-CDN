@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Checkbox draws a contrasting tick on a filled square for the checked state and a dash for mixed values across all twelve themes.
+
 ## 0.3.0 — 2026-11-25
 
 - Drag a project folder onto **Install folder** in the registry to choose where components, themes, and examples are installed. Clear the field to restore `Assets/UI`.
