@@ -75,7 +75,7 @@ namespace Garabandic.UiCdn.Editor
             foreach (var file in foundations.Concat(components.SelectMany(c => c.files)))
             {
                 var source = UiCdnInstaller.SafePath(packageRoot, file.source);
-                UiCdnInstaller.SafePath(Path.GetTempPath(), file.target);
+                UiCdnInstaller.ValidateRelative(file.target);
                 if (!targets.Add(file.target)) throw new InvalidDataException("Duplicate target: " + file.target);
                 if (!File.Exists(source)) throw new FileNotFoundException(file.source);
             }
