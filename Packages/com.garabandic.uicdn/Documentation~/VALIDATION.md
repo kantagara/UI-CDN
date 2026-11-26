@@ -26,7 +26,7 @@ Two subsequent Editor launches confirmed installed C# compilation, source-genera
 
 ## Rendered checks
 
-`tools/visual-review.ps1` passed **232 attached-panel assertions**. It captured eight component views, twelve themes, four font choices, and the RPG comparisons in both illustrated and pixel styles.
+`tools/visual-review.ps1` passed **250 attached-panel assertions**. It captured eight component views, twelve themes, four font choices, RPG equipment comparisons, and phone previews of the armory and shop.
 
 - Actual layout and resolved theme variables.
 - Checkbox tick visibility and at least 3:1 contrast against its fill in every preset, plus navigation submit, silent value changes and the mixed-state dash.
@@ -38,6 +38,7 @@ Two subsequent Editor launches confirmed installed C# compilation, source-genera
 - Theme and typeface selection persistence, resolved font on a live price button, normal and focused geometry, and interactive shop offer selection.
 - Per-theme artwork resolution, aligned price columns and space for the largest coin amount on a 320 px shop.
 - The genre picker, armory artwork, stat gains and losses, equipment changes by submit, cancel focus and a 320 px inventory.
+- Portrait and landscape viewport dimensions, pointer hit testing after scaling, retained equipment selection on rotation, scrolling to an action in landscape, checkbox submit, return to full width, and resizing the Editor window.
 
 Reviewed Button, Tabs, Dialog, Switch, Input, Accordion, Toast and the shop across all presets. Screenshots come from the dedicated native Editor window and are generated locally in `artifacts/ui-review`. The package includes the [alternate theme gallery](Images/theme-gallery.png) and [three-font comparison](Images/font-choices.png).
 

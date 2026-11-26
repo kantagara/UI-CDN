@@ -16,6 +16,12 @@
 .catalog-item--selected { border-color: #8bb3ff; background-color: #2e3a50; }
 #component-title { font-size: 22px; -unity-font-style: bold; margin-bottom: 8px; }
 #preview { min-height: 280px; padding: 24px; margin-top: 16px; margin-bottom: 8px; border-radius: 8px; overflow: hidden; }
+#preview-size { margin: 4px 0; }
+.preview-stage--phone { align-items: center; justify-content: center; overflow: hidden; margin: 6px 0; background-color: #101216; border-radius: 8px; }
+#phone-frame { flex-shrink: 0; padding: 5px; border-width: 1px; border-color: #636a75; border-radius: 18px; background-color: #292d35; }
+#phone-screen { flex-grow: 1; border-radius: 12px; overflow: hidden; }
+#preview.preview--phone { padding: 0; margin: 0; border-radius: 0; flex-shrink: 0; }
+#preview.preview--phone .ui-example { padding: 16px; }
 .wrap { white-space: normal; margin-bottom: 12px; }
 .actions { flex-direction: row; flex-wrap: wrap; margin-top: 20px; }
 .actions > Button { min-height: 36px; padding-left: 16px; padding-right: 16px; margin-right: 8px; }

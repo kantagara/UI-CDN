@@ -391,9 +391,101 @@ public static class UiCdnVisualVerification
                 Select("card");
                 Check(!root.Q<Toggle>("theme-showcase").value && !root.Q("genre-picker").enabledSelf && root.Q<UiCard>() != null,
                     "selecting a catalog entry exits the genre preview");
-                UiCdnSettings.instance.SelectTheme("dark");
-                File.WriteAllText(Path.Combine(output, "result.txt"), $"PASS: {assertions} attached-panel assertions, including genre screens and pixel art.");
-                window.Close(); EditorApplication.Exit(0);
+                ReviewPhone();
+            });
+        });
+    }
+
+    private static void CheckPhoneSize(float width, float height)
+    {
+        var root = window.rootVisualElement;
+        var screen = root.Q<ScrollView>("phone-screen").contentViewport;
+        var stage = root.Q("preview-stage");
+        Check(Mathf.Abs(screen.layout.width - width) < 1 && Mathf.Abs(screen.layout.height - height) < 1,
+            $"phone lays out at {width} × {height}, got {screen.layout.size}");
+        var frame = root.Q("phone-frame");
+        Check(frame.worldBound.width <= stage.worldBound.width && frame.worldBound.height <= stage.worldBound.height,
+            "scaled device fits the available preview");
+    }
+
+    private static void ReviewPhone()
+    {
+        var root = window.rootVisualElement;
+        var detail = root.Q<ScrollView>("detail");
+        root.Q<Toggle>("theme-showcase").value = true;
+        var gear = root.Q<UiArmory>();
+        var axe = gear.Q<UiGearItem>("cinder");
+        gear.Inspect(axe);
+        var picker = root.Q<DropdownField>("preview-size");
+        picker.index = 1;
+        Later(300, () =>
+        {
+            CheckPhoneSize(390, 844);
+            Check(gear == root.Q<UiArmory>() && gear.Selected == axe, "changed preview size keeps the live selection");
+            detail.ScrollTo(root.Q("preview-stage"));
+            Later(200, () =>
+            {
+                var equip = gear.Q<UiButton>("equip");
+                var picked = root.panel.Pick(equip.worldBound.center);
+                Check(picked == equip || equip.Contains(picked), "scaled portrait maps pointer coordinates to Equip");
+                equip.Focus();
+                using (var submit = NavigationSubmitEvent.GetPooled()) equip.SendEvent(submit);
+                Check(gear.GetEquipped(GearSlot.Weapon) == axe, "equip in the phone preview");
+                Capture("mobile-armory");
+                picker.index = 2;
+                Later(250, () =>
+                {
+                    CheckPhoneSize(844, 390);
+                    Check(gear.GetEquipped(GearSlot.Weapon) == axe, "rotation preserves the equipped item");
+                    Capture("mobile-landscape");
+                    var screen = root.Q<ScrollView>("phone-screen");
+                    screen.ScrollTo(gear.Q<UiButton>("equip"));
+                    Later(150, () =>
+                    {
+                        Check(screen.scrollOffset.y > 0 && screen.contentViewport.worldBound.Contains(equip.worldBound.center),
+                            "overflowing landscape content can scroll to the last action");
+                        ReviewPhoneFormsAndShop();
+                    });
+                });
+            });
+        });
+    }
+
+    private static void ReviewPhoneFormsAndShop()
+    {
+        var root = window.rootVisualElement;
+        Select("checkbox");
+        var checkbox = root.Q<UiCheckbox>();
+        var picker = root.Q<DropdownField>("preview-size");
+        Check(picker.index == 2, "another catalog entry keeps the selected orientation");
+        picker.index = 0;
+        Check(checkbox == root.Q<UiCheckbox>() && root.Q("phone-frame") == null, "full width restores the live component");
+        picker.index = 1;
+        checkbox.Focus();
+        using (var submit = NavigationSubmitEvent.GetPooled()) checkbox.SendEvent(submit);
+        Check(!checkbox.value, "checkbox accepts submit on the phone");
+        root.Q<DropdownField>("theme-picker").value = "Royal Puzzle";
+        root.Q<Toggle>("theme-showcase").value = true;
+        root.Q<DropdownField>("genre-picker").value = "Casual · Treasure shop";
+        Later(300, () =>
+        {
+            CheckPhoneSize(390, 844);
+            var shop = root.Q<UiTreasureShop>();
+            Check(shop != null && shop.layout.width <= 390, "shop reflows at the mobile width after theme and screen changes");
+            root.Q<ScrollView>("detail").ScrollTo(root.Q("preview-stage"));
+            Later(200, () =>
+            {
+                Capture("mobile-shop");
+                var previousWidth = root.Q("phone-frame").worldBound.width;
+                window.position = new Rect(120, 30, 780, 580);
+                Later(250, () =>
+                {
+                    CheckPhoneSize(390, 844);
+                    Check(root.Q("phone-frame").worldBound.width < previousWidth, "smaller editor scales the frame while preserving logical width");
+                    UiCdnSettings.instance.SelectTheme("dark");
+                    File.WriteAllText(Path.Combine(output, "result.txt"), $"PASS: {assertions} attached-panel assertions.");
+                    window.Close(); EditorApplication.Exit(0);
+                });
             });
         });
     }

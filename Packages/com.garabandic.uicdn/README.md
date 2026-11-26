@@ -18,6 +18,12 @@ Choose **Visual style** and **Display font** independently. New configurations s
 
 ![Coiny, Fredoka and Nunito on the same coin pack](Documentation~/Images/font-choices.png)
 
+## Preview a phone layout
+
+Open **Preview size** above the example. **Phone portrait** lays it out at 390 × 844 UI Toolkit points. **Phone landscape** rotates that viewport to 844 × 390. Click or navigate the controls and scroll inside the frame for longer screens. Switching back to **Full width** keeps the current example and its state. Check device-specific safe areas, pixel density and touch input on your target hardware.
+
+![Pixel Forge armory and Royal Puzzle shop at the portrait preview size](Documentation~/Images/mobile-preview.png)
+
 ## Use the installed files
 
 Add `ui.uss` from the selected installation folder to your document's style sheets. Add the classes `ui-root ui-theme-selected` to the document root. Use the default runtime theme on your Panel Settings so built-in text inputs, toggles, and sliders have their native visuals. Assign the UXML to your `UIDocument` in your Unity 6 scene.

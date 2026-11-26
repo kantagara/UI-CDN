@@ -23,6 +23,8 @@ namespace Garabandic.UiCdn.Editor
         private string packagePath;
         private Toggle showcaseToggle;
         private DropdownField genres;
+        [SerializeField] private int previewSize;
+        private UiCdnPreviewViewport viewport;
         private UiCdnComponent ActiveComponent => showcaseToggle.value ? showcase : selected;
 
         [MenuItem("Window/UiCdn/Component Registry")]
@@ -51,7 +53,9 @@ namespace Garabandic.UiCdn.Editor
                 search.RegisterValueChangedCallback(evt => { query = evt.newValue; RenderCatalog(); });
                 rootVisualElement.Add(search);
                 catalog = new ScrollView { name = "catalog" };
-                detail = new ScrollView { name = "detail" };
+                var detailScroll = new ScrollView { name = "detail" };
+                detailScroll.contentViewport.RegisterCallback<GeometryChangedEvent>(_ => viewport?.Fit());
+                detail = detailScroll;
                 rootVisualElement.Add(new VisualElement { name = "body" }.With(catalog, detail));
                 status = new Label("Drop a Project folder into Install folder to choose where files are copied.") { name = "status" };
                 rootVisualElement.Add(status);
@@ -174,7 +178,8 @@ namespace Garabandic.UiCdn.Editor
             var dependencies = displayed.Where(c => c.id != sample.id).Select(c => c.name);
             detail.Add(new Label("Dependencies: " + string.Join(" → ", dependencies)));
             detail.Add(new Label(theme.name + " · " + theme.family + "\n" + theme.description).Class("wrap"));
-            detail.Add(CreatePreview(sample, displayed));
+            viewport = new UiCdnPreviewViewport(CreatePreview(sample, displayed), previewSize, index => previewSize = index);
+            detail.Add(viewport);
             detail.Add(new Label("Live preview · Tab / arrows / submit / cancel"));
             var actions = new VisualElement(); actions.AddToClassList("actions");
             actions.Add(new Button(() => Install(componentIds)) { text = "Install " + sample.name });

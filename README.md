@@ -14,6 +14,10 @@ Select **Visual style → Pixel Forge** and **Display font → Theme Default** f
 
 In **Game UI showcase → Genre / screen**, choose the casual treasure shop or the RPG armory. The armory lets you inspect weapons and shields, compare attack and guard against your current equipment, and equip your selection.
 
+Use **Preview size → Phone portrait** or **Phone landscape** above any example to try it at 390 × 844 or 844 × 390 logical points. Rotate the preview while playing with the controls to compare the same state.
+
+![Interactive phone previews of the RPG armory and treasure shop](Packages/com.garabandic.uicdn/Documentation~/Images/mobile-preview.png)
+
 ![RPG equipment comparison for weapons and shields](Packages/com.garabandic.uicdn/Documentation~/Images/armory.png)
 
 ![Treasure Shop in ten alternate themes](Packages/com.garabandic.uicdn/Documentation~/Images/theme-gallery.png)
