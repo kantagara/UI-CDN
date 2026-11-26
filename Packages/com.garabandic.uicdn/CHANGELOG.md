@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.4.1 — 2026-11-26
 
 - Fix installing on macOS: manifest validation no longer resolves install targets against the system temp folder, whose `/var` parent is a symbolic link there, so every install failed with "UiCdn does not follow symbolic links: /var".
 
